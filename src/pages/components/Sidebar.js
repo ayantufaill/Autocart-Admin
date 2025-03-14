@@ -31,7 +31,7 @@ const Sidebar = ({ open, toggleSidebar }) => {
     { text: "Financial Management", icon: <MonetizationOnOutlinedIcon /> },
     { text: "Email Management", icon: <EmailOutlinedIcon /> },
     { text: "Message Management", icon: <ChatOutlinedIcon /> },
-    { text: "Story Management", icon: <AutoStoriesOutlinedIcon /> },
+    { text: "Story Managements", icon: <AutoStoriesOutlinedIcon /> },
   ];
 
   return (
