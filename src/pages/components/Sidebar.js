@@ -1,16 +1,15 @@
 import React from "react";
+
 import {
-  Box,
+
   Drawer,
-  IconButton,
-  Divider,
+
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import AdsClickOutlinedIcon from "@mui/icons-material/AdsClickOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
@@ -20,8 +19,10 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
-const Sidebar = ({ open, toggleSidebar }) => {
+const Sidebar = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
 
   const menuItems = [
     { text: "Dashboard", icon: <DashboardOutlinedIcon /> },
@@ -38,32 +39,32 @@ const Sidebar = ({ open, toggleSidebar }) => {
     <Drawer
       variant="permanent"
       sx={{
-        width: open ? { xs: "200px", lg: "300px" } : "80px",
+        width: { xs: isExpanded ? "280px" : "80px", md: "270px", lg: "280px", xl: "383px" },
         flexShrink: 0,
         "& .MuiDrawer-paper": {
-          width: open ? { xs: "200px", lg: "300px" } : "80px",
+          width: { xs: isExpanded ? "280px" : "80px", md: "270px", lg: "280px", xl: "383px" },
           transition: "width 0.3s",
           boxSizing: "border-box",
-          overflowX: "hidden",
           height: "100vh",
+          overflow: "hidden",
+
+          position: "relative",
+          top: 0,
+          overflowY: { xs: "auto", md: "hidden" }
+
         },
       }}
     >
-      {/* Sidebar Toggle Button */}
-      <Box sx={{ display: "flex", justifyContent: "flex-end", padding: "10px" }}>
-        <IconButton onClick={toggleSidebar}>
-          {open ? <ChevronLeftIcon /> : <MenuIcon />}
-        </IconButton>
-      </Box>
-
-      <Divider />
 
       {/* Sidebar Menu Items */}
-      <List sx={{ pl: open ? { xs: "20px", lg: "40px" } : "0px" , height:'100vh'}}>
+      <List sx={{ height: "100%", overflowY: "auto" }}>
         {menuItems.map((item, index) => (
           <ListItem
+            onClick={() => {
+              setIsExpanded(!isExpanded);
+              if (activeIndex !== index) setActiveIndex(index);
+            }}
             key={index}
-            onClick={() => setActiveIndex(index)}
             sx={{
               backgroundColor: activeIndex === index ? "#07B007" : "transparent",
               color: activeIndex === index ? "white" : "#6B7280",
@@ -75,24 +76,36 @@ const Sidebar = ({ open, toggleSidebar }) => {
               mt: "10px",
               cursor: "pointer",
               transition: "background-color 0.3s",
-              padding: open ? "10px 16px" : "10px",
-              justifyContent: open ? "start" : "center",
-              height: {xs:"68px", lg:'58px'},
-              width: "100%",
+              padding: "10px",
+              justifyContent: { xs: "center", md: "start" },
+              height: { xs: "68px", lg: "58px" },
+              width: { md: "calc(100% - 30px)" },
+              ml: { md: "30px" },
             }}
           >
+
             <ListItemIcon
+
               sx={{
                 color: activeIndex === index ? "white" : "inherit",
-                minWidth: open ? "36px" : "auto",
+                minWidth: "auto",
                 height: "36px",
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
               }}
             >
               {item.icon}
             </ListItemIcon>
-            {open && <ListItemText primary={item.text} />}
+            <ListItemText
+              primary={item.text}
+              sx={{
+                display: { xs: isExpanded ? "block" : "none", md: "block" },
+                whiteSpace: "nowrap",
+                ml: "20px",
+                typography: "body1",
+              }}
+            />
           </ListItem>
         ))}
       </List>
