@@ -1,9 +1,6 @@
 import React from "react";
 
-import {
-
-  Drawer,
-
+import {Drawer,
   List,
   ListItem,
   ListItemIcon,
@@ -39,19 +36,17 @@ const Sidebar = () => {
     <Drawer
       variant="permanent"
       sx={{
-        width: { xs: isExpanded ? "280px" : "80px", md: "270px", lg: "280px", xl: "383px" },
+        width: { xs: isExpanded ? "250px" : "80px", md: "270px", lg: "280px", xl: "330px" },
+        borderRight:'1px solid rgb(224, 224, 224)',
         flexShrink: 0,
         "& .MuiDrawer-paper": {
-          width: { xs: isExpanded ? "280px" : "80px", md: "270px", lg: "280px", xl: "383px" },
+          width: { xs: isExpanded ? "250px" : "80px", md: "270px", lg: "280px", xl: "330px" },
           transition: "width 0.3s",
           boxSizing: "border-box",
-          height: "100vh",
-          overflow: "hidden",
-
+          height: "calc(100vh - 80px)",
           position: "relative",
           top: 0,
-          overflowY: { xs: "auto", md: "hidden" }
-
+          overflowY: { xs: "auto", md: "hidden" },
         },
       }}
     >
