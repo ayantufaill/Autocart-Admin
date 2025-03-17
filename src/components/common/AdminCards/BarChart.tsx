@@ -45,10 +45,10 @@ export default function CustomBarChart() {
                                 color: "url(#redGradient)",
                             },
                         ]}
-                        // width={1417}
+                       
                         height={400}
                     >
-                        {/* SVG Gradient Definition */}
+                     
                         <svg width="0" height="0">
                             <defs>
                                 <linearGradient id="redGradient" x1="0" x2="0" y1="0" y2="1">
