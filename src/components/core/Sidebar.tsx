@@ -36,11 +36,11 @@ const Sidebar = () => {
     <Drawer
       variant="permanent"
       sx={{
-        width: { xs: isExpanded ? "250px" : "80px", md: "270px", lg: "280px", xl: "330px" },
+        width: { xs: isExpanded ? "250px" : "80px", md: "260px", lg: "260px", xl: "280px" },
         borderRight:'1px solid rgb(224, 224, 224)',
         flexShrink: 0,
         "& .MuiDrawer-paper": {
-          width: { xs: isExpanded ? "250px" : "80px", md: "270px", lg: "280px", xl: "330px" },
+          width: { xs: isExpanded ? "250px" : "80px", md: "260px", lg: "260px", xl: "280px" },
           transition: "width 0.3s",
           boxSizing: "border-box",
           height: "calc(100vh - 80px)",

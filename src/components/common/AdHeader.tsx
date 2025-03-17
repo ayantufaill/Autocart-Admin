@@ -1,7 +1,12 @@
 import { Box, Typography, Button } from '@mui/material';
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-const AdHeader = ({ title, onDelete }) => {
+interface AdHeaderProps {
+    title: string;
+    onDelete: () => void; // Function that takes no arguments and returns nothing
+}
+
+const AdHeader: React.FC<AdHeaderProps> = ({ title, onDelete }) => {
     return (
         <Box
             sx={{

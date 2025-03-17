@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
 import { Box, Typography } from '@mui/material';
 
+interface ContentCardsProps {
+    title: string;
+    value: string | number;
+    color: string;
+    change?: string;
+    unit?: string;
+}
 
-// Reusable StatsCard Component
-const ContentCards = ({ title, value, color, change, unit }) => {
+const ContentCards: React.FC<ContentCardsProps> = ({ title, value, color, change = "", unit = "" }) => {
     return (
         <Box
             sx={{
@@ -12,7 +18,6 @@ const ContentCards = ({ title, value, color, change, unit }) => {
                 borderRadius: "12px",
                 border: "0.5px solid #CACACA",
                 p: { xs: 2, md: 3, lg: 3 },
-                Height: "200px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: 'center'
@@ -26,9 +31,11 @@ const ContentCards = ({ title, value, color, change, unit }) => {
                         {title}
                     </Typography>
                 </Box>
-                <Typography sx={{ fontSize: "14px", color: change.includes("+") ? "#22C55E" : "#EF4444" }}>
-                    {change}
-                </Typography>
+                {change && (
+                    <Typography sx={{ fontSize: "14px", color: change.includes("+") ? "#22C55E" : "#EF4444" }}>
+                        {change}
+                    </Typography>
+                )}
             </Box>
 
             {/* Value Section */}
@@ -37,13 +44,14 @@ const ContentCards = ({ title, value, color, change, unit }) => {
                     {value}
                 </Typography>
 
-                <Typography sx={{ fontSize: { xs: "16px", md: "20px" }, color: "#9CA3AF", ml: 1 }}>
-                    {unit}
-                </Typography>
+                {unit && (
+                    <Typography sx={{ fontSize: { xs: "16px", md: "20px" }, color: "#9CA3AF", ml: 1 }}>
+                        {unit}
+                    </Typography>
+                )}
             </Box>
         </Box>
     );
 };
 
-
-export default ContentCards
+export default ContentCards;
