@@ -15,7 +15,7 @@ const ColorTabs: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   return (
-    <Box sx={{ width: "100%", bgcolor: "#D4D4D4", p: 2 }}>
+    <Box sx={{ width: "100%", bgcolor: "#F9F9F9", p: 2 }}>
       <Tabs
         value={selectedTab}
         onChange={(_, newValue) => setSelectedTab(newValue)}
