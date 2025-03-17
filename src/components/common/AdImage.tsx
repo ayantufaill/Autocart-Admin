@@ -1,9 +1,18 @@
 import { Box, Grid } from '@mui/material';
 
-const AdImages = ({ images }) => {
+interface ImageItem {
+    img: string;
+    title: string;
+}
+
+interface AdImagesProps {
+    images: ImageItem[];
+}
+
+const AdImages: React.FC<AdImagesProps> = ({ images }) => {
     return (
-        <Box sx={{ minHeight: '464px', display: "flex", alignItems: "center", justifyContent: "center", py: {xs:8, lg:4 }}}>
-            <Box sx={{ minHeight: '444px', width: "100%" ,display: "flex", alignItems: "center", justifyContent: "center",}}>
+        <Box sx={{ minHeight: '464px', display: "flex", alignItems: "center", justifyContent: "center", py: { xs: 8, lg: 4 } }}>
+            <Box sx={{ minHeight: '444px', width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Grid container spacing={4}>
                     {images.map((item, index) => (
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={3} key={index}>
