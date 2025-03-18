@@ -1,9 +1,7 @@
 import React from "react";
 
 import {
-
   Drawer,
-
   List,
   ListItem,
   ListItemIcon,
@@ -18,31 +16,59 @@ import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlin
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
+  const route = useRouter();
 
   const menuItems = [
-    { text: "Dashboard", icon: <DashboardOutlinedIcon /> },
-    { text: "Ads Management", icon: <AdsClickOutlinedIcon /> },
-    { text: "Users Management", icon: <PeopleOutlineOutlinedIcon /> },
-    { text: "Reporting & Analytics", icon: <AnalyticsOutlinedIcon /> },
-    { text: "Financial Management", icon: <MonetizationOnOutlinedIcon /> },
-    { text: "Email Management", icon: <EmailOutlinedIcon /> },
-    { text: "Message Management", icon: <ChatOutlinedIcon /> },
-    { text: "Story Management", icon: <AutoStoriesOutlinedIcon /> },
+    { text: "Dashboard", icon: <DashboardOutlinedIcon />, path: "/" },
+    { text: "Ads Management", icon: <AdsClickOutlinedIcon />, path: "/" },
+    {
+      text: "Users Management",
+      icon: <PeopleOutlineOutlinedIcon />,
+      path: "/",
+    },
+    {
+      text: "Reporting & Analytics",
+      icon: <AnalyticsOutlinedIcon />,
+      path: "/",
+    },
+    {
+      text: "Financial Management",
+      icon: <MonetizationOnOutlinedIcon />,
+      path: "/",
+    },
+    { text: "Email Management", icon: <EmailOutlinedIcon />, path: "/" },
+    { text: "Message Management", icon: <ChatOutlinedIcon />, path: "/" },
+    {
+      text: "Story Management",
+      icon: <AutoStoriesOutlinedIcon />,
+      path: "/admin/story",
+    },
   ];
 
   return (
     <Drawer
       variant="permanent"
       sx={{
-        width: { xs: isExpanded ? "280px" : "80px", md: "270px", lg: "280px", xl: "383px" },
+        width: {
+          xs: isExpanded ? "280px" : "80px",
+          md: "270px",
+          lg: "280px",
+          xl: "383px",
+        },
         flexShrink: 0,
         "& .MuiDrawer-paper": {
-          width: { xs: isExpanded ? "280px" : "80px", md: "270px", lg: "280px", xl: "383px" },
+          width: {
+            xs: isExpanded ? "280px" : "80px",
+            md: "270px",
+            lg: "280px",
+            xl: "383px",
+          },
           transition: "width 0.3s",
           boxSizing: "border-box",
           height: "100vh",
@@ -50,12 +76,10 @@ const Sidebar = () => {
 
           position: "relative",
           top: 0,
-          overflowY: { xs: "auto", md: "hidden" }
-
+          overflowY: { xs: "auto", md: "hidden" },
         },
       }}
     >
-
       {/* Sidebar Menu Items */}
       <List sx={{ height: "100%", overflowY: "auto" }}>
         {menuItems.map((item, index) => (
@@ -63,10 +87,12 @@ const Sidebar = () => {
             onClick={() => {
               setIsExpanded(!isExpanded);
               if (activeIndex !== index) setActiveIndex(index);
+              route.push(item.path);
             }}
             key={index}
             sx={{
-              backgroundColor: activeIndex === index ? "#07B007" : "transparent",
+              backgroundColor:
+                activeIndex === index ? "#07B007" : "transparent",
               color: activeIndex === index ? "white" : "#6B7280",
               "&:hover": {
                 backgroundColor: "#07B007",
@@ -83,9 +109,7 @@ const Sidebar = () => {
               ml: { md: "30px" },
             }}
           >
-
             <ListItemIcon
-
               sx={{
                 color: activeIndex === index ? "white" : "inherit",
                 minWidth: "auto",

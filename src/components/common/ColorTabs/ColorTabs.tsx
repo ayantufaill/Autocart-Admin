@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Box, Avatar, Badge, Typography } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { useRouter } from "next/router";
 
-const tabData = [
-  { label: "All Ads", count: 428 },
-  { label: "Pending Ads", count: 37 },
-  { label: "Renew Ads", count: 42 },
-  { label: "Deleted Ads", count: 84 },
-  { label: "Approved Ads", count: 27 },
-  { label: "Rejected Ads", count: 58 },
-];
+type TabDataItem = {
+  label: string;
+  count?: number;
+  path: string;
+};
 
-const ColorTabs: React.FC = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
+type ColorTabsProps = {
+  tabData: TabDataItem[];
+  defaultTab: number;
+};
 
+const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
+  const [selectedTab, setSelectedTab] = useState(defaultTab);
+  const route = useRouter();
   return (
     <Box sx={{ width: "100%", bgcolor: "#F9F9F9", p: 2 }}>
       <Tabs
@@ -30,6 +33,8 @@ const ColorTabs: React.FC = () => {
       >
         {tabData.map((tab, index) => (
           <Tab
+            disableTouchRipple
+            onClick={() => route.push(tab.path)}
             key={index}
             label={
               <Box display="flex" alignItems="center">

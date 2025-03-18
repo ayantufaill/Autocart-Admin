@@ -1,6 +1,6 @@
 import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
-
+import { Container } from "@mui/material";
 import React from "react";
 
 const adsData: {
@@ -31,7 +31,7 @@ const adsData: {
     title: "BMW Sport",
     category: "Dealership",
     userId: "USER200",
-    status: "Rejected",
+    status: "Active",
     dateCreated: "20/01/2025",
     expiryDate: "20/02/2025",
     imageUrl: "/images/bmw2.jpg",
@@ -42,28 +42,32 @@ const adsData: {
     title: "BMW Sport",
     category: "Vintage Car",
     userId: "USER200",
-    status: "Pending",
+    status: "Active",
     dateCreated: "20/01/2025",
     expiryDate: "20/02/2025",
     imageUrl: "/images/bmw3.jpg",
   },
 ];
 
-export default function Index() {
+const ActiveAds: React.FC = () => {
   return (
-    <div>
+    <div style={{ backgroundColor: "#F9F9F9" }}>
       <ColorTabs
         tabData={[
-          { label: "All Ads", count: 428, path: "/" },
-          { label: "Pending Ads", count: 37, path: "/" },
-          { label: "Renew Ads", count: 42, path: "/" },
-          { label: "Deleted Ads", count: 84, path: "/" },
-          { label: "Approved Ads", count: 27, path: "/" },
-          { label: "Rejected Ads", count: 58, path: "/" },
+          { label: "All Ads", path: "/", count: 428 },
+          { label: "Pending Ads", path: "/admin/pending/ads", count: 37 },
+          { label: "Renew Ads", path: "/", count: 42 },
+          { label: "Deleted Ads", path: "/", count: 84 },
+          { label: "Approved Ads", path: "/admin/active/ads", count: 27 },
+          { label: "Rejected Ads", path: "/admin/rejected/ads", count: 27 },
         ]}
-        defaultTab={0}
+        defaultTab={4}
       />
-      <AdsTable ads={adsData} />
+      <Container sx={{ pb: "40px" }}>
+        <AdsTable ads={adsData} />
+      </Container>
     </div>
   );
-}
+};
+
+export default ActiveAds;

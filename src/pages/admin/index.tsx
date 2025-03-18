@@ -12,7 +12,6 @@ import FinanceStatCard from '@/components/common/AdminCards/FinanceCard';
 import ContentCards from '@/components/common/AdminCards/AdsCard';
 import CustomBarChart from '@/components/common/AdminCards/BarChart'
 
-// comment to verify beanch story
 
 const stats = [
     { title: "Total Ads", value: "7,854,472", color: "#1E40AF", change: "+9.2%", unit: "Ads" },
