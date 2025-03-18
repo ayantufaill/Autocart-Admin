@@ -62,7 +62,7 @@ const StoryReported: React.FC = () => {
   const [search, setSearch] = useState("");
 
   return (
-    <>
+    <div style={{backgroundColor: "#F9F9F9"}}>
       <ColorTabs
         tabData={[
           { label: "Story Overview", path: "/admin/story/management" },
@@ -96,7 +96,7 @@ const StoryReported: React.FC = () => {
         </Box>
         <AdsTable ads={adsData} />
       </Container>
-    </>
+    </div>
   );
 };
 

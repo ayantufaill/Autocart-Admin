@@ -23,7 +23,8 @@ const actions = [
 
 const StoryOpened: React.FC = () => {
   return (
-    <Container sx={{ py: 5 }}>
+    <div style={{backgroundColor: "#F9F9F9"}}>
+      <Container sx={{ py: 5 }}>
       <Stack
         spacing={{ xs: 2, md: 0 }}
         direction={{ md: "row" }}
@@ -98,6 +99,7 @@ const StoryOpened: React.FC = () => {
         </Grid>
       </Paper>
     </Container>
+    </div>
   );
 };
 
