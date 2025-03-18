@@ -1,6 +1,7 @@
 import React from "react";
 
-import {Drawer,
+import {
+  Drawer,
   List,
   ListItem,
   ListItemIcon,
@@ -20,7 +21,6 @@ const Sidebar = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
-
   const menuItems = [
     { text: "Dashboard", icon: <DashboardOutlinedIcon /> },
     { text: "Ads Management", icon: <AdsClickOutlinedIcon /> },
@@ -36,11 +36,22 @@ const Sidebar = () => {
     <Drawer
       variant="permanent"
       sx={{
-        width: { xs: isExpanded ? "250px" : "80px", md: "260px", lg: "260px", xl: "280px" },
-        borderRight:'1px solid rgb(224, 224, 224)',
+        height: "calc(100vh - 80px)",
+        width: {
+          xs: isExpanded ? "250px" : "80px",
+          md: "260px",
+          lg: "260px",
+          xl: "280px",
+        },
+        borderRight: "1px solid rgb(224, 224, 224)",
         flexShrink: 0,
         "& .MuiDrawer-paper": {
-          width: { xs: isExpanded ? "250px" : "80px", md: "260px", lg: "260px", xl: "280px" },
+          width: {
+            xs: isExpanded ? "250px" : "80px",
+            md: "260px",
+            lg: "260px",
+            xl: "280px",
+          },
           transition: "width 0.3s",
           boxSizing: "border-box",
           height: "calc(100vh - 80px)",
@@ -50,8 +61,6 @@ const Sidebar = () => {
         },
       }}
     >
-
-      
       <List sx={{ height: "100%", overflowY: "auto" }}>
         {menuItems.map((item, index) => (
           <ListItem
@@ -61,7 +70,8 @@ const Sidebar = () => {
             }}
             key={index}
             sx={{
-              backgroundColor: activeIndex === index ? "#07B007" : "transparent",
+              backgroundColor:
+                activeIndex === index ? "#07B007" : "transparent",
               color: activeIndex === index ? "white" : "#6B7280",
               "&:hover": {
                 backgroundColor: "#07B007",
@@ -78,9 +88,7 @@ const Sidebar = () => {
               ml: { md: "30px" },
             }}
           >
-
             <ListItemIcon
-
               sx={{
                 color: activeIndex === index ? "white" : "inherit",
                 minWidth: "auto",
