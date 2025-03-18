@@ -21,8 +21,7 @@ const FinanceStatCard: React.FC<FinanceStatCardProps> = ({ title, amount, percen
                 px: { xs: 2, md: 3, lg: 3 },
                 gap: '8px',
                 py: '20px',
-                pb:'30px',
-                justifyContent: 'center'
+                justifyContent: 'space-between'
             }}
         >
             
@@ -47,7 +46,7 @@ const FinanceStatCard: React.FC<FinanceStatCardProps> = ({ title, amount, percen
 
             <Box sx={{ height: '68px', display: 'flex', flexDirection: "column", gap: '6px' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                    <Typography sx={{ fontSize: { xs: "22px", md: "32px" }, fontWeight: 600, color: "#1F2937" }}>
+                    <Typography sx={{ fontSize: { xs: "22px", md: "22px" ,xl:'32px' }, fontWeight: 600, color: "#1F2937" }}>
                         {amount}
                     </Typography>
 
