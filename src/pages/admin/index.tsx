@@ -87,14 +87,14 @@ const index = () => {
         >
 
             {/* Top Section */}
-            <Box sx={{ height: { xs: "auto", md: "134px" } }}>
+            <Box sx={{ height: { xs: "auto", md: "84px" } }}>
                 <Box
                     sx={{
                         backgroundColor: "white",
-                        height: { xs: "auto", lg: "108px" },
+                        height: { xs: "auto", lg: "75px" },
                         borderRadius: "24px",
-                        px: { xs: 2, md: 3 },
-                        py: { xs: 2, md: 2 },
+                        px: { xs: '8px', md: '16px' },
+                        py: { xs: '8px', md: '8px' },
                         border: "0.5px solid #CACACA",
                         display: "flex",
                         alignItems: "center",
@@ -110,42 +110,43 @@ const index = () => {
                             textAlign: { xs: "center", lg: "left" },
                         }}
                     >
-                        <Typography sx={{ fontSize: { xs: "20px", md: "24px" }, fontWeight: "600", color: "#1F2937" }}>
+                        <Typography sx={{ fontSize: { xs: "18px", md: "20px" }, fontWeight: "600", color: "#1F2937" }}>
                             Today
                         </Typography>
-                        <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: { xs: "center", lg: "flex-start" }, gap: { xs: 1, md: 4 }, mt: 1 }}>
-                            <Typography sx={{ fontSize: { xs: "16px", md: "22px" }, color: "#9CA3AF" }}>
+                        <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: { xs: "center", lg: "flex-start" }, gap: { xs: 1, md: 4 } }}>
+                            <Typography sx={{ fontSize: { xs: "16px", md: "16px" }, color: "#9CA3AF" }}>
                                 Sunday 19TH January 2025
                             </Typography>
-                            <Typography sx={{ fontSize: { xs: "16px", md: "22px" }, color: "#9CA3AF" }}>
+                            <Typography sx={{ fontSize: { xs: "16px", md: "16px" }, color: "#9CA3AF" }}>
                                 01:25pm
                             </Typography>
                         </Box>
                     </Box>
 
                     {/* Right Section */}
-                    <Button
-                        variant="outlined"
-                        startIcon={<CalendarMonthOutlinedIcon sx={{ width: "36px", height: "36px", color: "#9CA3AF" }} />}
-                        sx={{
-                            width: { xs: "100%", md: "230px" },
-                            height: "60px",
-                            borderRadius: "12px",
-                            border: "0.5px solid #CACACA",
-                            color: "#9CA3AF",
-                            textTransform: "none",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            gap: 1,
-                            py: 1,
-                            px: 2,
-                        }}
-                    >
-                        <Typography sx={{ fontSize: { xs: "16px", md: "18px" }, color: "#9CA3AF" }}>
-                            Change Date
-                        </Typography>
-                    </Button>
+                    <Box>
+                        <Button
+                            variant="outlined"
+                            startIcon={<CalendarMonthOutlinedIcon sx={{ width: "26px", height: "26px", color: "#9CA3AF" }} />}
+                            sx={{
+                                width: { xs: "100%", md: "160px" },
+                                height: "40px",
+                                borderRadius: "12px",
+                                border: "0.5px solid #CACACA",
+                                color: "#9CA3AF",
+                                textTransform: "none",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                py: '4px',
+                                px: '4px',
+                            }}
+                        >
+                            <Typography sx={{ fontSize: { xs: "16px", md: "18px" }, color: "#9CA3AF" }}>
+                                Change Date
+                            </Typography>
+                        </Button>
+                    </Box>
                 </Box>
             </Box>
 
@@ -153,8 +154,8 @@ const index = () => {
             <Box sx={{ width: "100%" }}>
                 {/* Heading */}
                 <Box sx={{ display: "flex", gap: '16px', alignItems: 'center', mb: 3, mt: { xs: 4, md: 10, lg: 0 } }}>
-                    <AdsClickOutlinedIcon sx={{ height: "36px", width: "36px", color: "#9CA3AF" }} />
-                    <Typography sx={{ fontSize: '32px', color: '#1F2937', fontWeight: 600 }}>Ads</Typography>
+                    <AdsClickOutlinedIcon sx={{ height: "26px", width: "26px", color: "#9CA3AF" }} />
+                    <Typography sx={{ fontSize: '24px', color: '#1F2937', fontWeight: 600 }}>Ads</Typography>
                 </Box>
 
                 {/* Cards */}
@@ -174,8 +175,8 @@ const index = () => {
             <Box sx={{ mb: 1 }}>
                 {/* Heading */}
                 <Box sx={{ display: "flex", gap: '16px', alignItems: 'center', mb: 3 }}>
-                    <PeopleOutlineOutlinedIcon sx={{ height: "36px", width: "36px", color: "#9CA3AF" }} />
-                    <Typography sx={{ fontSize: '32px', color: '#1F2937', fontWeight: 600 }}>Users</Typography>
+                    <PeopleOutlineOutlinedIcon sx={{ height: "26px", width: "26px", color: "#9CA3AF" }} />
+                    <Typography sx={{ fontSize: '24px', color: '#1F2937', fontWeight: 600 }}>Users</Typography>
                 </Box>
 
                 {/* Cards */}
@@ -197,8 +198,8 @@ const index = () => {
             }}>
                 {/* Heading */}
                 <Box sx={{ display: "flex", gap: '16px', alignItems: 'center' }}>
-                    <PaidOutlinedIcon sx={{ height: "36px", width: "36px", color: "#9CA3AF" }} />
-                    <Typography sx={{ fontSize: '32px', color: '#1F2937', fontWeight: 600 }}>Finance Overview</Typography>
+                    <PaidOutlinedIcon sx={{ height: "26px", width: "26px", color: "#9CA3AF" }} />
+                    <Typography sx={{ fontSize: '24px', color: '#1F2937', fontWeight: 600 }}>Finance Overview</Typography>
                 </Box>
                 {/* Cards */}
                 <Box>
@@ -219,16 +220,16 @@ const index = () => {
 
             {/* Message*/}
             <Box sx={{
-                display: 'flex', flexDirection: "column", gap: '27px'
+                display: 'flex', flexDirection: "column", gap: '17px'
             }}>
                 {/* Heading */}
                 <Box sx={{ display: "flex", gap: '16px', alignItems: 'center' }}>
-                    <ChatOutlinedIcon sx={{ height: "36px", width: "36px", color: "#9CA3AF" }} />
-                    <Typography sx={{ fontSize: '32px', color: '#1F2937', fontWeight: 600 }}>Message</Typography>
+                    <ChatOutlinedIcon sx={{ height: "26px", width: "26px", color: "#9CA3AF" }} />
+                    <Typography sx={{ fontSize: '24px', color: '#1F2937', fontWeight: 600 }}>Message</Typography>
                 </Box>
                 {/* Cards 1*/}
                 <Box>
-                    <Typography sx={{ fontSize: '24px', color: '#9CA3AF', mb: '16px' }}>Flagged Message</Typography>
+                    <Typography sx={{ fontSize: '20px', color: '#9CA3AF', mb: '16px' }}>Flagged Message</Typography>
                     <Grid container spacing={2}>
                         {flaggedMessage.map((data, index) => (
                             <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
@@ -239,7 +240,7 @@ const index = () => {
                 </Box>
                 {/* Cards 2*/}
                 <Box>
-                    <Typography sx={{ fontSize: '24px', color: '#9CA3AF', mb: '16px' }}>Reported Message</Typography>
+                    <Typography sx={{ fontSize: '20px', color: '#9CA3AF', mb: '16px' }}>Reported Message</Typography>
                     <Grid container spacing={2}>
                         {reportedMessage.map((data, index) => (
                             <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
@@ -252,16 +253,16 @@ const index = () => {
 
             {/* Mail*/}
             <Box sx={{
-                display: 'flex', flexDirection: "column", gap: '27px'
+                display: 'flex', flexDirection: "column", gap: '17px'
             }}>
                 {/* Heading */}
                 <Box sx={{ display: "flex", gap: '16px', alignItems: 'center' }}>
-                    <EmailOutlinedIcon sx={{ height: "36px", width: "36px", color: "#9CA3AF" }} />
-                    <Typography sx={{ fontSize: '32px', color: '#1F2937', fontWeight: 600 }}>Mail</Typography>
+                    <EmailOutlinedIcon sx={{ height: "26px", width: "26px", color: "#9CA3AF" }} />
+                    <Typography sx={{ fontSize: '24px', color: '#1F2937', fontWeight: 600 }}>Mail</Typography>
                 </Box>
                 {/* Cards 1*/}
                 <Box>
-                    <Typography sx={{ fontSize: '24px', color: '#9CA3AF', mb: '16px' }}>Inbox Mail</Typography>
+                    <Typography sx={{ fontSize: '20px', color: '#9CA3AF', mb: '16px' }}>Inbox Mail</Typography>
                     <Grid container spacing={2}>
                         {inboxMail.map((data, index) => (
                             <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
@@ -272,7 +273,7 @@ const index = () => {
                 </Box>
                 {/* Cards 2*/}
                 <Box>
-                    <Typography sx={{ fontSize: '24px', color: '#9CA3AF', mb: '16px' }}>Outbox Mail</Typography>
+                    <Typography sx={{ fontSize: '20px', color: '#9CA3AF', mb: '16px' }}>Outbox Mail</Typography>
                     <Grid container spacing={2}>
                         {outboxMail.map((data, index) => (
                             <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
@@ -285,12 +286,12 @@ const index = () => {
 
             {/* Stories*/}
             <Box sx={{
-                display: 'flex', flexDirection: "column", gap: '37px'
+                display: 'flex', flexDirection: "column", gap: '27px'
             }}>
                 {/* Heading */}
                 <Box sx={{ display: "flex", gap: '16px', alignItems: 'center' }}>
-                    <AutoStoriesOutlinedIcon sx={{ height: "36px", width: "36px", color: "#9CA3AF" }} />
-                    <Typography sx={{ fontSize: '32px', color: '#1F2937', fontWeight: 600 }}>Stories</Typography>
+                    <AutoStoriesOutlinedIcon sx={{ height: "26px", width: "26px", color: "#9CA3AF" }} />
+                    <Typography sx={{ fontSize: '24px', color: '#1F2937', fontWeight: 600 }}>Stories</Typography>
                 </Box>
                 {/* Cards */}
                 <Box>
