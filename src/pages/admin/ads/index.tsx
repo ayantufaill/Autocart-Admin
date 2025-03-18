@@ -54,12 +54,12 @@ export default function Index() {
     <div>
       <ColorTabs
         tabData={[
-          { label: "All Ads", count: 428, path: "/" },
-          { label: "Pending Ads", count: 37, path: "/" },
+          { label: "All Ads", count: 428, path: "/admin/ads" },
+          { label: "Pending Ads", count: 37, path: "/admin/pending/ads" },
           { label: "Renew Ads", count: 42, path: "/" },
           { label: "Deleted Ads", count: 84, path: "/" },
-          { label: "Approved Ads", count: 27, path: "/" },
-          { label: "Rejected Ads", count: 58, path: "/" },
+          { label: "Approved Ads", count: 27, path: "/admin/active/ads" },
+          { label: "Rejected Ads", count: 58, path: "/admin/rejected/ads" },
         ]}
         defaultTab={0}
       />

@@ -26,7 +26,7 @@ const Sidebar = () => {
 
   const menuItems = [
     { text: "Dashboard", icon: <DashboardOutlinedIcon />, path: "/" },
-    { text: "Ads Management", icon: <AdsClickOutlinedIcon />, path: "/" },
+    { text: "Ads Management", icon: <AdsClickOutlinedIcon />, path: "/admin/ads" },
     {
       text: "Users Management",
       icon: <PeopleOutlineOutlinedIcon />,

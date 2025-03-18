@@ -54,7 +54,7 @@ const StoryManagement: React.FC = () => {
     <div>
       <ColorTabs
         tabData={[
-          { label: "All Ads", path: "/", count: 428 },
+          { label: "All Ads", path: "/admin/ads", count: 428 },
           { label: "Pending Ads", path: "/admin/pending/ads", count: 37 },
           { label: "Renew Ads", path: "/", count: 42 },
           { label: "Deleted Ads", path: "/", count: 84 },
