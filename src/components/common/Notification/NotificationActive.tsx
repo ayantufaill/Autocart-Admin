@@ -48,7 +48,7 @@ const NotificationActive = () => {
                     >14</Typography>
                 </Box>
 
-                {/* Button */}
+            
                 <Box>
                     <Button
                         variant="contained"
@@ -70,7 +70,6 @@ const NotificationActive = () => {
             </Box>
 
 
-            {/* Bottom Section */}
 
             <Box
                 sx={{

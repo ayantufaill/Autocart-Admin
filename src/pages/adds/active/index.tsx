@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
-import AdHeader from '@/components/common/AdHeader';
-import AdDetails from '@/components/common/AdDetail';
-import AdImages from '@/components/common/AdImage';
+import AdHeader from '@/components/common/AdsActive/AdHeader';
+import AdDetails from '@/components/common/AdsActive/AdDetail';
+import AdImages from '@/components/common/AdsActive/AdImage';
 
 const itemData = [
     { img: "/Images/AdsActive/image 12.png", title: "Image 1" },

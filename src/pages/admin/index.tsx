@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid, Button } from '@mui/material';
 import AdsClickOutlinedIcon from '@mui/icons-material/AdsClickOutlined';
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
@@ -8,9 +8,9 @@ import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
-import FinanceStatCard from '@/components/common/ContentFinanceCard';
-import ContentCards from '@/components/common/ContentCards';
-import CustomBarChart from '@/components/common/BarChart'
+import FinanceStatCard from '@/components/common/AdminCards/FinanceCard';
+import ContentCards from '@/components/common/AdminCards/AdsCard';
+import CustomBarChart from '@/components/common/AdminCards/BarChart'
 
 const stats = [
     { title: "Total Ads", value: "7,854,472", color: "#1E40AF", change: "+9.2%", unit: "Ads" },
@@ -76,7 +76,7 @@ const index = () => {
                 backgroundColor: "#F9F9F9",
                 px: '40px',
                 pt: '40px',
-                pb:'300px',
+                pb: '300px',
                 width: '100%',
                 // height: "calc(100% - 80px)",
                 height: '100%',
@@ -124,25 +124,28 @@ const index = () => {
                     </Box>
 
                     {/* Right Section */}
-                    <Box
+                    <Button
+                        variant="outlined"
+                        startIcon={<CalendarMonthOutlinedIcon sx={{ width: "36px", height: "36px", color: "#9CA3AF" }} />}
                         sx={{
                             width: { xs: "100%", md: "230px" },
                             height: "60px",
                             borderRadius: "12px",
                             border: "0.5px solid #CACACA",
-                            py: 1,
-                            px: 2,
+                            color: "#9CA3AF",
+                            textTransform: "none",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                             gap: 1,
+                            py: 1,
+                            px: 2,
                         }}
                     >
-                        <CalendarMonthOutlinedIcon sx={{ width: "36px", height: "36px", color: "#9CA3AF" }} />
                         <Typography sx={{ fontSize: { xs: "16px", md: "18px" }, color: "#9CA3AF" }}>
                             Change Date
                         </Typography>
-                    </Box>
+                    </Button>
                 </Box>
             </Box>
 

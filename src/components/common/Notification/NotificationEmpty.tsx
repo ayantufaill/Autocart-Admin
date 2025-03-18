@@ -12,7 +12,7 @@ const NotificationEmpty = () => {
                 flexDirection: 'column'
             }}
         >
-             {/* Top */}
+             
             <Box
                 sx={{
                     height: '108px',
@@ -49,7 +49,7 @@ const NotificationEmpty = () => {
                 </Box>
             </Box>
                     
-            {/* Bottom */}
+        
             <Box
                 sx={{  
                     height: "calc(100% - 188px)",

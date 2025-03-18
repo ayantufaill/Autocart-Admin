@@ -3,7 +3,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 interface AdHeaderProps {
     title: string;
-    onDelete: () => void; // Function that takes no arguments and returns nothing
+    onDelete: () => void; 
 }
 
 const AdHeader: React.FC<AdHeaderProps> = ({ title, onDelete }) => {
@@ -17,14 +17,14 @@ const AdHeader: React.FC<AdHeaderProps> = ({ title, onDelete }) => {
                 height: "156px"
             }}
         >
-            {/* Left Section */}
+            
             <Box sx={{ display: 'flex', alignItems: "center", gap: { xs: '8px', sm: '24px' }, height: "40px" }}>
                 <Box sx={{ height: { xs: '12px', sm: '16px' }, width: { xs: '12px', sm: '16px' }, bgcolor: "#07B007", borderRadius: "4px" }}></Box>
                 <Typography sx={{ fontSize: { xs: '22px', sm: '26px', md: '32px' }, fontWeight: 600 }}>
                     {title}
                 </Typography>
             </Box>
-            {/* Right Section */}
+     
             <Button
                 variant="contained"
                 onClick={onDelete}

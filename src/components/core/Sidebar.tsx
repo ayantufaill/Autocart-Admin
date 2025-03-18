@@ -51,7 +51,7 @@ const Sidebar = () => {
       }}
     >
 
-      {/* Sidebar Menu Items */}
+      
       <List sx={{ height: "100%", overflowY: "auto" }}>
         {menuItems.map((item, index) => (
           <ListItem

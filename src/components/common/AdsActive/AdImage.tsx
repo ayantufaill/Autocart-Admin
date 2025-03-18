@@ -9,6 +9,7 @@ interface AdImagesProps {
     images: ImageItem[];
 }
 
+
 const AdImages: React.FC<AdImagesProps> = ({ images }) => {
     return (
         <Box sx={{ minHeight: '464px', display: "flex", alignItems: "center", justifyContent: "center", py: { xs: 8, lg: 4 } }}>
