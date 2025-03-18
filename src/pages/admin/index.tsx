@@ -163,7 +163,7 @@ const index = () => {
                 <Box>
                     <Grid container spacing={2}>
                         {stats.map((stat, index) => (
-                            <Grid item xs={12} md={6} xl={3} key={index}>
+                            <Grid item xs={12} md={6} lg={3} key={index}>
                                 <ContentCards {...stat} />
                             </Grid>
 
@@ -184,7 +184,7 @@ const index = () => {
                 <Box>
                     <Grid container spacing={2}>
                         {users.map((user, index) => (
-                            <Grid item xs={12} md={6} xl={3} key={index}>
+                            <Grid item xs={12} md={6} lg={3} key={index}>
                                 <ContentCards {...user} />
                             </Grid>
                         ))}
@@ -206,7 +206,7 @@ const index = () => {
                 <Box>
                     <Grid container spacing={2}>
                         {financeData.map((data, index) => (
-                            <Grid item xs={12} md={6} lg={6} xl={3} key={index}>
+                            <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
                                 <FinanceStatCard {...data} />
                             </Grid>
                         ))}
@@ -233,7 +233,7 @@ const index = () => {
                     <Typography sx={{ fontSize: '24px', color: '#9CA3AF', mb: '16px' }}>Flagged Message</Typography>
                     <Grid container spacing={2}>
                         {flaggedMessage.map((data, index) => (
-                            <Grid item xs={12} md={6} lg={6} xl={3} key={index}>
+                            <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
                                 <FinanceStatCard {...data} />
                             </Grid>
                         ))}
@@ -244,7 +244,7 @@ const index = () => {
                     <Typography sx={{ fontSize: '24px', color: '#9CA3AF', mb: '16px' }}>Reported Message</Typography>
                     <Grid container spacing={2}>
                         {reportedMessage.map((data, index) => (
-                            <Grid item xs={12} md={6} lg={6} xl={3} key={index}>
+                            <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
                                 <FinanceStatCard {...data} />
                             </Grid>
                         ))}
@@ -266,7 +266,7 @@ const index = () => {
                     <Typography sx={{ fontSize: '24px', color: '#9CA3AF', mb: '16px' }}>Inbox Mail</Typography>
                     <Grid container spacing={2}>
                         {inboxMail.map((data, index) => (
-                            <Grid item xs={12} md={6} lg={6} xl={3} key={index}>
+                            <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
                                 <FinanceStatCard {...data} />
                             </Grid>
                         ))}
@@ -277,7 +277,7 @@ const index = () => {
                     <Typography sx={{ fontSize: '24px', color: '#9CA3AF', mb: '16px' }}>Outbox Mail</Typography>
                     <Grid container spacing={2}>
                         {outboxMail.map((data, index) => (
-                            <Grid item xs={12} md={6} lg={6} xl={3} key={index}>
+                            <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
                                 <FinanceStatCard {...data} />
                             </Grid>
                         ))}
@@ -298,7 +298,7 @@ const index = () => {
                 <Box>
                     <Grid container spacing={2}>
                         {stories.map((data, index) => (
-                            <Grid item xs={12} md={6} lg={6} xl={3} key={index}>
+                            <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
                                 <FinanceStatCard {...data} />
                             </Grid>
                         ))}

@@ -14,16 +14,17 @@ const FlaggedMessage: React.FC<FlaggedMessageProps> = ({ title, value, percentag
         <Box
             sx={{
                 // width: '242px',
-                height: '124px',
+                height: '126px',
                 bgcolor: '#FFFFFF',
                 borderRadius: '6px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-evenly',
-                alignItems: 'center'
+                alignItems: 'center',
+                border:'0.5px solid #CACACA'
             }}
         >
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '206px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '206px' , px:'10px'}}>
                 <Typography sx={{ color: '#854D0E', fontSize: '15px' }}>{title}</Typography>
                 <Box
                     sx={{
@@ -42,7 +43,7 @@ const FlaggedMessage: React.FC<FlaggedMessageProps> = ({ title, value, percentag
                 </Box>
             </Box>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', width: '206px', gap: '6px', justifyContent: 'center', height: '51px' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: '206px', gap: '6px', justifyContent: 'center', height: '51px', px:'10px' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Typography sx={{ color: '#1F2937', fontSize: '24px', fontWeight: 600 }}>{value}</Typography>
                     <Typography sx={{ color: percentage.includes("+") ? "#22C55E" : "#EF4444", fontSize: '11px' }}>{percentage}</Typography>
