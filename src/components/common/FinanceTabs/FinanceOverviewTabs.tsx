@@ -13,7 +13,7 @@ interface NavigationTabsProps {
 
 const NavigationTabs: React.FC<NavigationTabsProps> = ({ tabs, activeTab, onTabChange }) => {
     return (
-        <Box sx={{ py: "24px", height: "94px" }}>
+        <Box sx={{ height: {xs:'46px',xl:"94px"} }}>
             <Box
                 sx={{
                     height: "46px",
@@ -30,13 +30,13 @@ const NavigationTabs: React.FC<NavigationTabsProps> = ({ tabs, activeTab, onTabC
                         key={index}
                         variant={activeTab === tab.label ? "contained" : "text"}
                         sx={{
-                            width: "255px",
+                            width: "242px",
                             height: "46px",
                             px: "4px",
                             py: "8px",
                             bgcolor: activeTab === tab.label ? "#07B007" : "transparent",
                             color: activeTab === tab.label ? "white" : "#9CA3AF",
-                            fontSize: "24px",
+                            fontSize: "21px",
                             borderRadius: "4px",
                             textTransform: "none",
                         }}
