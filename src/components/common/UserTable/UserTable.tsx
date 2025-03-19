@@ -102,10 +102,16 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                   borderBottom: "0.5px solid #E5E7EB",
                 }}
               >
-                <TableCell sx={{ textAlign: "center", padding: "12px" }}>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    padding: "12px",
+                    border: "0.5px solid #CACACA",
+                  }}
+                >
                   <Box
                     onClick={() =>
-                      router.push(`/admin/users/${user.status.toLowerCase()}`)
+                      router.push(`/admin/user/${user.status.toLowerCase()}`)
                     }
                     sx={{
                       display: "flex",
@@ -133,11 +139,29 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                     {user.status}
                   </Box>
                 </TableCell>
-                <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    border: "0.5px solid #CACACA",
+                  }}
+                >
                   {user.name}
                 </TableCell>
-                <TableCell sx={{ textAlign: "center" }}>{user.email}</TableCell>
-                <TableCell sx={{ textAlign: "center" }}>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    border: "0.5px solid #CACACA",
+                  }}
+                >
+                  {user.email}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    border: "0.5px solid #CACACA",
+                  }}
+                >
                   {user.adsPosted}
                 </TableCell>
                 <TableCell
@@ -146,6 +170,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                     display: "flex",
                     alignItems: "center",
                     gap: "8px",
+                    border: "0.5px solid #CACACA",
                   }}
                 >
                   <Avatar
@@ -154,7 +179,12 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                   />
                   {user.userId}
                 </TableCell>
-                <TableCell sx={{ textAlign: "center" }}>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    border: "0.5px solid #CACACA",
+                  }}
+                >
                   {user.regDate}
                 </TableCell>
               </TableRow>

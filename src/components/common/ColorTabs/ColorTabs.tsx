@@ -19,17 +19,21 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
   const route = useRouter();
 
   return (
-    <Box sx={{ width: "100%", bgcolor: "#F9F9F9", p: 2 }}>
+    <Box sx={{ width: "100%", bgcolor: "#F9F9F9" }}>
       <Tabs
         value={selectedTab}
         onChange={(_, newValue) => setSelectedTab(newValue)}
-        variant="scrollable"
+        // variant="scrollable"
         scrollButtons="auto"
         textColor="primary"
         sx={{
           "& .MuiTabs-indicator": {
             display: "none",
           },
+          "& .css-s2t35c-MuiTabs-scroller": {
+            overflow: "auto !important",
+          },
+          
         }}
       >
         {tabData.map((tab, index) => (

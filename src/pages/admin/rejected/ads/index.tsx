@@ -1,6 +1,6 @@
 import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
-import { Button, Container, Stack } from "@mui/material";
+import { Box, Button, Container, Stack } from "@mui/material";
 import { Close, FileCopyOutlined } from "@mui/icons-material";
 
 const adsData: {
@@ -51,7 +51,7 @@ const adsData: {
 
 const RejectedAds: React.FC = () => {
   return (
-    <div style={{ backgroundColor: "#F9F9F9" }}>
+    <div>
       <ColorTabs
         tabData={[
           { label: "All Ads", path: "/admin/ads", count: 428 },
@@ -64,9 +64,11 @@ const RejectedAds: React.FC = () => {
         defaultTab={5}
       />
 
-      <Container>
-        <AdsTable ads={adsData} />
-      </Container>
+      <Box sx={{ backgroundColor: "#F9F9F9", pb: "20px" }}>
+        <Container>
+          <AdsTable ads={adsData} />
+        </Container>
+      </Box>
 
       <Stack direction={"row"} spacing={3} pt={3} pl={3}>
         <Button

@@ -6,7 +6,7 @@ const SuspendedUser: React.FC = () => {
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <Container>
-        <UserDetails />
+        <UserDetails status="Suspended" />
       </Container>
     </div>
   );

@@ -1,7 +1,7 @@
 import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import { Close, FileCopyOutlined } from "@mui/icons-material";
-import { Button, Container, Stack } from "@mui/material";
+import { Box, Button, Container, Stack } from "@mui/material";
 
 const adsData: {
   id: string;
@@ -63,9 +63,11 @@ const StoryManagement: React.FC = () => {
         ]}
         defaultTab={1}
       />
-      <Container sx={{ bgcolor: "#F9F9F9", pb: "40px" }}>
-        <AdsTable ads={adsData} />
-      </Container>
+      <Box sx={{ bgcolor: "#F9F9F9", pb: "40px" }}>
+        <Container>
+          <AdsTable ads={adsData} />
+        </Container>
+      </Box>
       <Stack direction={"row"} spacing={3} pt={3} pl={3}>
         <Button
           variant="contained"
