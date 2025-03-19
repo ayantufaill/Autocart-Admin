@@ -8,31 +8,21 @@ import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
-import FinanceStatCard from '@/components/common/AdminCards/FinanceCard';
-import ContentCards from '@/components/common/AdminCards/AdsCard';
-import CustomBarChart from '@/components/common/AdminCards/BarChart'
-import AdminHeader from '@/components/common/AdminCards/AdminHeader';
-import { FC } from "react";
-import IconTitleBox from "@/components/common/AdminCards/CardsHeading"
-
-interface StatData {
-    title: string;
-    value: string;
-    color: string;
-    change: string;
-    unit: string;
-}
 import FinanceStatCard from "@/components/common/AdminCards/FinanceCard";
 import ContentCards from "@/components/common/AdminCards/AdsCard";
 import CustomBarChart from "@/components/common/AdminCards/BarChart";
+import AdminHeader from "@/components/common/AdminCards/AdminHeader";
+import { FC } from "react";
+import IconTitleBox from "@/components/common/AdminCards/CardsHeading";
 
-// comment to verify beanch story
+interface StatData {
+  title: string;
+  value: string;
+  color: string;
+  change: string;
+  unit: string;
+}
 
-const stats: StatData[] = [
-    { title: "Total Ads", value: "7,854,472", color: "#1E40AF", change: "+9.2%", unit: "Ads" },
-    { title: "Pending Ads", value: "7,854,472", color: "#854D0E", change: "+9.2%", unit: "Ads" },
-    { title: "Active Ads", value: "7,854,472", color: "#166534", change: "+9.2%", unit: "Ads" },
-    { title: "Daily Ads Created", value: "2,854,472", color: "#991B1B", change: "+9.2%", unit: "Ads" }
 const stats = [
   {
     title: "Total Ads",
