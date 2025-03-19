@@ -16,20 +16,35 @@ import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlin
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
+  const route = useRouter()
+
   const menuItems = [
-    { text: "Dashboard", icon: <DashboardOutlinedIcon /> },
-    { text: "Ads Management", icon: <AdsClickOutlinedIcon /> },
-    { text: "Users Management", icon: <PeopleOutlineOutlinedIcon /> },
-    { text: "Reporting & Analytics", icon: <AnalyticsOutlinedIcon /> },
-    { text: "Financial Management", icon: <MonetizationOnOutlinedIcon /> },
-    { text: "Email Management", icon: <EmailOutlinedIcon /> },
-    { text: "Message Management", icon: <ChatOutlinedIcon /> },
-    { text: "Story Management", icon: <AutoStoriesOutlinedIcon /> },
+    { text: "Dashboard", icon: <DashboardOutlinedIcon />, path: "/" },
+    { text: "Ads Management", icon: <AdsClickOutlinedIcon />, path: "/admin/ads" },
+    {
+      text: "Users Management",
+      icon: <PeopleOutlineOutlinedIcon />,
+      path: "/admin/user",
+    },
+    {
+      text: "Reporting & Analytics",
+      icon: <AnalyticsOutlinedIcon />,
+      path: "/admin/report",
+    },
+    {
+      text: "Financial Management",
+      icon: <MonetizationOnOutlinedIcon />,
+      path: "/admin/finance",
+    },
+    { text: "Email Management", icon: <EmailOutlinedIcon />, path: "/admin/email" },
+    { text: "Message Management", icon: <ChatOutlinedIcon />, path: "/admin/message" },
+    { text: "Story Management", icon: <AutoStoriesOutlinedIcon />, path: "/admin/story" },
   ];
 
   return (
@@ -67,6 +82,7 @@ const Sidebar = () => {
             onClick={() => {
               setIsExpanded(!isExpanded);
               if (activeIndex !== index) setActiveIndex(index);
+              route.push(item.path)
             }}
             key={index}
             sx={{

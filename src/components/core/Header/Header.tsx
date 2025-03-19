@@ -10,10 +10,13 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/system";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 const Header: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const route = useRouter();
 
   return (
     <Box
@@ -73,6 +76,7 @@ const Header: React.FC = () => {
               height: "50px",
               display: "flex",
               alignItems: "center",
+              bgcolor: "red",
             }}
           >
             <Image
@@ -95,12 +99,25 @@ const Header: React.FC = () => {
           height: "100%",
         }}
       >
-        <Image
-          src="/Images/Header/notification.png"
-          alt="Notification"
-          width={29}
-          height={30}
-          style={{ objectFit: "contain" }}
+        <NotificationsNoneIcon
+          onClick={() => {
+            route.push("/admin/notification/active");
+          }}
+          sx={{
+            backgroundColor:
+              route.pathname === "/admin/notification/active"
+                ? "#07B007"
+                : "transparent",
+            color:
+              route.pathname === "/admin/notification/active"
+                ? "white"
+                : "black",
+            padding: "3px",
+            borderRadius: "3px",
+            cursor: "pointer",
+            width: "32px",
+            height: "32px",
+          }}
         />
       </Box>
     </Box>

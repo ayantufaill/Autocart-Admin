@@ -1,12 +1,12 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 
 interface FinanceStatCardProps {
-    title: string;
-    amount: string | number;
-    percentage?: string;
-    comparisonText?: string; 
+  title: string;
+  amount: string | number;
+  percentage?: string;
+  comparisonText?: string;
 }
 
 const FinanceStatCard: React.FC<FinanceStatCardProps> = ({ title, amount, percentage = "", comparisonText = "" }) => {
