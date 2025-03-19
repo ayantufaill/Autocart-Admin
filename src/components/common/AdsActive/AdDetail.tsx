@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Divider } from '@mui/material';
+import { Box, Grid, Typography, Divider } from "@mui/material";
 
 interface DetailItem {
   label: string;
@@ -6,62 +6,77 @@ interface DetailItem {
 }
 
 interface AdDetailsProps {
-  details: DetailItem[][];  
+  details: DetailItem[][];
   description: string;
 }
-
 
 const AdDetails: React.FC<AdDetailsProps> = ({ details, description }) => {
   return (
     <Box>
-      <Typography sx={{ fontSize: { xs: '22px', sm: '26px', md: '32px' }, fontWeight: 600, color: '#1F2937' }}>
-        Ads Detail
+      <Typography
+        sx={{
+          fontSize: { xs: "20px", sm: "24px", md: "28px" },
+          fontWeight: 600,
+          color: "#1F2937",
+        }}
+      >
+        Ads Details
       </Typography>
-      <Divider sx={{ bgcolor: "#CACACA", my: 4 }} />
+      <Divider sx={{ bgcolor: "#CACACA", my: 2 }} />
 
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6} lg={6} xl={3}>
-          <Box sx={{ display: 'flex', flexDirection: "column", gap: '64px' }}>
-            {details[0]?.map((item, i) => (
-              <Box key={i} sx={{ display: 'flex', flexDirection: "column", gap: '24px' }}>
-                <Typography sx={{ fontSize: '24px', color: "#9CA3AF", letterSpacing: "1%" }}>
-                  {item.label}
-                </Typography>
-                <Typography sx={{
-                  fontSize: { xs: '22px', sm: '28px', md: '28px', xl:'32px' },
-                  fontWeight: 600, color: '#1F2937'
-                }}>
-                  {item.value}
-                </Typography>
-              </Box>
+      <Grid container spacing={4} alignItems="start">
+        {/* Details Section */}
+        <Grid item xs={12} md={6} lg={5}>
+          <Grid container spacing={4}>
+            {details.map((column, colIndex) => (
+              <Grid key={colIndex} item xs={12} sm={6}>
+                <Box
+                  sx={{ display: "flex", flexDirection: "column", gap: "40px" }}
+                >
+                  {column.map((item, i) => (
+                    <Box
+                      key={i}
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                      }}
+                    >
+                      <Typography sx={{ fontSize: "13px", color: "#9CA3AF" }}>
+                        {item.label}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "15px", md: "18px" },
+                          fontWeight: 600,
+                        }}
+                      >
+                        {item.value}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Grid>
             ))}
-          </Box>
+          </Grid>
         </Grid>
 
-        <Grid item xs={12} md={6} lg={6} xl={3}>
-          <Box sx={{ display: 'flex', flexDirection: "column", gap: '64px' }}>
-            {details[1]?.map((item, i) => (
-              <Box key={i} sx={{ display: 'flex', flexDirection: "column", gap: '24px' }}>
-                <Typography sx={{ fontSize: '24px', color: "#9CA3AF", letterSpacing: "1%" }}>
-                  {item.label}
-                </Typography>
-                <Typography sx={{
-                  fontSize: { xs: '22px', sm: '28px', md: '28px', xl:'32px' },
-                  fontWeight: 600, color: '#1F2937'
-                }}>
-                  {item.value}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} md={12} lg={12} xl={6}>
-          <Box sx={{ border: '0.5px solid #CACACA', borderRadius: '8px', px: '40px', py: '40px' }}>
-            <Typography sx={{ fontSize: { xs: '18px', sm: '20px', md: '24px' }, fontWeight: 600, color: '#000000', mb: '10px' }}>
+        {/* Description Section */}
+        <Grid item xs={12} md={6} lg={7}>
+          <Box
+            sx={{
+              border: "0.5px solid #CACACA",
+              borderRadius: "8px",
+              p: "24px",
+              height: "100%",
+            }}
+          >
+            <Typography sx={{ fontSize: "20px", fontWeight: 600, mb: "12px" }}>
               Description
             </Typography>
-            <Typography sx={{ fontSize: { xs: '16px', sm: '18px', md: '20px' }, color: '#9CA3AF', lineHeight: '30px' }}>
+            <Typography
+              sx={{ fontSize: "18px", color: "#4B5563", lineHeight: "30px" }}
+            >
               {description}
             </Typography>
           </Box>

@@ -24,6 +24,8 @@ interface StatData {
     unit: string;
 }
 
+// comment to verify beanch story
+
 const stats: StatData[] = [
     { title: "Total Ads", value: "7,854,472", color: "#1E40AF", change: "+9.2%", unit: "Ads" },
     { title: "Pending Ads", value: "7,854,472", color: "#854D0E", change: "+9.2%", unit: "Ads" },

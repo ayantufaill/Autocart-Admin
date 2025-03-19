@@ -1,54 +1,124 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 interface AdHeaderProps {
-    title: string;
-    onDelete: () => void; 
+  title: string;
+  onApprove?: () => void;
+  onReject?: () => void;
+  onDelete?: () => void;
 }
 
-const AdHeader: React.FC<AdHeaderProps> = ({ title, onDelete }) => {
-    return (
+const AdHeader: React.FC<AdHeaderProps> = ({
+  title,
+  onApprove,
+  onReject,
+  onDelete,
+}) => {
+  return (
+    <Box
+      sx={{
+        py: "16px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        height: "80px",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: { xs: "6px", sm: "12px" },
+          height: "30px",
+        }}
+      >
         <Box
-            sx={{
-                py: "48px",
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                height: "156px"
-            }}
+          sx={{
+            height: "10px",
+            width: "10px",
+            bgcolor: "#07B007",
+            borderRadius: "3px",
+          }}
+        />
+        <Typography
+          sx={{
+            fontSize: { xs: "16px", sm: "18px", md: "22px" },
+            fontWeight: 600,
+          }}
         >
-            
-            <Box sx={{ display: 'flex', alignItems: "center", gap: { xs: '8px', sm: '24px' }, height: "40px" }}>
-                <Box sx={{ height: { xs: '12px', sm: '16px' }, width: { xs: '12px', sm: '16px' }, bgcolor: "#07B007", borderRadius: "4px" }}></Box>
-                <Typography sx={{ fontSize: { xs: '22px', sm: '26px', md: '32px' }, fontWeight: 600 }}>
-                    {title}
-                </Typography>
-            </Box>
-     
-            <Button
-                variant="contained"
-                onClick={onDelete}
-                sx={{
-                    backgroundColor: "#F87171",
-                    color: "#FFFFFF",
-                    height: { xs: '40px', sm: '50px', md: '60px' },
-                    width: { xs: '130px', sm: '150px', md: '200px' },
-                    px: { xs: '4px', md: '12px' },
-                    py: { xs: '4px', md: '12px' },
-                    display: "flex",
-                    alignItems: "center",
-                    gap: { xs: '4px', md: '16px' },
-                    borderRadius: "8px",
-                    textTransform: "none",
-                }}
-            >
-                <DeleteOutlineIcon sx={{ height: { xs: '22px', md: '36px' }, width: { xs: '22px', md: '36px' } }} />
-                <Typography sx={{ fontSize: { xs: '18px', md: '24px' }, color: "#FFFFFF", fontWeight: 600 }}>
-                    Delete Ad
-                </Typography>
-            </Button>
-        </Box>
-    );
+          {title}
+        </Typography>
+      </Box>
+
+      <Box sx={{ display: "flex", gap: "10px" }}>
+        {onApprove && (
+          <Button
+            variant="contained"
+            onClick={onApprove}
+            sx={{
+              backgroundColor: "#60A5FA",
+              color: "#FFFFFF",
+              height: { xs: "30px", sm: "38px", md: "44px" },
+              width: { xs: "90px", sm: "110px", md: "140px" },
+              borderRadius: "6px",
+              textTransform: "none",
+              gap: "1px",
+              "&:hover": { backgroundColor: "#3A75BF" },
+            }}
+          >
+            <DeleteOutlineIcon sx={{ height: "20px", width: "20px", mr: 1 }} />
+            Approve Ad
+          </Button>
+        )}
+        {onReject && (
+          <Button
+            variant="contained"
+            onClick={onReject}
+            sx={{
+              backgroundColor: "#F87171",
+              color: "#FFFFFF",
+              height: { xs: "30px", sm: "38px", md: "44px" },
+              width: { xs: "90px", sm: "110px", md: "140px" },
+              borderRadius: "6px",
+              textTransform: "none",
+              display: "flex",
+              alignItems: "center",
+
+              gap: "2px",
+              "&:hover": { backgroundColor: "#EA5656" },
+            }}
+          >
+            <CancelIcon sx={{ height: "20px", width: "20px", mr: 1 }} />
+            Reject Ad
+          </Button>
+        )}
+
+        {onDelete && (
+          <Button
+            variant="contained"
+            onClick={onDelete}
+            sx={{
+              backgroundColor: "#F87171",
+              color: "#FFFFFF",
+              height: { xs: "30px", sm: "38px", md: "44px" },
+              width: { xs: "90px", sm: "110px", md: "130px" },
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              borderRadius: "6px",
+              textTransform: "none",
+              "&:hover": { backgroundColor: "#DC2626" },
+            }}
+          >
+            <DeleteOutlineIcon sx={{ height: "20px", width: "20px" }} />
+            Delete
+          </Button>
+        )}
+      </Box>
+    </Box>
+  );
 };
 
 export default AdHeader;

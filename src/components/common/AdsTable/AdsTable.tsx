@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import {
   Table,
   TableHead,
@@ -37,6 +38,7 @@ const statusConfig = {
 
 const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
   const [search, setSearch] = useState("");
+  const router = useRouter();
 
   const filteredAds = ads.filter((ad) =>
     ad.title.toLowerCase().includes(search.toLowerCase())
@@ -107,7 +109,7 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                   borderBottom: "0.5px solid #E5E7EB",
                 }}
               >
-                {/* Status Cell */}
+                {/* ✅ Clickable Status */}
                 <TableCell
                   sx={{
                     textAlign: "center",
@@ -116,6 +118,9 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                   }}
                 >
                   <Box
+                    onClick={() =>
+                      router.push(`/admin/ads/${ad.status.toLowerCase()}`)
+                    } // ✅ Status Click Event
                     sx={{
                       display: "flex",
                       alignItems: "center",
@@ -128,6 +133,9 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                       fontWeight: "bold",
                       color: statusConfig[ad.status].textColor,
                       minWidth: "100px",
+                      cursor: "pointer", // ✅ Pointer Cursor
+                      transition: "opacity 0.2s ease-in-out",
+                      "&:hover": { opacity: 0.8 }, // ✅ Hover Effect
                     }}
                   >
                     <Box
@@ -143,49 +151,10 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                 </TableCell>
 
                 <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "8px",
-                    }}
-                  >
-                    <span>{ad.id}</span>
-                    <Box
-                      sx={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor:
-                          ad.sellerType === "Private Seller"
-                            ? "#FAF5FF"
-                            : "#ECFEFF",
-                        color: "#9CA3AF",
-                        padding: "2px 6px",
-                        fontSize: "11px",
-                        fontWeight: "500",
-                        borderRadius: "4px",
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          width: 6,
-                          height: 6,
-                          backgroundColor:
-                            ad.sellerType === "Private Seller"
-                              ? "#A855F7"
-                              : "#06B6D4",
-                          borderRadius: "50%",
-                          marginRight: "4px",
-                        }}
-                      />
-                      {ad.sellerType}
-                    </Box>
-                  </Box>
+                  {ad.id}
                 </TableCell>
 
-                {/* Title */}
+                {/* ✅ Clickable Title */}
                 <TableCell
                   sx={{
                     textAlign: "center",
@@ -194,11 +163,15 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                   }}
                 >
                   <Box
+                    onClick={() => router.push("/admin/ads/active")} // ✅ Click event
                     sx={{
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       gap: "8px",
+                      cursor: "pointer", // ✅ Pointer cursor
+                      transition: "color 0.2s ease-in-out",
+                      "&:hover": { color: "#2563EB" }, // ✅ Hover effect
                     }}
                   >
                     <img
