@@ -1,7 +1,7 @@
 import React from "react";
 
 const ActiveUser: React.FC = () => {
-  return <div>ActiveUser</div>;
+  return <div>ActiveUserDetails</div>;
 };
 
 export default ActiveUser;
