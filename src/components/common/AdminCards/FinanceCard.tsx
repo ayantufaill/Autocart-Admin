@@ -13,55 +13,45 @@ const FinanceStatCard: React.FC<FinanceStatCardProps> = ({ title, amount, percen
     return (
         <Box
             sx={{
+                height: '130px',
                 bgcolor: '#FFFFFF',
-                border: '0.5px solid #CACACA',
                 borderRadius: '8px',
                 display: 'flex',
                 flexDirection: 'column',
-                px: { xs: 2, md: 3, lg: 3 },
-                gap: '8px',
-                py: '20px',
-                justifyContent: 'space-between'
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+                border:'0.5px solid #CACACA',
+                px:{xs:'10px', lg:'0px'}
             }}
         >
             
-            <Box sx={{
-                height: '30px',
-                display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center'
-            }}>
-                <Typography sx={{ height: '25px', color: '#854D0E', fontSize: '20px', letterSpacing: '1%' }}>
-                    {title}
-                </Typography>
-                <CalendarMonthOutlinedIcon
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: {xs:'100%',lg:'196px'} , px:'5px'}}>
+                <Typography sx={{ color: '#854D0E', fontSize: '15px' }}>{title}</Typography>
+                <Box
                     sx={{
-                        borderRadius: '8px',
-                        border: "0.5px solid #CACACA",
-                        height: '30px',
-                        width: '30px',
-                        color: '#9CA3AF',
-                        p: '2px'
+                        p: '1px',
+                        height: '23px',
+                        width: '23px',
+                        border: '0.5px solid #CACACA',
+                        bgcolor: 'white',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
                     }}
-                />
+                >
+                    <CalendarMonthOutlinedIcon sx={{ color: '#9CA3AF', width: '15px', height: '15px' }} />
+                </Box>
             </Box>
 
-            <Box sx={{ height: '68px', display: 'flex', flexDirection: "column", gap: '6px' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                    <Typography sx={{ fontSize: { xs: "22px", md: "22px" ,xl:'32px' }, fontWeight: 600, color: "#1F2937" }}>
-                        {amount}
-                    </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: {xs:'100%',lg:'196px'}, gap: '6px', justifyContent: 'center', height: '51px', px:'5px' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                   <Typography sx={{ color: '#1F2937', fontSize: '24px', fontWeight: 600 }}>{amount}</Typography>
 
-                    {percentage && (
-                        <Typography sx={{ fontSize: "14px", color: percentage.includes("+") ? "#22C55E" : "#EF4444" }}>
-                            {percentage}
-                        </Typography>
-                    )}
+                    <Typography sx={{ color: percentage.includes("+") ? "#22C55E" : "#EF4444", fontSize: '12px' }}>{percentage}</Typography>
                 </Box>
 
-                {comparisonText && (
-                    <Typography sx={{ fontSize: { xs: "16px" }, color: "#9CA3AF" }}>
-                        {comparisonText}
-                    </Typography>
-                )}
+                <Typography sx={{ fontSize: '12px', color: '#9CA3AF' }}>{comparisonText}</Typography>
             </Box>
         </Box>
     );
