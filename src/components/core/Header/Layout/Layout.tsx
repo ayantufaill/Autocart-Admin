@@ -2,24 +2,34 @@ import { ReactNode } from "react";
 import { useState } from "react";
 import { Box } from "@mui/material";
 import Header from "../Header";
-import Sidebar from "@/pages/components/Sidebar";
+import Sidebar from "@/components/core/Sidebar";
+import { Source_Sans_3 } from "next/font/google";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
-const CustomLayout = ({ children }: LayoutProps) => {
+const sans = Source_Sans_3({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
-const [sidebarOpen, setSidebarOpen] = useState(true);
+const CustomLayout = ({ children }: LayoutProps) => {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <Box
+      className={sans.className}
+      sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+    >
       <Header />
 
-      <Box  sx={{ display: 'flex', height: "100vh" }}>
-        <Sidebar />
-        <Box sx={{ flex: 1 }}>{children}</Box>
-      </Box>
+      <main className={sans.className}>
+        <Box sx={{ display: "flex" }}>
+          <Sidebar />
+          <Box sx={{ flex: 1 }}>{children}</Box>
+        </Box>
+      </main>
     </Box>
   );
 };
