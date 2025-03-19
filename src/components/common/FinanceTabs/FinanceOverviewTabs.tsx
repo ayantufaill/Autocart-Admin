@@ -30,13 +30,13 @@ const NavigationTabs: React.FC<NavigationTabsProps> = ({ tabs, activeTab, onTabC
                         key={index}
                         variant={activeTab === tab.label ? "contained" : "text"}
                         sx={{
-                            width: "242px",
-                            height: "46px",
+                            width: "222px",
+                            height: "42px",
                             px: "4px",
                             py: "8px",
                             bgcolor: activeTab === tab.label ? "#07B007" : "transparent",
                             color: activeTab === tab.label ? "white" : "#9CA3AF",
-                            fontSize: "21px",
+                            fontSize: "18px",
                             borderRadius: "4px",
                             textTransform: "none",
                         }}

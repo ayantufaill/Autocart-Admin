@@ -30,11 +30,11 @@ const index: React.FC = () => {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        gap: { xs: '20px', md: '37px' },
+        gap: { xs: '20px', md: '20px' },
       }}
     >
    
-      <Box sx={{ py: '24px', height: '94px',mb:{xs:'120px',sm:'120px', md:'50px'} }}>
+      <Box sx={{ py: '24px', height: '94px',mb:{xs:'85px',sm:'85px', md:'20px', lg:'0px'} }}>
         <FinanceOverviewTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
       </Box>
 
@@ -43,23 +43,22 @@ const index: React.FC = () => {
       <Box sx={{
         display: 'flex', flexDirection: "column", gap: '7px'
       }}>
-        {/* Heading */}
+    
         <Box sx={{ display: "flex", gap: '16px', alignItems: 'center', mb: '15px' }}>
-          <PaidOutlinedIcon sx={{ height: "36px", width: "36px", color: "#9CA3AF" }} />
-          <Typography sx={{ fontSize: '32px', color: '#1F2937', fontWeight: 600 }}>Finance Overview</Typography>
+          <PaidOutlinedIcon sx={{ height: "28px", width: "28px", color: "#9CA3AF" }} />
+          <Typography sx={{ fontSize: '24px', color: '#1F2937', fontWeight: 600 }}>Finance Overview</Typography>
         </Box>
-        {/* Cards */}
+     
         <Box>
           <Grid container spacing={2}>
             {financeData.map((data, index) => (
-              <Grid item xs={12} md={6} lg={6} xl={3} key={index}>
+              <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
                 <FinanceStatCard {...data} />
               </Grid>
             ))}
           </Grid>
         </Box>
 
-        {/* Bar Chart */}
         <Box sx={{ my: { xs: '20px', lg: '60px' } }}>
           <CustomBarChart />
         </Box>

@@ -15,9 +15,10 @@ const ContentCards: React.FC<ContentCardsProps> = ({ title, value, color, change
             sx={{
                 height: '137px',
                 bgcolor: "white",
-                borderRadius: "12px",
+                borderRadius: "8px",
                 border: "0.5px solid #CACACA",
-                p: { xs: "12px", md: "16px", xl: "16px" },
+                py: { xs: "12px", md: "16px", lg: "10px" },
+                px:{ xs: "12px", md: "10px", lg: "20px" },
                 display: "flex",
                 flexDirection: "column",
                 justifyContent:'space-around'
@@ -27,12 +28,12 @@ const ContentCards: React.FC<ContentCardsProps> = ({ title, value, color, change
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Box sx={{ width: "12px", height: "12px", bgcolor: color, mr: 1, borderRadius: "4px" }}></Box>
-                    <Typography sx={{ fontSize: { xs: "16px", md: "16px" ,xl:'20px' }, color: "#9CA3AF", fontWeight:600 }}>
+                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" ,xl:'20px' }, color: "#9CA3AF", fontWeight:600 }}>
                         {title}
                     </Typography>
                 </Box>
                 {change && (
-                    <Typography sx={{ fontSize: "14px", color: change.includes("+") ? "#22C55E" : "#EF4444" }}>
+                    <Typography sx={{ fontSize: "12px", color: change.includes("+") ? "#22C55E" : "#EF4444" }}>
                         {change}
                     </Typography>
                 )}
@@ -40,12 +41,12 @@ const ContentCards: React.FC<ContentCardsProps> = ({ title, value, color, change
 
             {/* Value Section */}
             <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                <Typography sx={{ fontSize: { xs: "22px", md: "22px", xl:'32px' }, fontWeight: 600, color: "#1F2937" }}>
+                <Typography sx={{ fontSize: { xs: "20px", md: "24px", xl:'26px' }, fontWeight: 600, color: "#1F2937" }}>
                     {value}
                 </Typography>
 
                 {unit && (
-                    <Typography sx={{ fontSize: { xs: "16px", md: "18px" , xl:'20px' }, color: "#9CA3AF", ml: "13px" }}>
+                    <Typography sx={{ fontSize: { xs: "16px", md: "16px" , xl:'20px' }, color: "#9CA3AF", ml: "13px" }}>
                         {unit}
                     </Typography>
                 )}
