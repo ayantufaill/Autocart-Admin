@@ -20,7 +20,14 @@ const CustomLayout = ({ children }: LayoutProps) => {
   return (
     <Box
       className={sans.className}
-      sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        "& .css-s2t35c-MuiTabs-scroller": {
+          fontFamily: "Source-Sans-3",
+        },
+      }}
     >
       <Header />
 

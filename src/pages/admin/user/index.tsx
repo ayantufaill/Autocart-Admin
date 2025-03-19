@@ -89,7 +89,19 @@ const users: {
 const User: React.FC = () => {
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
-      <ColorTabs />
+      <ColorTabs
+        tabData={[
+          { label: "All Users", count: 5247, path: "/admin/user" },
+          { label: "Active Users", count: 924, path: "/admin/active/user" },
+          {
+            label: "Suspended Users",
+            count: 74,
+            path: "/admin/suspended/user",
+          },
+          { label: "Banned Users", count: 80, path: "/admin/banned/user" },
+        ]}
+        defaultTab={0}
+      />
       <Container sx={{ pb: 10 }}>
         <UserTable Users={users} />
       </Container>

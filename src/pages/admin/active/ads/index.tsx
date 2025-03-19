@@ -1,7 +1,6 @@
 import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import { Container } from "@mui/material";
-
 import React from "react";
 
 const adsData: {
@@ -32,7 +31,7 @@ const adsData: {
     title: "BMW Sport",
     category: "Dealership",
     userId: "USER200",
-    status: "Rejected",
+    status: "Active",
     dateCreated: "20/01/2025",
     expiryDate: "20/02/2025",
     imageUrl: "/images/bmw2.jpg",
@@ -43,14 +42,14 @@ const adsData: {
     title: "BMW Sport",
     category: "Vintage Car",
     userId: "USER200",
-    status: "Pending",
+    status: "Active",
     dateCreated: "20/01/2025",
     expiryDate: "20/02/2025",
     imageUrl: "/images/bmw3.jpg",
   },
 ];
 
-export default function Index() {
+const index: React.FC = () => {
   return (
     <div style={{ backgroundColor: "#F9F9F9", paddingBottom: 20 }}>
       <ColorTabs
@@ -62,11 +61,13 @@ export default function Index() {
           { label: "Approved Ads", count: 27, path: "/admin/active/ads" },
           { label: "Rejected Ads", count: 58, path: "/admin/rejected/ads" },
         ]}
-        defaultTab={0}
+        defaultTab={4}
       />
       <Container>
         <AdsTable ads={adsData} />
       </Container>
     </div>
   );
-}
+};
+
+export default index;
