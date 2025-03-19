@@ -20,7 +20,13 @@ interface Ad {
   title: string;
   category: string;
   userId: string;
-  status: "Active" | "Pending" | "Rejected";
+  status:
+    | "Active"
+    | "Pending"
+    | "Rejected"
+    | "Expired"
+    | "Flagged"
+    | "Reported";
   dateCreated: string;
   expiryDate: string;
   imageUrl: string;
@@ -34,6 +40,9 @@ const statusConfig = {
   Active: { color: "#F0FDF4", textColor: "#047857", icon: "#07B007" },
   Pending: { color: "#FEFCE8", textColor: "#D97706", icon: "#EAB308" },
   Rejected: { color: "#FEF2F2", textColor: "#B91C1C", icon: "#EF4444" },
+  Expired: { color: "#F9FAFB", textColor: "#9CA3AF", icon: "#6B7280" },
+  Reported: { color: "#FEF2F2", textColor: "#9CA3AF", icon: "#EF4444" },
+  Flagged: { color: "#FEFCE8", textColor: "#9CA3AF", icon: "#EAB308" },
 };
 
 const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
