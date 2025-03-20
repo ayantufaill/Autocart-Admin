@@ -8,23 +8,22 @@ import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
-import FinanceStatCard from '@/components/common/AdminCards/FinanceCard';
-import ContentCards from '@/components/common/AdminCards/AdsCard';
-import CustomBarChart from '@/components/common/AdminCards/BarChart'
-import AdminHeader from '@/components/common/AdminCards/AdminHeader';
+import FinanceStatCard from "@/components/common/AdminCards/FinanceCard";
+import ContentCards from "@/components/common/AdminCards/AdsCard";
+import CustomBarChart from "@/components/common/AdminCards/BarChart";
+import AdminHeader from "@/components/common/AdminCards/AdminHeader";
 import { FC } from "react";
-import IconTitleBox from "@/components/common/AdminCards/CardsHeading"
+import IconTitleBox from "@/components/common/AdminCards/CardsHeading";
 
 interface StatData {
-    title: string;
-    value: string;
-    color: string;
-    change: string;
-    unit: string;
+  title: string;
+  value: string;
+  color: string;
+  change: string;
+  unit: string;
 }
 
 // comment to verify beanch story
-
 
 const stats = [
   {

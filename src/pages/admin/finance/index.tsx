@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import FinanceOverview from "./overview";
 
 function index() {
   return (
-    <div>index</div>
-  )
+    <div>
+      <FinanceOverview />
+    </div>
+  );
 }
 
-export default index
+export default index;

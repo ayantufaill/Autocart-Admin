@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Avatar, Badge, Typography } from "@mui/material";
+import {
+  Tabs,
+  Tab,
+  Box,
+  Avatar,
+  Badge,
+  Typography,
+  Container,
+} from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useRouter } from "next/router";
 
@@ -19,46 +27,58 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
   const route = useRouter();
 
   return (
-    <Box sx={{ width: "100%", bgcolor: "#F9F9F9" }}>
-      <Tabs
-        value={selectedTab}
-        onChange={(_, newValue) => setSelectedTab(newValue)}
-        // variant="scrollable"
-        scrollButtons="auto"
-        textColor="primary"
+    <Box sx={{ width: "100%", bgcolor: "#F9F9F9", py: 2 }}>
+      <Container
         sx={{
-          "& .MuiTabs-indicator": {
+          overflowX: "scroll",
+          "::-webkit-scrollbar": {
             display: "none",
           },
-          "& .css-s2t35c-MuiTabs-scroller": {
-            overflow: "auto !important",
-          },
-          
         }}
       >
-        {tabData.map((tab, index) => (
-          <Tab
-            disableTouchRipple
-            onClick={() => route.push(tab.path)}
-            key={index}
-            label={
-              <Box display="flex" alignItems="center">
-                <Typography
-                  sx={{
-                    fontWeight: selectedTab === index ? "bold" : "normal",
-                    color: selectedTab === index ? "white" : "#9CA3AF",
-                    bgcolor: selectedTab === index ? "#07B007" : "transparent",
-                    px: 2,
-                    py: 1,
-                  }}
-                >
-                  {tab.label} ({tab.count})
-                </Typography>
-              </Box>
-            }
-          />
-        ))}
-      </Tabs>
+        <Tabs
+          value={selectedTab}
+          onChange={(_, newValue) => setSelectedTab(newValue)}
+          // variant="scrollable"
+          scrollButtons="auto"
+          textColor="primary"
+          sx={{
+            "::-webkit-scrollbar": {
+              display: "none !important",
+            },
+            "& .MuiTabs-indicator": {
+              display: "none",
+            },
+            "& .css-s2t35c-MuiTabs-scroller": {
+              overflow: "auto !important",
+            },
+          }}
+        >
+          {tabData.map((tab, index) => (
+            <Tab
+              disableTouchRipple
+              onClick={() => route.push(tab.path)}
+              key={index}
+              label={
+                <Box display="flex" alignItems="center">
+                  <Typography
+                    sx={{
+                      fontWeight: selectedTab === index ? "bold" : "normal",
+                      color: selectedTab === index ? "white" : "#9CA3AF",
+                      bgcolor:
+                        selectedTab === index ? "#07B007" : "transparent",
+                      px: 2,
+                      py: 1,
+                    }}
+                  >
+                    {tab.label} ({tab.count})
+                  </Typography>
+                </Box>
+              }
+            />
+          ))}
+        </Tabs>
+      </Container>
     </Box>
   );
 };

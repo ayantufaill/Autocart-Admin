@@ -1,5 +1,5 @@
 import React from "react";
-import StoryManagement from "../pending/ads";
+import StoryManagement from "./management";
 
 const Story = () => {
   return (
