@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, Grid, Button } from "@mui/material";
 import AdsClickOutlinedIcon from "@mui/icons-material/AdsClickOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
-import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -12,18 +12,17 @@ import FinanceStatCard from '@/components/common/AdminCards/FinanceCard';
 import ContentCards from '@/components/common/AdminCards/AdsCard';
 import CustomBarChart from '@/components/common/AdminCards/BarChart'
 import AdminHeader from '@/components/common/AdminCards/AdminHeader';
-import { FC } from "react";
-import IconTitleBox from "@/components/common/AdminCards/CardsHeading"
+
 
 interface StatData {
-    title: string;
-    value: string;
-    color: string;
-    change: string;
-    unit: string;
+  title: string;
+  value: string;
+  color: string;
+  change: string;
+  unit: string;
 }
 
-// comment to verify beanch story
+
 
 
 const stats = [
@@ -259,7 +258,7 @@ const index = () => {
           pt: "40px",
           pb: "300px",
           width: "100%",
-          // height: "calc(100% - 80px)",
+
           height: "100%",
           display: "flex",
           flexDirection: "column",
@@ -267,100 +266,7 @@ const index = () => {
         }}
       >
         {/* Top Section */}
-        <Box sx={{ height: { xs: "auto", md: "84px" } }}>
-          <Box
-            sx={{
-              backgroundColor: "white",
-              height: { xs: "auto", lg: "75px" },
-              borderRadius: "12px",
-              px: { xs: "8px", md: "16px" },
-              py: { xs: "8px", md: "8px" },
-              border: "0.5px solid #CACACA",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexDirection: { xs: "column", lg: "row" },
-              gap: { xs: 2, lg: 0 },
-            }}
-          >
-            {/* Left Section */}
-            <Box
-              sx={{
-                width: "100%",
-                textAlign: { xs: "center", lg: "left" },
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: { xs: "18px", md: "20px" },
-                  fontWeight: "600",
-                  color: "#1F2937",
-                }}
-              >
-                Today
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: { xs: "center", lg: "flex-start" },
-                  gap: { xs: 1, md: 4 },
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: { xs: "16px", md: "16px" },
-                    color: "#9CA3AF",
-                  }}
-                >
-                  Sunday 19TH January 2025
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: { xs: "16px", md: "16px" },
-                    color: "#9CA3AF",
-                  }}
-                >
-                  01:25pm
-                </Typography>
-              </Box>
-            </Box>
-
-            {/* Right Section */}
-            <Box>
-              <Button
-                variant="outlined"
-                startIcon={
-                  <CalendarMonthOutlinedIcon
-                    sx={{ width: "26px", height: "26px", color: "#9CA3AF" }}
-                  />
-                }
-                sx={{
-                  width: { xs: "100%", md: "160px" },
-                  height: "40px",
-                  borderRadius: "12px",
-                  border: "0.5px solid #CACACA",
-                  color: "#9CA3AF",
-                  textTransform: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  py: "4px",
-                  px: "4px",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: { xs: "16px", md: "18px" },
-                    color: "#9CA3AF",
-                  }}
-                >
-                  Change Date
-                </Typography>
-              </Button>
-            </Box>
-          </Box>
-        </Box>
+        <AdminHeader />
 
         {/* Ads Section */}
         <Box sx={{ width: "100%" }}>
@@ -374,8 +280,14 @@ const index = () => {
               mt: { xs: 4, md: 10, lg: 0 },
             }}
           >
-            <AdsClickOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+            <img
+              src="/Icons/Property 1=ads.png" 
+              alt="Ads Icon"
+              style={{
+                width: "28px",
+                height: "28px",
+                filter: "grayscale(100%)",
+              }}
             />
             <Typography
               sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
@@ -402,8 +314,14 @@ const index = () => {
           <Box
             sx={{ display: "flex", gap: "16px", alignItems: "center", mb: 3 }}
           >
-            <PeopleOutlineOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+            <img
+              src="/Icons/Property 1=users.png" 
+              alt="Ads Icon"
+              style={{
+                width: "28px",
+                height: "28px",
+                filter: "grayscale(100%)",
+              }}
             />
             <Typography
               sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
@@ -434,8 +352,14 @@ const index = () => {
         >
           {/* Heading */}
           <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
-            <PaidOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+          <img
+              src="/Icons/Property 1=finance.png" 
+              alt="Ads Icon"
+              style={{
+                width: "28px",
+                height: "28px",
+                filter: "grayscale(100%)",
+              }}
             />
             <Typography
               sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
@@ -470,8 +394,14 @@ const index = () => {
         >
           {/* Heading */}
           <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
-            <ChatOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+          <img
+              src="/Icons/Property 1=message.png" 
+              alt="Ads Icon"
+              style={{
+                width: "28px",
+                height: "28px",
+                filter: "grayscale(100%)",
+              }}
             />
             <Typography
               sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
@@ -517,8 +447,14 @@ const index = () => {
         >
           {/* Heading */}
           <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
-            <EmailOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+          <img
+              src="/Icons/Property 1=email.png" 
+              alt="Ads Icon"
+              style={{
+                width: "28px",
+                height: "28px",
+                filter: "grayscale(100%)",
+              }}
             />
             <Typography
               sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
@@ -564,8 +500,14 @@ const index = () => {
         >
           {/* Heading */}
           <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
-            <AutoStoriesOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+          <img
+              src="/Icons/Property 1=story.png" 
+              alt="Ads Icon"
+              style={{
+                width: "28px",
+                height: "28px",
+                filter: "grayscale(100%)",
+              }}
             />
             <Typography
               sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}

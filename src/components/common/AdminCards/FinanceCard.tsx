@@ -25,7 +25,7 @@ const FinanceStatCard: React.FC<FinanceStatCardProps> = ({ title, amount, percen
             }}
         >
             
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: {xs:'100%',lg:'196px'} , px:'5px'}}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: {xs:'100%',lg:'90%',xl:'90%'} , px:'5px'}}>
                 <Typography sx={{ color: '#854D0E', fontSize: '15px' }}>{title}</Typography>
                 <Box
                     sx={{
@@ -44,7 +44,7 @@ const FinanceStatCard: React.FC<FinanceStatCardProps> = ({ title, amount, percen
                 </Box>
             </Box>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', width: {xs:'100%',lg:'196px'}, gap: '6px', justifyContent: 'center', height: '51px', px:'5px' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: {xs:'100%',lg:'90%',xl:'90%'}, gap: '6px', justifyContent: 'center', height: '51px', px:'5px' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                    <Typography sx={{ color: '#1F2937', fontSize: '24px', fontWeight: 600 }}>{amount}</Typography>
 
