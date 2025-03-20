@@ -22,11 +22,15 @@ const Sidebar = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
-  const route = useRouter()
+  const route = useRouter();
 
   const menuItems = [
     { text: "Dashboard", icon: <DashboardOutlinedIcon />, path: "/" },
-    { text: "Ads Management", icon: <AdsClickOutlinedIcon />, path: "/admin/ads" },
+    {
+      text: "Ads Management",
+      icon: <AdsClickOutlinedIcon />,
+      path: "/admin/ads",
+    },
     {
       text: "Users Management",
       icon: <PeopleOutlineOutlinedIcon />,
@@ -40,11 +44,23 @@ const Sidebar = () => {
     {
       text: "Financial Management",
       icon: <MonetizationOnOutlinedIcon />,
-      path: "/admin/finance",
+      path: "/admin/finance/overview",
     },
-    { text: "Email Management", icon: <EmailOutlinedIcon />, path: "/admin/email" },
-    { text: "Message Management", icon: <ChatOutlinedIcon />, path: "/admin/message" },
-    { text: "Story Management", icon: <AutoStoriesOutlinedIcon />, path: "/admin/story" },
+    {
+      text: "Email Management",
+      icon: <EmailOutlinedIcon />,
+      path: "/admin/email",
+    },
+    {
+      text: "Message Management",
+      icon: <ChatOutlinedIcon />,
+      path: "/admin/message",
+    },
+    {
+      text: "Story Management",
+      icon: <AutoStoriesOutlinedIcon />,
+      path: "/admin/story",
+    },
   ];
 
   return (
@@ -82,7 +98,7 @@ const Sidebar = () => {
             onClick={() => {
               setIsExpanded(!isExpanded);
               if (activeIndex !== index) setActiveIndex(index);
-              route.push(item.path)
+              route.push(item.path);
             }}
             key={index}
             sx={{
