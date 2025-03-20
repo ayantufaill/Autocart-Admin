@@ -254,11 +254,9 @@ const index = () => {
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <Box
         sx={{
-          px: "40px",
+          px: { xs: "20px", md: "25px", lg: "30px", xl: "40px" },
           pt: "40px",
           pb: "300px",
-          width: "100%",
-          // height: "calc(100% - 80px)",
           height: "100%",
           display: "flex",
           flexDirection: "column",
@@ -292,7 +290,7 @@ const index = () => {
               <Typography
                 sx={{
                   fontSize: { xs: "18px", md: "20px" },
-                  fontWeight: "600",
+                  fontWeight: 500,
                   color: "#1F2937",
                 }}
               >
@@ -308,7 +306,7 @@ const index = () => {
               >
                 <Typography
                   sx={{
-                    fontSize: { xs: "16px", md: "16px" },
+                    fontSize: { xs: "14px", md: "16px" },
                     color: "#9CA3AF",
                   }}
                 >
@@ -316,7 +314,7 @@ const index = () => {
                 </Typography>
                 <Typography
                   sx={{
-                    fontSize: { xs: "16px", md: "16px" },
+                    fontSize: { xs: "14px", md: "16px" },
                     color: "#9CA3AF",
                   }}
                 >
@@ -367,17 +365,25 @@ const index = () => {
           <Box
             sx={{
               display: "flex",
-              gap: "16px",
+              gap: { xs: "10px", md: "12px", lg: "16px" },
               alignItems: "center",
               mb: 3,
               mt: { xs: 4, md: 10, lg: 0 },
             }}
           >
             <AdsClickOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Ads
             </Typography>
@@ -399,13 +405,26 @@ const index = () => {
         <Box sx={{ mb: 1 }}>
           {/* Heading */}
           <Box
-            sx={{ display: "flex", gap: "16px", alignItems: "center", mb: 3 }}
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "12px", lg: "16px" },
+              alignItems: "center",
+              mb: 3,
+            }}
           >
             <PeopleOutlineOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Users
             </Typography>
@@ -432,12 +451,26 @@ const index = () => {
           }}
         >
           {/* Heading */}
-          <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "16px" },
+              alignItems: "center",
+            }}
+          >
             <PaidOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Finance Overview
             </Typography>
@@ -468,19 +501,39 @@ const index = () => {
           }}
         >
           {/* Heading */}
-          <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "16px" },
+              alignItems: "center",
+            }}
+          >
             <ChatOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Message
             </Typography>
           </Box>
           {/* Cards 1*/}
           <Box>
-            <Typography sx={{ fontSize: "18px", color: "#9CA3AF", mb: "16px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", lg: "16px" },
+                color: "#9CA3AF",
+                mb: "16px",
+              }}
+            >
               Flagged Message
             </Typography>
             <Grid container spacing={2}>
@@ -493,7 +546,13 @@ const index = () => {
           </Box>
           {/* Cards 2*/}
           <Box>
-            <Typography sx={{ fontSize: "18px", color: "#9CA3AF", mb: "16px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", lg: "16px" },
+                color: "#9CA3AF",
+                mb: "16px",
+              }}
+            >
               Reported Message
             </Typography>
             <Grid container spacing={2}>
@@ -515,19 +574,39 @@ const index = () => {
           }}
         >
           {/* Heading */}
-          <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "16px" },
+              alignItems: "center",
+            }}
+          >
             <EmailOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Mail
             </Typography>
           </Box>
           {/* Cards 1*/}
           <Box>
-            <Typography sx={{ fontSize: "18px", color: "#9CA3AF", mb: "16px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", lg: "16px" },
+                color: "#9CA3AF",
+                mb: "16px",
+              }}
+            >
               Inbox Mail
             </Typography>
             <Grid container spacing={2}>
@@ -540,7 +619,13 @@ const index = () => {
           </Box>
           {/* Cards 2*/}
           <Box>
-            <Typography sx={{ fontSize: "18px", color: "#9CA3AF", mb: "16px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", lg: "16px" },
+                color: "#9CA3AF",
+                mb: "16px",
+              }}
+            >
               Outbox Mail
             </Typography>
             <Grid container spacing={2}>
@@ -562,12 +647,26 @@ const index = () => {
           }}
         >
           {/* Heading */}
-          <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "16px" },
+              alignItems: "center",
+            }}
+          >
             <AutoStoriesOutlinedIcon
-              sx={{ height: "26px", width: "26px", color: "#9CA3AF" }}
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Stories
             </Typography>

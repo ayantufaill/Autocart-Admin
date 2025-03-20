@@ -74,7 +74,11 @@ const FinanceOverview: React.FC = () => {
             sx={{ height: "28px", width: "28px", color: "#9CA3AF" }}
           />
           <Typography
-            sx={{ fontSize: "24px", color: "#1F2937", fontWeight: 600 }}
+            sx={{
+              fontSize: { xs: "18px", md: "20px", xl: "22px" },
+              fontWeight: 500,
+              color: "#1F2937",
+            }}
           >
             Finance Overview
           </Typography>

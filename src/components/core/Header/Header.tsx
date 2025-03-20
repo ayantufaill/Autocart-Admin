@@ -105,11 +105,13 @@ const Header: React.FC = () => {
           }}
           sx={{
             backgroundColor:
-              route.pathname === "/admin/notification/active"
+              route.pathname === "/admin/notification/active" ||
+              route.pathname === "/admin/notification/empty"
                 ? "#07B007"
                 : "transparent",
             color:
-              route.pathname === "/admin/notification/active"
+              route.pathname === "/admin/notification/active" ||
+              route.pathname === "/admin/notification/empty"
                 ? "white"
                 : "black",
             padding: "3px",
