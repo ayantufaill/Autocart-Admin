@@ -1,9 +1,8 @@
 import React from "react";
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid, Container } from "@mui/material";
 
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 
-import FinanceOverviewTabs from "@/components/common/FinanceTabs/FinanceOverviewTabs";
 import FinanceStatCard from "@/components/common/AdminCards/FinanceCard";
 import CustomBarChart from "@/components/common/AdminCards/BarChart";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
@@ -34,7 +33,7 @@ const financeData = [
     comparisonText: "Compared to yesterday",
   },
 ];
-const index: React.FC = () => {
+const FinanceOverview: React.FC = () => {
   return (
     <Box
       sx={{
@@ -49,26 +48,14 @@ const index: React.FC = () => {
     >
       <ColorTabs
         tabData={[
-          {
-            label: "Finance Overview",
-            count: 10,
-            path: "/admin/finance/overview",
-          },
-          {
-            label: "All Transactions",
-            count: 50,
-            path: "/admin/finance/alltransaction",
-          },
-          {
-            label: "Refund Management",
-            count: 40,
-            path: "/admin/finance/refund",
-          },
+          { label: "Finance Overview", path: "/admin/finance" },
+          { label: "All Transactions", path: "/admin/finance/alltransaction" },
+          { label: "Refund Management", path: "/admin/finance/refund" },
         ]}
         defaultTab={0}
       />
 
-      <Box
+      <Container
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -106,9 +93,9 @@ const index: React.FC = () => {
         <Box sx={{ my: { xs: "20px", lg: "60px" } }}>
           <CustomBarChart />
         </Box>
-      </Box>
+      </Container>
     </Box>
   );
 };
 
-export default index;
+export default FinanceOverview;

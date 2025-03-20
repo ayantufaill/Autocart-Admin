@@ -5,6 +5,7 @@ import FinanceStatCard from "@/components/common/AdminCards/FinanceCard";
 import { Box, Container, Grid, InputAdornment, TextField } from "@mui/material";
 import React, { useState } from "react";
 import SearchAd from "@/components/common/SearchAd/SearchAd";
+import { useRouter } from "next/router";
 
 const adsData: {
   id: string;
@@ -54,6 +55,7 @@ const adsData: {
 
 const StoryActive: React.FC = () => {
   const [search, setSearch] = useState("");
+  const route = useRouter();
 
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>

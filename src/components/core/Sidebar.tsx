@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Drawer,
@@ -19,10 +19,19 @@ import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import { useRouter } from "next/router";
 
 const Sidebar = () => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const route = useRouter();
+
+  useEffect(() => {
+    const link = route.pathname.split("/")[2];
+    const index = menuItems.findIndex((item) => {
+      console.log(link);
+      return item.path.split("/")[2] == link;
+    });
+    setActiveIndex(index);
+  }, [route.pathname]);
 
   const menuItems = [
     { text: "Dashboard", icon: <DashboardOutlinedIcon />, path: "/" },
@@ -44,7 +53,7 @@ const Sidebar = () => {
     {
       text: "Financial Management",
       icon: <MonetizationOnOutlinedIcon />,
-      path: "/admin/finance/overview",
+      path: "/admin/finance",
     },
     {
       text: "Email Management",
@@ -92,7 +101,7 @@ const Sidebar = () => {
         },
       }}
     >
-      <List sx={{ height: "100%", overflowY: "auto" }}>
+      <List sx={{ height: "100%", overflowY: "auto" , borderLeft: "0" }}>
         {menuItems.map((item, index) => (
           <ListItem
             onClick={() => {
