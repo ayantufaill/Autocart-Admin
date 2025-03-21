@@ -58,12 +58,12 @@ const Sidebar = () => {
     {
       text: "Email Management",
       icon: <EmailOutlinedIcon />,
-      path: "/admin/email",
+      path: "/admin/emailmanagement",
     },
     {
       text: "Message Management",
       icon: <ChatOutlinedIcon />,
-      path: "/admin/message",
+      path: "/admin/messagemanagement",
     },
     {
       text: "Story Management",
