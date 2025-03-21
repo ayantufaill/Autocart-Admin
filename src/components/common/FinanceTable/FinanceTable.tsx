@@ -40,14 +40,18 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <TextField
-        placeholder="Search User"
+        placeholder="Search Ads"
         variant="outlined"
         onChange={(e) => setSearch(e.target.value)}
         sx={{
           marginBottom: 2,
           backgroundColor: "#F9F9F9",
-          width: "600px",
-          borderRadius: 0,
+          width: { xs: "90%", md: "70%" },
+          maxWidth: "600px",
+          "& .MuiOutlinedInput-root": {
+            borderRadius: "10px",
+            maxHeight: "48px",
+          },
         }}
         InputProps={{
           startAdornment: (
@@ -69,7 +73,7 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
                     fontWeight: "bold",
                     textAlign: "center",
                     backgroundColor: "#F3F4F6",
-                    color: "#6B7280",
+                    color: "#B2B7C1",
                     padding: "12px",
                     borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                     borderBottom: "none",
@@ -104,7 +108,6 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
                 sx={{
                   textAlign: "center",
                   padding: "12px",
-                  // borderLeft: "0.5px solid #CACACA",
                   borderBottom:
                     index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                 }}
@@ -115,6 +118,7 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "8px",
+                    fontWeight: 600,
                   }}
                 >
                   <img
@@ -135,6 +139,7 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
                   borderLeft: "0.5px solid #CACACA",
                   borderBottom:
                     index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                  fontWeight: 600,
                 }}
               >
                 <Box
@@ -160,6 +165,7 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
                   borderLeft: "0.5px solid #CACACA",
                   borderBottom:
                     index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                  fontWeight: 600,
                 }}
               >
                 {finance.transactionId}
@@ -172,6 +178,7 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
                   borderLeft: "0.5px solid #CACACA",
                   borderBottom:
                     index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                  fontWeight: 600,
                 }}
               >
                 {finance.amount}
@@ -184,6 +191,7 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
                   borderLeft: "0.5px solid #CACACA",
                   borderBottom:
                     index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                  fontWeight: 600,
                 }}
               >
                 {finance.date}

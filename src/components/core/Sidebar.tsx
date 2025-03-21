@@ -58,12 +58,12 @@ const Sidebar = () => {
     {
       text: "Email Management",
       icon: <EmailOutlinedIcon />,
-      path: "/admin/email",
+      path: "/admin/emailmanagement",
     },
     {
       text: "Message Management",
       icon: <ChatOutlinedIcon />,
-      path: "/admin/message",
+      path: "/admin/messagemanagement",
     },
     {
       text: "Story Management",
@@ -98,10 +98,11 @@ const Sidebar = () => {
           position: "relative",
           top: 0,
           overflowY: { xs: "auto", md: "hidden" },
+          borderRight: "none",
         },
       }}
     >
-      <List sx={{ height: "100%", overflowY: "auto" , borderLeft: "0" }}>
+      <List sx={{ height: "100%", overflowY: "auto", borderLeft: "0" }}>
         {menuItems.map((item, index) => (
           <ListItem
             onClick={() => {

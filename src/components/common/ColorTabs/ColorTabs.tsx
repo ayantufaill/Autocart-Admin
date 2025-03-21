@@ -27,7 +27,15 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
   const route = useRouter();
 
   return (
-    <Box sx={{ width: "100%", bgcolor: "#F9F9F9", py: 2 }}>
+    <Box
+      sx={{
+        bgcolor: "#F9F9F9",
+        py: 2,
+        minWidth: "100%",
+        width: { xs: "280px", sm: "500px", md: "700px", lg: "100%" },
+        overflowX: { xs: "auto" },
+      }}
+    >
       <Container>
         <Tabs
           value={selectedTab}
@@ -51,11 +59,12 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
               disableTouchRipple
               onClick={() => route.push(tab.path)}
               key={index}
+              sx={{ px: 0 }}
               label={
                 <Box display="flex" alignItems="center">
                   <Typography
                     sx={{
-                      fontWeight: selectedTab === index ? "bold" : "normal",
+                      fontWeight: selectedTab === index ? 600 : 500,
                       color: selectedTab === index ? "white" : "#9CA3AF",
                       bgcolor:
                         selectedTab === index ? "#07B007" : "transparent",
