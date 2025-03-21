@@ -23,7 +23,7 @@ const ContentCards: React.FC<ContentCardsProps> = ({
         bgcolor: "white",
         borderRadius: "12px",
         border: "0.5px solid #CACACA",
-        p: { xs: "12px", md: "16px", xl: "16px" },
+        px: { xs: "14px", lg: "18px" },
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
@@ -40,8 +40,8 @@ const ContentCards: React.FC<ContentCardsProps> = ({
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box
             sx={{
-              width: "12px",
-              height: "12px",
+              width: { xs: "10px", md: "12px" },
+              height: { xs: "10px", md: "12px" },
               bgcolor: color,
               mr: 1,
               borderRadius: "4px",
@@ -49,9 +49,8 @@ const ContentCards: React.FC<ContentCardsProps> = ({
           ></Box>
           <Typography
             sx={{
-              fontSize: "16px",
+              fontSize: { xs: "14px", md: "16px" },
               color: "#9CA3AF",
-              fontWeight: 500,
             }}
           >
             {title}
@@ -60,7 +59,7 @@ const ContentCards: React.FC<ContentCardsProps> = ({
         {change && (
           <Typography
             sx={{
-              fontSize: "14px",
+              fontSize: "12px",
               color: change.includes("+") ? "#22C55E" : "#EF4444",
             }}
           >
@@ -73,8 +72,8 @@ const ContentCards: React.FC<ContentCardsProps> = ({
       <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
         <Typography
           sx={{
-            fontSize: { xs: "22px", md: "22px", xl: "24px" },
-            fontWeight: 600,
+            fontSize: { xs: "18px", md: "20px", xl: "22px" },
+            fontWeight: 500,
             color: "#1F2937",
           }}
         >
@@ -84,7 +83,7 @@ const ContentCards: React.FC<ContentCardsProps> = ({
         {unit && (
           <Typography
             sx={{
-              fontSize: "16px",
+              fontSize: { xs: "14px", md: "16px" },
               color: "#9CA3AF",
               ml: "13px",
             }}
