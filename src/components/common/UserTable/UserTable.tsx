@@ -64,10 +64,10 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
         }}
       />
 
-      <TableContainer component={Paper} sx={{ maxHeight: 500 }}>
+      <TableContainer>
         <Table stickyHeader sx={{ minWidth: 900 }}>
           <TableHead>
-            <TableRow>
+            <TableRow sx={{ borderBottom: "1.5px solid #CACACA" }}>
               {[
                 "Status",
                 "Name",
@@ -75,16 +75,16 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                 "Ads Posted",
                 "User ID",
                 "Registration Date",
-              ].map((header) => (
+              ].map((header, index) => (
                 <TableCell
                   key={header}
                   sx={{
-                    fontWeight: "bold",
+                    fontWeight: "semibold",
                     textAlign: "center",
                     backgroundColor: "#F3F4F6",
                     color: "#6B7280",
-                    padding: "12px",
-                    border: "0.5px solid #CACACA",
+                    // padding: "12px",
+                    borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                   }}
                 >
                   {header}
@@ -94,19 +94,28 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
           </TableHead>
 
           <TableBody>
-            {filteredUsers.map((user, index) => (
-              <TableRow
-                key={user.userId}
+            {/* Empty Row to add gap */}
+            <TableRow>
+              <TableCell
                 sx={{
-                  backgroundColor: index % 2 === 0 ? "#FFFFFF" : "#F9FAFB",
-                  borderBottom: "0.5px solid #E5E7EB",
+                  backgroundColor: "transparent",
+                  borderBottom: "0px",
+                }}
+              />
+            </TableRow>
+            {filteredUsers.map((user, index, arr) => (
+              <TableRow
+                key={index}
+                sx={{
+                  backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
                 }}
               >
                 <TableCell
                   sx={{
                     textAlign: "center",
                     padding: "12px",
-                    border: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Box
@@ -143,7 +152,9 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                   sx={{
                     textAlign: "center",
                     fontWeight: "bold",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {user.name}
@@ -151,7 +162,9 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                 <TableCell
                   sx={{
                     textAlign: "center",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {user.email}
@@ -159,7 +172,9 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                 <TableCell
                   sx={{
                     textAlign: "center",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {user.adsPosted}
@@ -170,7 +185,9 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                     display: "flex",
                     alignItems: "center",
                     gap: "8px",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Avatar
@@ -182,7 +199,9 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                 <TableCell
                   sx={{
                     textAlign: "center",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {user.regDate}

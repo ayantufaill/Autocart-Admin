@@ -7,13 +7,11 @@ const NotificationActive = () => {
     <Box
       sx={{
         width: "100%",
-        height: "calc(100vh - 80px)",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
-        overflowY: "auto",
         backgroundColor: "#F9F9F9",
         px: { xs: "20px", sm: "40px", md: "50px", lg: "60px" },
-        py: "24px",
       }}
     >
       <Box
@@ -35,8 +33,8 @@ const NotificationActive = () => {
         >
           <Typography
             sx={{
-              color: "#1F2937",
-              fontSize: { xs: "22px", sm: "32px" },
+              color: "#999DA4",
+              fontSize: { xs: "18px", sm: "20px", lg: "22px" },
             }}
           >
             Notification
@@ -44,37 +42,24 @@ const NotificationActive = () => {
 
           <Typography
             sx={{
-              fontSize: { xs: "20px", sm: "24px" },
-              color: "#9CA3AF",
+              fontSize: { xs: "14px", sm: "16px", lg: "18px" },
+              color: "#D0D3D8",
             }}
           >
             14
           </Typography>
         </Box>
 
-        <Box>
-          <Button
-            variant="contained"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              width: { xs: "120px", sm: "164px", md: "184px" },
-              height: { xs: "40px", sm: "60px" },
-              px: { xs: "8px", sm: "24px" },
-              py: "12px",
-              gap: { xs: "3px", sm: "5px", md: "12px" },
-              backgroundColor: "#3B82F6",
-            }}
-          >
-            <FileCopyOutlinedIcon />
-            <Typography
-              sx={{ fontSize: { xs: "14px", sm: "16px", md: "20px" } }}
-            >
-              {" "}
-              Read All
-            </Typography>
-          </Button>
-        </Box>
+        <Button
+          variant="contained"
+          sx={{
+            py: 1,
+            bgcolor: "#A5C5F8",
+          }}
+          startIcon={<FileCopyOutlinedIcon />}
+        >
+          Read All
+        </Button>
       </Box>
 
       <Box
@@ -90,14 +75,14 @@ const NotificationActive = () => {
           sx={{
             width: "16px",
             height: "16px",
-            bgcolor: "#07B007",
+            bgcolor: "#8FD98F",
             borderRadius: "4px",
           }}
         ></Box>
         <Typography
           sx={{
-            color: "#1F2937",
-            fontSize: { xs: "22px", sm: "32px" },
+            color: "#999DA4",
+            fontSize: { xs: "18px", sm: "20px", lg: "22px" },
           }}
         >
           BMW Sport

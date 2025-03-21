@@ -28,29 +28,21 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
 
   return (
     <Box sx={{ width: "100%", bgcolor: "#F9F9F9", py: 2 }}>
-      <Container
-        sx={{
-          overflowX: "scroll",
-          "::-webkit-scrollbar": {
-            display: "none",
-          },
-        }}
-      >
+      <Container>
         <Tabs
           value={selectedTab}
           onChange={(_, newValue) => setSelectedTab(newValue)}
-          // variant="scrollable"
           scrollButtons="auto"
           textColor="primary"
           sx={{
-            "::-webkit-scrollbar": {
-              display: "none !important",
-            },
             "& .MuiTabs-indicator": {
               display: "none",
             },
             "& .css-s2t35c-MuiTabs-scroller": {
               overflow: "auto !important",
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
             },
           }}
         >

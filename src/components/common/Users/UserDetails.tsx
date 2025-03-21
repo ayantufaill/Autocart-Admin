@@ -50,28 +50,34 @@ interface UserDetailsProps {
 const UserDetails: React.FC<UserDetailsProps> = ({ status }) => {
   return (
     <div>
+      {/* Header */}
       <Stack
-        direction={"row"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
+        spacing={2}
+        direction={{ xs: "column", md: "row" }}
+        alignItems={{ xs: "start", md: "center" }}
+        justifyContent={{ xs: "center", md: "space-between" }}
         py={3}
       >
         <Stack direction={"row"} alignItems={"center"} gap={1}>
           <Box
             sx={{
               bgcolor: configStatus[status],
-              width: "16px",
-              height: "16px",
+              width: { xs: "12px", md: "14px", xl: "16px" },
+              height: { xs: "12px", md: "14px", xl: "16px" },
               borderRadius: "3px",
             }}
           />
           <Typography
-            sx={{ color: "#1F2937", fontWeight: 700, fontSize: "22px" }}
+            sx={{
+              color: "#1F2937",
+              fontWeight: 500,
+              fontSize: { xs: "16px", md: "20px", xl: "22px" },
+            }}
           >
             {userData[0].value}
           </Typography>
         </Stack>
-        <Stack direction={"row"} spacing={2}>
+        <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
           <Button
             variant="contained"
             sx={{ bgcolor: "#60A5FA", textTransform: "none" }}
@@ -95,9 +101,14 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status }) => {
           </Button>
         </Stack>
       </Stack>
+      {/* Details */}
       <Paper sx={{ p: 3, bgcolor: "#FFF" }}>
         <Typography
-          sx={{ color: "#1F2937", fontWeight: 700, fontSize: "22px" }}
+          sx={{
+            color: "#1F2937",
+            fontWeight: 500,
+            fontSize: { xs: "16px", md: "20px", xl: "22px" },
+          }}
         >
           User Details
         </Typography>
@@ -107,7 +118,10 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status }) => {
           <Grid size={{ xs: 12, lg: 6 }}>
             <Box
               display="grid"
-              gridTemplateColumns="repeat(2, 1fr)"
+              gridTemplateColumns={{
+                xs: "repeat(1, 1fr)",
+                sm: "repeat(2, 1fr)",
+              }}
               height={"100%"}
               gap={2}
             >
@@ -116,11 +130,11 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status }) => {
                   key={index}
                   spacing={1}
                   sx={{
-                    pl: index % 2 !== 0 ? 2 : 0,
+                    pl: { sm: index % 2 !== 0 ? 2 : 0 },
                   }}
                 >
                   <Typography
-                    fontSize={"16px"}
+                    fontSize={{ xs: "12px", md: "14px" }}
                     sx={{
                       color: "#9CA3AF",
                     }}
@@ -128,7 +142,11 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status }) => {
                     {user.label}
                   </Typography>
                   <Typography
-                    sx={{ color: "#1F2937", fontWeight: 600, fontSize: "22px" }}
+                    sx={{
+                      color: "#1F2937",
+                      fontWeight: 500,
+                      fontSize: { xs: "14px", md: "16px", xl: "22px" },
+                    }}
                   >
                     {user.value}
                   </Typography>

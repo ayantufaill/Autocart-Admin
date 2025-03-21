@@ -67,11 +67,15 @@ const StoryOpened: React.FC = () => {
           </Stack>
         </Stack>
         <Paper elevation={2} sx={{ padding: "36px" }}>
-          <Typography fontWeight={600} fontSize={{ xs: "18px", md: "22px" }}>
+          <Typography
+            fontWeight={500}
+            fontSize={{ xs: "18px", md: "20px" }}
+            mb={2}
+          >
             Story Details
           </Typography>
           <Divider />
-          <Grid container pt={4} spacing={4}>
+          <Grid container pt={4} spacing={{ xs: 4, lg: 8 }}>
             <Grid item xs={12} md={6} lg={4}>
               <Image
                 src={"/Images/AdsActive/image 12.png"}
@@ -82,14 +86,15 @@ const StoryOpened: React.FC = () => {
               />
             </Grid>
             <Grid item xs={12} md={6} lg={8}>
-              <Typography color="#9CA3AF" fontSize={{ xs: "16px", xl: "20px" }}>
+              <Typography color="#9CA3AF" fontSize={{ xs: "16px", xl: "18px" }}>
                 Caption
               </Typography>
               <Typography
                 color="#1F2937"
                 fontSize={{ xs: "16px", lg: "20px" }}
-                maxWidth={"733px"}
+                maxWidth={"580px"}
                 mt={1}
+                fontWeight={500}
               >
                 Lorem ipsum dolor sit amet consectetur. Varius mauris sed sed et
                 nec diam volutpat proin cum. Volutpat massa egestas nunc ut
