@@ -25,6 +25,8 @@ interface StatData {
 
 
 
+
+
 const stats = [
   {
     title: "Total Ads",
@@ -254,7 +256,7 @@ const index = () => {
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <Box
         sx={{
-          px: "40px",
+          px: { xs: "20px", md: "25px", lg: "30px", xl: "40px" },
           pt: "40px",
           pb: "300px",
           width: "100%",
@@ -266,6 +268,100 @@ const index = () => {
         }}
       >
         {/* Top Section */}
+        <Box sx={{ height: { xs: "auto", md: "84px" } }}>
+          <Box
+            sx={{
+              backgroundColor: "white",
+              height: { xs: "auto", lg: "75px" },
+              borderRadius: "12px",
+              px: { xs: "8px", md: "16px" },
+              py: { xs: "8px", md: "8px" },
+              border: "0.5px solid #CACACA",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexDirection: { xs: "column", lg: "row" },
+              gap: { xs: 2, lg: 0 },
+            }}
+          >
+            {/* Left Section */}
+            <Box
+              sx={{
+                width: "100%",
+                textAlign: { xs: "center", lg: "left" },
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: { xs: "18px", md: "20px" },
+                  fontWeight: 500,
+                  color: "#1F2937",
+                }}
+              >
+                Today
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: { xs: "center", lg: "flex-start" },
+                  gap: { xs: 1, md: 4 },
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: { xs: "14px", md: "16px" },
+                    color: "#9CA3AF",
+                  }}
+                >
+                  Sunday 19TH January 2025
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "14px", md: "16px" },
+                    color: "#9CA3AF",
+                  }}
+                >
+                  01:25pm
+                </Typography>
+              </Box>
+            </Box>
+
+            {/* Right Section */}
+            <Box>
+              <Button
+                variant="outlined"
+                startIcon={
+                  <CalendarMonthOutlinedIcon
+                    sx={{ width: "26px", height: "26px", color: "#9CA3AF" }}
+                  />
+                }
+                sx={{
+                  width: { xs: "100%", md: "160px" },
+                  height: "40px",
+                  borderRadius: "12px",
+                  border: "0.5px solid #CACACA",
+                  color: "#9CA3AF",
+                  textTransform: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  py: "4px",
+                  px: "4px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: { xs: "16px", md: "18px" },
+                    color: "#9CA3AF",
+                  }}
+                >
+                  Change Date
+                </Typography>
+              </Button>
+            </Box>
+          </Box>
+        </Box>
         <AdminHeader />
 
         {/* Ads Section */}
@@ -274,12 +370,18 @@ const index = () => {
           <Box
             sx={{
               display: "flex",
-              gap: "16px",
+              gap: { xs: "10px", md: "12px", lg: "16px" },
               alignItems: "center",
               mb: 3,
               mt: { xs: 4, md: 10, lg: 0 },
             }}
           >
+            <AdsClickOutlinedIcon
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
             <img
               src="/Icons/Property 1=ads.png" 
               alt="Ads Icon"
@@ -290,7 +392,11 @@ const index = () => {
               }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Ads
             </Typography>
@@ -312,8 +418,19 @@ const index = () => {
         <Box sx={{ mb: 1 }}>
           {/* Heading */}
           <Box
-            sx={{ display: "flex", gap: "16px", alignItems: "center", mb: 3 }}
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "12px", lg: "16px" },
+              alignItems: "center",
+              mb: 3,
+            }}
           >
+            <PeopleOutlineOutlinedIcon
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
             <img
               src="/Icons/Property 1=users.png" 
               alt="Ads Icon"
@@ -324,7 +441,11 @@ const index = () => {
               }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Users
             </Typography>
@@ -351,6 +472,19 @@ const index = () => {
           }}
         >
           {/* Heading */}
+          <Box
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "16px" },
+              alignItems: "center",
+            }}
+          >
+            <PaidOutlinedIcon
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
           <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
           <img
               src="/Icons/Property 1=finance.png" 
@@ -362,7 +496,11 @@ const index = () => {
               }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Finance Overview
             </Typography>
@@ -393,6 +531,19 @@ const index = () => {
           }}
         >
           {/* Heading */}
+          <Box
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "16px" },
+              alignItems: "center",
+            }}
+          >
+            <ChatOutlinedIcon
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
           <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
           <img
               src="/Icons/Property 1=message.png" 
@@ -404,14 +555,24 @@ const index = () => {
               }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Message
             </Typography>
           </Box>
           {/* Cards 1*/}
           <Box>
-            <Typography sx={{ fontSize: "18px", color: "#9CA3AF", mb: "16px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", lg: "16px" },
+                color: "#9CA3AF",
+                mb: "16px",
+              }}
+            >
               Flagged Message
             </Typography>
             <Grid container spacing={2}>
@@ -424,7 +585,13 @@ const index = () => {
           </Box>
           {/* Cards 2*/}
           <Box>
-            <Typography sx={{ fontSize: "18px", color: "#9CA3AF", mb: "16px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", lg: "16px" },
+                color: "#9CA3AF",
+                mb: "16px",
+              }}
+            >
               Reported Message
             </Typography>
             <Grid container spacing={2}>
@@ -446,6 +613,19 @@ const index = () => {
           }}
         >
           {/* Heading */}
+          <Box
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "16px" },
+              alignItems: "center",
+            }}
+          >
+            <EmailOutlinedIcon
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
           <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
           <img
               src="/Icons/Property 1=email.png" 
@@ -457,14 +637,24 @@ const index = () => {
               }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Mail
             </Typography>
           </Box>
           {/* Cards 1*/}
           <Box>
-            <Typography sx={{ fontSize: "18px", color: "#9CA3AF", mb: "16px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", lg: "16px" },
+                color: "#9CA3AF",
+                mb: "16px",
+              }}
+            >
               Inbox Mail
             </Typography>
             <Grid container spacing={2}>
@@ -477,7 +667,13 @@ const index = () => {
           </Box>
           {/* Cards 2*/}
           <Box>
-            <Typography sx={{ fontSize: "18px", color: "#9CA3AF", mb: "16px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", lg: "16px" },
+                color: "#9CA3AF",
+                mb: "16px",
+              }}
+            >
               Outbox Mail
             </Typography>
             <Grid container spacing={2}>
@@ -499,6 +695,19 @@ const index = () => {
           }}
         >
           {/* Heading */}
+          <Box
+            sx={{
+              display: "flex",
+              gap: { xs: "10px", md: "16px" },
+              alignItems: "center",
+            }}
+          >
+            <AutoStoriesOutlinedIcon
+              sx={{
+                height: { xs: "22px", xl: "24px" },
+                width: { xs: "22px", xl: "24px" },
+                color: "#9CA3AF",
+              }}
           <Box sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
           <img
               src="/Icons/Property 1=story.png" 
@@ -510,7 +719,11 @@ const index = () => {
               }}
             />
             <Typography
-              sx={{ fontSize: "22px", color: "#1F2937", fontWeight: 600 }}
+              sx={{
+                fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                color: "#1F2937",
+                fontWeight: 500,
+              }}
             >
               Stories
             </Typography>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Drawer,
@@ -13,14 +13,32 @@ import {
 import { useRouter } from "next/router";
 
 const Sidebar = () => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
-  const route = useRouter()
+  const route = useRouter();
+
+  useEffect(() => {
+    const link = route.pathname.split("/")[2];
+    const index = menuItems.findIndex((item) => {
+      console.log(link);
+      return item.path.split("/")[2] == link;
+    });
+    setActiveIndex(index);
+  }, [route.pathname]);
 
   const menuItems = [
+<<<<<<< HEAD
     { text: "Dashboard", icon: "/Icons/Property 1=dashboard.png", path: "/" },
     { text: "Ads Management", icon: "/Icons/Property 1=ads.png", path: "/admin/ads" },
+=======
+    { text: "Dashboard", icon: <DashboardOutlinedIcon />, path: "/" },
+    {
+      text: "Ads Management",
+      icon: <AdsClickOutlinedIcon />,
+      path: "/admin/ads",
+    },
+>>>>>>> 8649188b79aa97833e3a0a85455d57b5913f9bf8
     {
       text: "Users Management",
       icon: "/Icons/Property 1=users.png",
@@ -36,9 +54,27 @@ const Sidebar = () => {
       icon: "/Icons/Property 1=finance.png",
       path: "/admin/finance",
     },
+<<<<<<< HEAD
     { text: "Email Management", icon: "/Icons/Property 1=email.png", path: "/admin/email" },
     { text: "Message Management", icon: "/Icons/Property 1=message.png", path: "/admin/message" },
     { text: "Story Management", icon: "/Icons/Property 1=story.png", path: "/admin/story" },
+=======
+    {
+      text: "Email Management",
+      icon: <EmailOutlinedIcon />,
+      path: "/admin/email",
+    },
+    {
+      text: "Message Management",
+      icon: <ChatOutlinedIcon />,
+      path: "/admin/message",
+    },
+    {
+      text: "Story Management",
+      icon: <AutoStoriesOutlinedIcon />,
+      path: "/admin/story",
+    },
+>>>>>>> 8649188b79aa97833e3a0a85455d57b5913f9bf8
   ];
 
   return (
@@ -53,6 +89,7 @@ const Sidebar = () => {
             lg: "260px",
             xl: "280px",
           },
+<<<<<<< HEAD
           borderRight: "1px solid rgb(224, 224, 224)",
           flexShrink: 0,
           "& .MuiDrawer-paper": {
@@ -79,6 +116,24 @@ const Sidebar = () => {
               if (activeIndex !== index) 
               setActiveIndex(index);
               route.push(item.path); 
+=======
+          transition: "width 0.3s",
+          boxSizing: "border-box",
+          height: "calc(100vh - 80px)",
+          position: "relative",
+          top: 0,
+          overflowY: { xs: "auto", md: "hidden" },
+        },
+      }}
+    >
+      <List sx={{ height: "100%", overflowY: "auto" , borderLeft: "0" }}>
+        {menuItems.map((item, index) => (
+          <ListItem
+            onClick={() => {
+              setIsExpanded(!isExpanded);
+              if (activeIndex !== index) setActiveIndex(index);
+              route.push(item.path);
+>>>>>>> 8649188b79aa97833e3a0a85455d57b5913f9bf8
             }}
             key={index}
             sx={{

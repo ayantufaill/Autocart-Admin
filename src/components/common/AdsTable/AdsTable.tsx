@@ -12,6 +12,8 @@ import {
   Avatar,
   InputAdornment,
   Box,
+  Stack,
+  Typography,
 } from "@mui/material";
 
 interface Ad {
@@ -45,6 +47,11 @@ const statusConfig = {
   Flagged: { color: "#FEFCE8", textColor: "#9CA3AF", icon: "#EAB308" },
 };
 
+const sellerConfig = {
+  "Private Seller": { icon: "#A855F7", color: "#FAF5FF" },
+  "Trade Seller": { icon: "#06B6D4", color: "#ECFEFF" },
+};
+
 const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
   const [search, setSearch] = useState("");
   const router = useRouter();
@@ -54,7 +61,7 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
   );
 
   return (
-    <Paper sx={{ backgroundColor: "#F9F9F9", p: 2 }}>
+    <div style={{ backgroundColor: "#F9F9F9" }}>
       <TextField
         placeholder="Search Ads"
         variant="outlined"
@@ -79,179 +86,236 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
         }}
       />
 
-      <TableContainer component={Paper} sx={{ maxHeight: 500 }}>
-        <Table stickyHeader sx={{ minWidth: 900 }}>
-          <TableHead>
-            <TableRow>
-              {[
-                "Status",
-                "Ad ID",
-                "Title",
-                "Category",
-                "User ID",
-                "Date Created",
-                "Expiry Date",
-              ].map((header) => (
-                <TableCell
-                  key={header}
-                  sx={{
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    backgroundColor: "#F3F4F6",
-                    color: "#6B7280",
-                    padding: "12px",
-                    border: "0.5px solid #CACACA",
-                  }}
-                >
-                  {header}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-
-          <TableBody>
-            {filteredAds.map((ad, index) => (
-              <TableRow
-                key={ad.id}
+      <Table stickyHeader sx={{ minWidth: 900 }}>
+        <TableHead>
+          <TableRow>
+            {[
+              "Status",
+              "Ad ID",
+              "Title",
+              "Category",
+              "User ID",
+              "Date Created",
+              "Expiry Date",
+            ].map((header, index) => (
+              <TableCell
+                key={header}
                 sx={{
-                  backgroundColor: index % 2 === 0 ? "#FFFFFF" : "#F9FAFB",
-                  borderBottom: "0.5px solid #E5E7EB",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  backgroundColor: "#F3F4F6",
+                  color: "#6B7280",
+                  padding: "12px",
+                  borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                 }}
               >
-                {/* ✅ Clickable Status */}
-                <TableCell
+                {header}
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          {/* Empty Row to add gap */}
+          <TableRow>
+            <TableCell
+              sx={{
+                backgroundColor: "transparent",
+                borderBottom: "0px",
+              }}
+            />
+          </TableRow>
+          {filteredAds.map((ad, index, arr) => (
+            <TableRow
+              key={ad.id}
+              sx={{
+                backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
+              }}
+            >
+              {/* ✅ Clickable Status */}
+              <TableCell
+                sx={{
+                  textAlign: "center",
+                  padding: "12px",
+                  borderBottom:
+                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                }}
+              >
+                <Box
+                  onClick={() =>
+                    router.push(`/admin/ads/${ad.status.toLowerCase()}`)
+                  } // ✅ Status Click Event
                   sx={{
-                    textAlign: "center",
-                    padding: "12px",
-                    border: "0.5px solid #CACACA",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    backgroundColor: statusConfig[ad.status].color,
+                    padding: "6px 12px",
+                    borderRadius: "6px",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    color: statusConfig[ad.status].textColor,
+                    minWidth: "100px",
+                    cursor: "pointer", // ✅ Pointer Cursor
+                    transition: "opacity 0.2s ease-in-out",
+                    "&:hover": { opacity: 0.8 }, // ✅ Hover Effect
                   }}
                 >
                   <Box
-                    onClick={() =>
-                      router.push(`/admin/ads/${ad.status.toLowerCase()}`)
-                    } // ✅ Status Click Event
+                    sx={{
+                      width: 10,
+                      height: 10,
+                      backgroundColor: statusConfig[ad.status].icon,
+                      borderRadius: "3px",
+                    }}
+                  />
+                  {ad.status}
+                </Box>
+              </TableCell>
+
+              <TableCell
+                sx={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  borderLeft: "0.5px solid #CACACA",
+                  borderBottom:
+                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                }}
+              >
+                <Stack
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={1}
+                >
+                  <Typography variant="subtitle2" fontWeight={600}>
+                    {ad.id}
+                  </Typography>
+                  <Box
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center",
-                      gap: "8px",
-                      backgroundColor: statusConfig[ad.status].color,
-                      padding: "6px 12px",
-                      borderRadius: "6px",
-                      fontSize: "14px",
-                      fontWeight: "bold",
-                      color: statusConfig[ad.status].textColor,
-                      minWidth: "100px",
-                      cursor: "pointer", // ✅ Pointer Cursor
-                      transition: "opacity 0.2s ease-in-out",
-                      "&:hover": { opacity: 0.8 }, // ✅ Hover Effect
+                      gap: 1,
+                      bgcolor: sellerConfig[ad.sellerType].color,
+                      p: "6px 12px",
+                      borderRadius: 1,
+                      fontSize: "10px",
+                      color: "#9CA3AF",
+                      fontWeight: "light",
                     }}
                   >
                     <Box
                       sx={{
-                        width: 10,
-                        height: 10,
-                        backgroundColor: statusConfig[ad.status].icon,
-                        borderRadius: "3px",
+                        width: 7,
+                        height: 7,
+                        bgcolor: sellerConfig[ad.sellerType].icon,
+                        borderRadius: "50%",
                       }}
                     />
-                    {ad.status}
+                    {ad.sellerType}
                   </Box>
-                </TableCell>
+                </Stack>
+              </TableCell>
 
-                <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
-                  {ad.id}
-                </TableCell>
-
-                {/* ✅ Clickable Title */}
-                <TableCell
+              {/* ✅ Clickable Title */}
+              <TableCell
+                sx={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  borderLeft: "0.5px solid #CACACA",
+                  borderBottom:
+                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                }}
+              >
+                <Box
+                  onClick={() => router.push("/admin/ads/active")} // ✅ Click event
                   sx={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    border: "0.5px solid #CACACA",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    cursor: "pointer", // ✅ Pointer cursor
+                    transition: "color 0.2s ease-in-out",
+                    "&:hover": { color: "#2563EB" }, // ✅ Hover effect
                   }}
                 >
-                  <Box
-                    onClick={() => router.push("/admin/ads/active")} // ✅ Click event
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "8px",
-                      cursor: "pointer", // ✅ Pointer cursor
-                      transition: "color 0.2s ease-in-out",
-                      "&:hover": { color: "#2563EB" }, // ✅ Hover effect
-                    }}
-                  >
-                    <img
-                      src="/Images/Ads/image.png"
-                      alt={ad.title}
-                      width="30"
-                      height="30"
-                      style={{ borderRadius: "5px" }}
-                    />
-                    <span>{ad.title}</span>
-                  </Box>
-                </TableCell>
+                  <img
+                    src="/Images/Ads/image.png"
+                    alt={ad.title}
+                    width="30"
+                    height="30"
+                    style={{ borderRadius: "5px" }}
+                  />
+                  <span>{ad.title}</span>
+                </Box>
+              </TableCell>
 
-                <TableCell
+              <TableCell
+                sx={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  borderLeft: "0.5px solid #CACACA",
+                  borderBottom:
+                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                }}
+              >
+                {ad.category}
+              </TableCell>
+
+              <TableCell
+                sx={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  borderLeft: "0.5px solid #CACACA",
+                  borderBottom:
+                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                }}
+              >
+                <Box
                   sx={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    border: "0.5px solid #CACACA",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
                   }}
                 >
-                  {ad.category}
-                </TableCell>
+                  <Avatar
+                    src="/Images/Ads/profile.png"
+                    sx={{ width: 24, height: 24 }}
+                  />
+                  <span>{ad.userId}</span>
+                </Box>
+              </TableCell>
 
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    border: "0.5px solid #CACACA",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "8px",
-                    }}
-                  >
-                    <Avatar
-                      src="/Images/Ads/profile.png"
-                      sx={{ width: 24, height: 24 }}
-                    />
-                    <span>{ad.userId}</span>
-                  </Box>
-                </TableCell>
+              <TableCell
+                sx={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  borderLeft: "0.5px solid #CACACA",
+                  borderBottom:
+                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                }}
+              >
+                {ad.dateCreated}
+              </TableCell>
 
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    border: "0.5px solid #CACACA",
-                  }}
-                >
-                  {ad.dateCreated}
-                </TableCell>
-
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    border: "0.5px solid #CACACA",
-                  }}
-                >
-                  {ad.expiryDate}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+              <TableCell
+                sx={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  borderLeft: "0.5px solid #CACACA",
+                  borderBottom:
+                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                }}
+              >
+                {ad.expiryDate}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 

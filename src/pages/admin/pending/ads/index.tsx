@@ -49,7 +49,7 @@ const adsData: {
   },
 ];
 
-const StoryManagement: React.FC = () => {
+const PendingAds: React.FC = () => {
   return (
     <div>
       <ColorTabs
@@ -88,4 +88,4 @@ const StoryManagement: React.FC = () => {
   );
 };
 
-export default StoryManagement;
+export default PendingAds;
