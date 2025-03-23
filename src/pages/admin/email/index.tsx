@@ -1,28 +1,9 @@
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
+import EmailActions from "@/components/common/EmailManagement/EmailActions";
 import FlaggedMessage from "@/components/common/Messagemanagement/Flaggedmessage";
-import SearchBar from "@/components/common/SearchBar/SearchBar";
-import { Search } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+
+import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
-
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import NoteAltOutlinedIcon from "@mui/icons-material/NoteAltOutlined";
-import FilePresentOutlinedIcon from "@mui/icons-material/FilePresentOutlined";
-
-const Buttons = [
-  { label: "Compose Email", icon: <NoteAltOutlinedIcon />, path: "" },
-  { label: "Bulk Mail", icon: <FilePresentOutlinedIcon />, path: "" },
-  { label: "Download", icon: <FileDownloadOutlinedIcon />, path: "" },
-];
 
 const data = [
   {
@@ -63,23 +44,19 @@ const Mails = [
 const tabs = [
   {
     label: "Mail Overview",
-    count: 428,
-    path: "/admin/emailmanagement",
+    path: "/admin/email",
   },
   {
     label: "Inbox Mail",
-    count: 37,
-    path: "/admin/emailmanagement/inbox",
+    path: "/admin/email/inbox",
   },
   {
     label: "Outbox Mail",
-    count: 42,
-    path: "/admin/emailmanagement/outbox",
+    path: "/admin/email/outbox",
   },
   {
     label: "Draft Mail",
-    count: 58,
-    path: "/admin/emailmanagement/draft",
+    path: "/admin/email/draft",
   },
 ];
 
@@ -89,31 +66,8 @@ const index = () => {
   return (
     <div style={{ backgroundColor: "#F9F9F9", paddingBottom: "20px" }}>
       <ColorTabs tabData={tabs} defaultTab={0} />
-      <Container>
-        <Stack>
-          <SearchBar
-            placeholder="Search User"
-            search={search}
-            setSearch={setSearch}
-          />
-        </Stack>
-        <Stack direction={"row"} spacing={2}>
-          {Buttons.map((btn, index) => (
-            <Button
-              onClick={() => console.log(btn.path)}
-              variant="outlined"
-              sx={{
-                color: "#9CA3AF",
-                borderColor: "#9CA3AF",
-                borderRadius: "8px",
-              }}
-              startIcon={btn.icon}
-            >
-              {btn.label}
-            </Button>
-          ))}
-        </Stack>
-
+      <Container sx={{ py: 3 }}>
+        <EmailActions search={search} setSearch={setSearch} />
         <Box>
           {Mails.map((mail, index) => (
             <Box

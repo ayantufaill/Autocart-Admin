@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import FinanceTable from "@/components/common/FinanceTable/FinanceTable";
@@ -62,17 +62,7 @@ const financeData: {
 
 const index: React.FC = () => {
   return (
-    <Box
-      sx={{
-        backgroundColor: "#F9F9F9",
-        px: "60px",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        gap: { xs: "20px", md: "20px" },
-      }}
-    >
+    <Box sx={{ backgroundColor: "#F9F9F9" }}>
       <ColorTabs
         tabData={[
           { label: "Finance Overview", path: "/admin/finance" },
@@ -81,7 +71,9 @@ const index: React.FC = () => {
         ]}
         defaultTab={2}
       />
-      <FinanceTable finance={financeData} />
+      <Container>
+        <FinanceTable finance={financeData} />
+      </Container>
     </Box>
   );
 };

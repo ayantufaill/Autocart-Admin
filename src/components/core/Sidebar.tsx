@@ -7,7 +7,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import AdsClickOutlinedIcon from "@mui/icons-material/AdsClickOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
@@ -25,11 +24,20 @@ const Sidebar = () => {
   const route = useRouter();
 
   useEffect(() => {
-    const link = route.pathname.split("/")[2];
-    const index = menuItems.findIndex((item) => {
-      console.log(link);
-      return item.path.split("/")[2] == link;
-    });
+    const routes = route.pathname.split("/").filter(Boolean);
+
+    const menuLinks = menuItems.map(
+      (item) => item.path.split("/").filter(Boolean)[1]
+    );
+
+    let index = menuLinks.findIndex((link) =>
+      routes.some((route) => route === link)
+    );
+
+    if (index == -1) {
+      index = 0;
+    }
+
     setActiveIndex(index);
   }, [route.pathname]);
 
@@ -58,7 +66,7 @@ const Sidebar = () => {
     {
       text: "Email Management",
       icon: <EmailOutlinedIcon />,
-      path: "/admin/emailmanagement",
+      path: "/admin/email",
     },
     {
       text: "Message Management",

@@ -14,6 +14,7 @@ import {
   Box,
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import SearchBar from "../SearchBar/SearchBar";
 
 interface User {
   status: "Active" | "Suspended" | "Banned";
@@ -45,27 +46,10 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
 
   return (
     <div>
-      <TextField
-        placeholder="Search Ads"
-        variant="outlined"
-        onChange={(e) => setSearch(e.target.value)}
-        sx={{
-          marginBottom: 2,
-          backgroundColor: "#F9F9F9",
-          width: { xs: "90%", md: "70%" },
-          maxWidth: "600px",
-          "& .MuiOutlinedInput-root": {
-            borderRadius: "10px",
-            maxHeight: "48px",
-          },
-        }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search />
-            </InputAdornment>
-          ),
-        }}
+      <SearchBar
+        placeholder="Search User"
+        search={search}
+        setSearch={setSearch}
       />
 
       <TableContainer
@@ -73,6 +57,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
           minWidth: "100%",
           width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
           overflowX: { xs: "scroll", md: "auto" },
+          mt: 2,
         }}
       >
         <Table stickyHeader>

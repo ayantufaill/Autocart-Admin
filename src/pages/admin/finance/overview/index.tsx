@@ -35,17 +35,7 @@ const financeData = [
 ];
 const FinanceOverview: React.FC = () => {
   return (
-    <Box
-      sx={{
-        backgroundColor: "#F9F9F9",
-        px: "60px",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        gap: { xs: "20px", md: "20px" },
-      }}
-    >
+    <Box sx={{ backgroundColor: "#F9F9F9" }}>
       <ColorTabs
         tabData={[
           { label: "Finance Overview", path: "/admin/finance" },
@@ -55,44 +45,41 @@ const FinanceOverview: React.FC = () => {
         defaultTab={0}
       />
 
-      <Container
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "7px",
-        }}
-      >
+      <Container>
         <Box
           sx={{
             display: "flex",
-            gap: "16px",
+            gap: { xs: "10px", md: "12px", lg: "16px" },
             alignItems: "center",
-            mb: "15px",
+            mb: 3,
+            mt: { xs: 4, md: 10, lg: 0 },
           }}
         >
           <PaidOutlinedIcon
-            sx={{ height: "28px", width: "28px", color: "#9CA3AF" }}
+            sx={{
+              height: { xs: "22px", xl: "24px" },
+              width: { xs: "22px", xl: "24px" },
+              color: "#9CA3AF",
+            }}
           />
           <Typography
             sx={{
               fontSize: { xs: "18px", md: "20px", xl: "22px" },
-              fontWeight: 500,
               color: "#1F2937",
+              fontWeight: 500,
             }}
           >
             Finance Overview
           </Typography>
         </Box>
 
-        <Box>
-          <Grid container spacing={2}>
-            {financeData.map((data, index) => (
-              <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
-                <FinanceStatCard {...data} />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
+        <Grid container spacing={2}>
+          {financeData.map((data, index) => (
+            <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
+              <FinanceStatCard {...data} />
+            </Grid>
+          ))}
+        </Grid>
 
         <Box sx={{ my: { xs: "20px", lg: "60px" } }}>
           <CustomBarChart />

@@ -6,16 +6,13 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Paper,
   TableContainer,
-  TextField,
   Avatar,
-  InputAdornment,
   Box,
   Stack,
   Typography,
 } from "@mui/material";
-import { Search } from "@mui/icons-material";
+import SearchBar from "../SearchBar/SearchBar";
 
 interface Ad {
   id: string;
@@ -63,29 +60,11 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
 
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
-      <TextField
+      <SearchBar
         placeholder="Search Ads"
-        variant="outlined"
-        onChange={(e) => setSearch(e.target.value)}
-        sx={{
-          marginBottom: 2,
-          backgroundColor: "#F9F9F9",
-          width: { xs: "90%", md: "70%" },
-          maxWidth: "600px",
-          "& .MuiOutlinedInput-root": {
-            borderRadius: "10px",
-            maxHeight: "48px",
-          },
-        }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search />
-            </InputAdornment>
-          ),
-        }}
+        search={search}
+        setSearch={setSearch}
       />
-
       <TableContainer
         sx={{
           minWidth: "100%",
@@ -202,7 +181,8 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     <Box
                       sx={{
                         display: "flex",
-                        alignItems: "center",
+                        flexDirection: { xs: "column", lg: "row" },
+                        alignItems: { xs: "left", lg: "center" },
                         gap: 1,
                         bgcolor: sellerConfig[ad.sellerType].color,
                         p: "6px 12px",

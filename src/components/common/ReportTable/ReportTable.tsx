@@ -14,6 +14,7 @@ import {
   Box,
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import SearchBar from "../SearchBar/SearchBar";
 
 interface Report {
   status: "Unread" | "Read";
@@ -43,36 +44,23 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
 
   return (
     <div>
-      <TextField
+      <SearchBar
         placeholder="Search Reports"
-        variant="outlined"
-        onChange={(e) => setSearch(e.target.value)}
-        sx={{
-          marginBottom: 2,
-          backgroundColor: "#F9F9F9",
-          width: "600px",
-          borderRadius: "10px",
-        }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search />
-            </InputAdornment>
-          ),
-        }}
+        search={search}
+        setSearch={setSearch}
       />
 
-      <TableContainer component={Paper} sx={{ maxHeight: 500 }}>
-        <Table stickyHeader sx={{ minWidth: 900 }}>
+      <TableContainer sx={{ my: 2 }}>
+        <Table stickyHeader>
           <TableHead>
-            <TableRow>
+            <TableRow sx={{ border: "none" }}>
               {[
                 "Status",
                 "Reporter User Id",
                 "Title",
                 "Category",
                 "Date Issued",
-              ].map((header) => (
+              ].map((header, index) => (
                 <TableCell
                   key={header}
                   sx={{
@@ -80,8 +68,7 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                     textAlign: "center",
                     backgroundColor: "#F3F4F6",
                     color: "#6B7280",
-                    padding: "12px",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: index !== 0 ? "0.5px solid #CACACA" : "none",
                   }}
                 >
                   {header}
@@ -91,19 +78,22 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
           </TableHead>
 
           <TableBody>
-            {filteredReports.map((report, index) => (
+            <TableRow sx={{ border: "none" }}>
+              <TableCell sx={{ border: "none" }} />
+            </TableRow>
+            {filteredReports.map((report, index, arr) => (
               <TableRow
                 key={report.category}
                 sx={{
-                  backgroundColor: index % 2 === 0 ? "#FFFFFF" : "#F9FAFB",
-                  borderBottom: "0.5px solid #E5E7EB",
+                  backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
                 }}
               >
                 <TableCell
                   sx={{
                     textAlign: "center",
                     padding: "12px",
-                    border: "0.5px solid #CACACA",
+                    borderBottom:
+                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Box
@@ -146,8 +136,10 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                     justifyContent: "center",
                     alignItems: "center",
                     gap: "8px",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: "0.5px solid #CACACA",
                     fontWeight: "bold",
+                    borderBottom:
+                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Avatar
@@ -159,8 +151,10 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                 <TableCell
                   sx={{
                     textAlign: "center",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: "0.5px solid #CACACA",
                     fontWeight: "bold",
+                    borderBottom:
+                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {report.title}
@@ -169,8 +163,10 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                 <TableCell
                   sx={{
                     textAlign: "center",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: "0.5px solid #CACACA",
                     fontWeight: "bold",
+                    borderBottom:
+                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {report.category}
@@ -178,8 +174,10 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                 <TableCell
                   sx={{
                     textAlign: "center",
-                    border: "0.5px solid #CACACA",
+                    borderLeft: "0.5px solid #CACACA",
                     fontWeight: "bold",
+                    borderBottom:
+                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {report.issueDate}
