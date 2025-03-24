@@ -62,7 +62,7 @@ const DraftTable: React.FC<EmailTableProps> = ({
                   fontWeight: 600,
                   textAlign: "center",
                   backgroundColor: "#F3F4F6",
-                  color: "#B2B7C1",
+                  color: "#9CA3AF",
                   borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                   borderBottom: "none",
                 }}

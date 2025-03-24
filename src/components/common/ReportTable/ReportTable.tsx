@@ -50,7 +50,14 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
         setSearch={setSearch}
       />
 
-      <TableContainer sx={{ my: 2 }}>
+      <TableContainer
+        sx={{
+          my: 2,
+          minWidth: "100%",
+          width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
+          overflowX: { xs: "scroll", md: "auto" },
+        }}
+      >
         <Table stickyHeader>
           <TableHead>
             <TableRow sx={{ border: "none" }}>
@@ -67,7 +74,7 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                     fontWeight: "bold",
                     textAlign: "center",
                     backgroundColor: "#F3F4F6",
-                    color: "#6B7280",
+                    color: "#9CA3AF",
                     borderLeft: index !== 0 ? "0.5px solid #CACACA" : "none",
                   }}
                 >
@@ -133,9 +140,10 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                   sx={{
                     textAlign: "center",
                     display: "flex",
+                    flexDirection: { xs: "column", lg: "row" },
                     justifyContent: "center",
                     alignItems: "center",
-                    gap: "8px",
+                    gap: {xs: "16px", md: "8px"},
                     borderLeft: "0.5px solid #CACACA",
                     fontWeight: "bold",
                     borderBottom:

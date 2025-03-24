@@ -15,7 +15,6 @@ import AdminHeader from "@/components/common/AdminCards/AdminHeader";
 import { FC } from "react";
 import IconTitleBox from "@/components/common/AdminCards/CardsHeading";
 
-
 // check emailManagement
 
 interface StatData {
@@ -120,25 +119,25 @@ const financeData = [
 const flaggedMessage = [
   {
     title: "Daily",
-    amount: "$6,733,345",
+    amount: "54",
     percentage: "+9.2%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Weekly",
-    amount: "$6,767,345",
+    amount: "25455",
     percentage: "+9.4%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Monthly",
-    amount: "$6,833,345",
+    amount: "374588",
     percentage: "-9.9%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Yearly",
-    amount: "$6,733,395",
+    amount: "8752285",
     percentage: "+9.1%",
     comparisonText: "Compared to yesterday",
   },
@@ -147,25 +146,25 @@ const flaggedMessage = [
 const reportedMessage = [
   {
     title: "Daily",
-    amount: "$6,733,345",
+    amount: "54",
     percentage: "+9.2%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Weekly",
-    amount: "$6,767,345",
+    amount: "25455",
     percentage: "+9.4%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Monthly",
-    amount: "$6,833,345",
+    amount: "374588",
     percentage: "-9.9%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Yearly",
-    amount: "$6,733,395",
+    amount: "8752235",
     percentage: "+9.1%",
     comparisonText: "Compared to yesterday",
   },
@@ -174,25 +173,25 @@ const reportedMessage = [
 const inboxMail = [
   {
     title: "Daily",
-    amount: "$6,733,345",
+    amount: "54",
     percentage: "+9.2%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Weekly",
-    amount: "$6,767,345",
+    amount: "25455",
     percentage: "+9.4%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Monthly",
-    amount: "$6,833,345",
+    amount: "34588",
     percentage: "-9.9%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Yearly",
-    amount: "$6,733,395",
+    amount: "8752235",
     percentage: "+9.1%",
     comparisonText: "Compared to yesterday",
   },
@@ -201,25 +200,25 @@ const inboxMail = [
 const outboxMail = [
   {
     title: "Daily",
-    amount: "$6,733,345",
+    amount: "54",
     percentage: "+9.2%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Weekly",
-    amount: "$6,767,345",
+    amount: "25455",
     percentage: "+9.4%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Monthly",
-    amount: "$6,833,345",
+    amount: "347588",
     percentage: "-9.9%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Yearly",
-    amount: "$6,733,395",
+    amount: "8752235",
     percentage: "+9.1%",
     comparisonText: "Compared to yesterday",
   },
@@ -228,25 +227,25 @@ const outboxMail = [
 const stories = [
   {
     title: "Daily",
-    amount: "$6,733,345",
+    amount: "852",
     percentage: "+9.2%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Weekly",
-    amount: "$6,767,345",
+    amount: "54752",
     percentage: "+9.4%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Monthly",
-    amount: "$6,833,345",
+    amount: "255475",
     percentage: "-9.9%",
     comparisonText: "Compared to yesterday",
   },
   {
     title: "Yearly",
-    amount: "$6,733,395",
+    amount: "22534285",
     percentage: "+9.1%",
     comparisonText: "Compared to yesterday",
   },
@@ -293,7 +292,7 @@ const index = () => {
               <Typography
                 sx={{
                   fontSize: { xs: "18px", md: "20px" },
-                  fontWeight: 500,
+                  fontWeight: 600,
                   color: "#1F2937",
                 }}
               >
@@ -372,7 +371,7 @@ const index = () => {
               sx={{
                 fontSize: { xs: "18px", md: "20px", xl: "22px" },
                 color: "#1F2937",
-                fontWeight: 500,
+                fontWeight: 600,
               }}
             >
               Ads
@@ -413,7 +412,7 @@ const index = () => {
               sx={{
                 fontSize: { xs: "18px", md: "20px", xl: "22px" },
                 color: "#1F2937",
-                fontWeight: 500,
+                fontWeight: 600,
               }}
             >
               Users
@@ -459,7 +458,7 @@ const index = () => {
               sx={{
                 fontSize: { xs: "18px", md: "20px", xl: "22px" },
                 color: "#1F2937",
-                fontWeight: 500,
+                fontWeight: 600,
               }}
             >
               Finance Overview
@@ -509,7 +508,7 @@ const index = () => {
               sx={{
                 fontSize: { xs: "18px", md: "20px", xl: "22px" },
                 color: "#1F2937",
-                fontWeight: 500,
+                fontWeight: 600,
               }}
             >
               Message
@@ -582,7 +581,7 @@ const index = () => {
               sx={{
                 fontSize: { xs: "18px", md: "20px", xl: "22px" },
                 color: "#1F2937",
-                fontWeight: 500,
+                fontWeight: 600,
               }}
             >
               Mail
@@ -655,7 +654,7 @@ const index = () => {
               sx={{
                 fontSize: { xs: "18px", md: "20px", xl: "22px" },
                 color: "#1F2937",
-                fontWeight: 500,
+                fontWeight: 600,
               }}
             >
               Stories

@@ -69,6 +69,7 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
                         selectedTab === index ? "#07B007" : "transparent",
                       px: 2,
                       py: 1,
+                      borderRadius: 1,
                     }}
                   >
                     {tab.label} {tab.count && "("}

@@ -77,7 +77,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                     fontWeight: 600,
                     textAlign: "center",
                     backgroundColor: "#F3F4F6",
-                    color: "#B2B7C1",
+                    color: "#9CA3AF",
                     borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                   }}
                 >
@@ -119,7 +119,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "start",
+                      justifyContent: "center",
                       gap: "8px",
                       backgroundColor: statusConfig[user.status].color,
                       padding: "6px 12px",

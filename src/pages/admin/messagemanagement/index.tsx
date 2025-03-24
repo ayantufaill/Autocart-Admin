@@ -16,6 +16,7 @@ import FinanceStatCard from "@/components/common/AdminCards/FinanceCard";
 import MessagesTable, {
   Message,
 } from "@/components/common/MessageTable/MessageTable";
+import SearchBar from "@/components/common/SearchBar/SearchBar";
 
 const data = [
   {
@@ -153,27 +154,10 @@ const FlaggedMessagesGrid = () => {
         defaultTab={0}
       />
       <Container>
-        <TextField
+        <SearchBar
           placeholder="Search User"
-          variant="outlined"
-          onChange={(e) => setSearch(e.target.value)}
-          sx={{
-            marginBottom: 2,
-            backgroundColor: "#F9F9F9",
-            width: { xs: "90%", md: "70%" },
-            maxWidth: "600px",
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "10px",
-              maxHeight: "48px",
-            },
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Search />
-              </InputAdornment>
-            ),
-          }}
+          search={search}
+          setSearch={setSearch}
         />
 
         <Box

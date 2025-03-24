@@ -70,6 +70,7 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
           minWidth: "100%",
           width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
           overflowX: { xs: "scroll", md: "auto" },
+          mt: 2
         }}
       >
         <Table stickyHeader>
@@ -90,8 +91,8 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     fontWeight: 600,
                     textAlign: "center",
                     backgroundColor: "#F3F4F6",
-                    color: "#6B7280",
-                    padding: "12px",
+                    color: "#9CA3AF",
+                    // padding: "12px",
                     borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                   }}
                 >

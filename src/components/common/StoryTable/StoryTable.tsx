@@ -66,7 +66,7 @@ const StoryTable: React.FC<StoryTableProps> = ({ stories }) => {
                   fontWeight: 600,
                   textAlign: "center",
                   backgroundColor: "#F3F4F6",
-                  color: "#A1A8B3",
+                  color: "#9CA3AF",
                   padding: "12px",
                   borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                   borderBottom: "none",

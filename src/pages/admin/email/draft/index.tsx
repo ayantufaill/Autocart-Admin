@@ -94,7 +94,7 @@ const index = () => {
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <ColorTabs tabData={tabs} defaultTab={3} />
-      <Container sx={{ py: 3 }}>
+      <Container sx={{ pb: 3 }}>
         <EmailActions search={search} setSearch={setSearch} />
         <Box mt={4}>
           <DraftTable

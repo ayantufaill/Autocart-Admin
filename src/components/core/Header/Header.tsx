@@ -83,15 +83,7 @@ const Header: React.FC = () => {
               alignItems: "center",
               bgcolor: "red",
             }}
-          >
-            {/* <Image
-              src="/Images/Header/image.png"
-              alt="Profile"
-              width={50}
-              height={50}
-              style={{ objectFit: "cover" }}
-            /> */}
-          </Avatar>
+          ></Avatar>
         </Box>
       )}
 
@@ -127,25 +119,6 @@ const Header: React.FC = () => {
             height: "32px",
           }}
         />
-        <Settings
-          sx={{ cursor: "pointer" }}
-          onClick={() => {
-            setShowLogout(!showLogout);
-          }}
-        />
-        {showLogout && (
-          <Box
-            sx={{
-              position: "absolute",
-              top: 50,
-              left: "-30px",
-            }}
-          >
-            <Button variant="contained" color="error">
-              Logout
-            </Button>
-          </Box>
-        )}
       </Box>
     </Box>
   );
