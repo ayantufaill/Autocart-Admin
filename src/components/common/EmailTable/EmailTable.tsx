@@ -47,6 +47,7 @@ const EmailTable: React.FC<EmailTableProps> = ({
     <TableContainer
       sx={{
         minWidth: "100%",
+        width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
         overflowX: { xs: "scroll", md: "auto" },
       }}
     >

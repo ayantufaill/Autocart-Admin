@@ -14,6 +14,7 @@ import {
   Box,
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import SearchBar from "../SearchBar/SearchBar";
 
 interface Finance {
   adID: string;
@@ -39,167 +40,158 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
 
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
-      <TextField
+      <SearchBar
         placeholder="Search Ads"
-        variant="outlined"
-        onChange={(e) => setSearch(e.target.value)}
-        sx={{
-          marginBottom: 2,
-          backgroundColor: "#F9F9F9",
-          width: { xs: "90%", md: "70%" },
-          maxWidth: "600px",
-          "& .MuiOutlinedInput-root": {
-            borderRadius: "10px",
-            maxHeight: "48px",
-          },
-        }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search />
-            </InputAdornment>
-          ),
-        }}
+        search={search}
+        setSearch={setSearch}
       />
+      <TableContainer
+        sx={{
+          minWidth: "100%",
+          width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
+          overflowX: { xs: "scroll", md: "auto" },
+          mt: 2,
+        }}
+      >
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              {["Ad Id", "User Id", "Transaction Id", "Amount", "Date"].map(
+                (header, index) => (
+                  <TableCell
+                    key={header}
+                    sx={{
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      backgroundColor: "#F3F4F6",
+                      color: "#B2B7C1",
+                      padding: "12px",
+                      borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
+                      borderBottom: "none",
+                    }}
+                  >
+                    {header}
+                  </TableCell>
+                )
+              )}
+            </TableRow>
+          </TableHead>
 
-      <Table stickyHeader sx={{ minWidth: 900 }}>
-        <TableHead>
-          <TableRow>
-            {["Ad Id", "User Id", "Transaction Id", "Amount", "Date"].map(
-              (header, index) => (
-                <TableCell
-                  key={header}
-                  sx={{
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    backgroundColor: "#F3F4F6",
-                    color: "#B2B7C1",
-                    padding: "12px",
-                    borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
-                    borderBottom: "none",
-                  }}
-                >
-                  {header}
-                </TableCell>
-              )
-            )}
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {/* Empty Row to add gap */}
-          <TableRow>
-            <TableCell
-              sx={{
-                backgroundColor: "transparent",
-                borderBottom: "0px",
-              }}
-            />
-          </TableRow>
-          {filteredFinance.map((finance, index, arr) => (
-            <TableRow
-              key={finance.adID}
-              sx={{
-                backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
-                borderBottom: "0.5px solid #E5E7EB",
-              }}
-            >
+          <TableBody>
+            {/* Empty Row to add gap */}
+            <TableRow>
               <TableCell
                 sx={{
-                  textAlign: "center",
-                  padding: "12px",
-                  borderBottom:
-                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                  backgroundColor: "transparent",
+                  borderBottom: "0px",
+                }}
+              />
+            </TableRow>
+            {filteredFinance.map((finance, index, arr) => (
+              <TableRow
+                key={finance.adID}
+                sx={{
+                  backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
+                  borderBottom: "0.5px solid #E5E7EB",
                 }}
               >
-                <Box
+                <TableCell
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "8px",
+                    textAlign: "center",
+                    padding: "12px",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    <img
+                      src={finance.imageUrl}
+                      alt="Ad Image"
+                      width="30"
+                      height="30"
+                      style={{ borderRadius: "5px" }}
+                    />
+                    {finance.adID}
+                  </Box>
+                </TableCell>
+
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    padding: "12px",
+                    borderLeft: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                     fontWeight: 600,
                   }}
                 >
-                  <img
-                    src={finance.imageUrl}
-                    alt="Ad Image"
-                    width="30"
-                    height="30"
-                    style={{ borderRadius: "5px" }}
-                  />
-                  {finance.adID}
-                </Box>
-              </TableCell>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    <Avatar
+                      src={finance.userImageUrl}
+                      sx={{ width: 24, height: 24 }}
+                    />
+                    {finance.userId}
+                  </Box>
+                </TableCell>
 
-              <TableCell
-                sx={{
-                  textAlign: "center",
-                  padding: "12px",
-                  borderLeft: "0.5px solid #CACACA",
-                  borderBottom:
-                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
-                  fontWeight: 600,
-                }}
-              >
-                <Box
+                <TableCell
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "8px",
+                    textAlign: "center",
+                    padding: "12px",
+                    borderLeft: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                    fontWeight: 600,
                   }}
                 >
-                  <Avatar
-                    src={finance.userImageUrl}
-                    sx={{ width: 24, height: 24 }}
-                  />
-                  {finance.userId}
-                </Box>
-              </TableCell>
+                  {finance.transactionId}
+                </TableCell>
 
-              <TableCell
-                sx={{
-                  textAlign: "center",
-                  padding: "12px",
-                  borderLeft: "0.5px solid #CACACA",
-                  borderBottom:
-                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
-                  fontWeight: 600,
-                }}
-              >
-                {finance.transactionId}
-              </TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    padding: "12px",
+                    borderLeft: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                    fontWeight: 600,
+                  }}
+                >
+                  {finance.amount}
+                </TableCell>
 
-              <TableCell
-                sx={{
-                  textAlign: "center",
-                  padding: "12px",
-                  borderLeft: "0.5px solid #CACACA",
-                  borderBottom:
-                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
-                  fontWeight: 600,
-                }}
-              >
-                {finance.amount}
-              </TableCell>
-
-              <TableCell
-                sx={{
-                  textAlign: "center",
-                  padding: "12px",
-                  borderLeft: "0.5px solid #CACACA",
-                  borderBottom:
-                    index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
-                  fontWeight: 600,
-                }}
-              >
-                {finance.date}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    padding: "12px",
+                    borderLeft: "0.5px solid #CACACA",
+                    borderBottom:
+                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
+                    fontWeight: 600,
+                  }}
+                >
+                  {finance.date}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };

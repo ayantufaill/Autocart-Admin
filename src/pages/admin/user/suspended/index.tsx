@@ -1,4 +1,4 @@
-import UserDetails from "@/components/common/Users/UserDetails";
+import UserOpened from "@/components/common/Users/UserOpened";
 import { Container } from "@mui/material";
 import React from "react";
 
@@ -6,7 +6,7 @@ const SuspendedUser: React.FC = () => {
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <Container>
-        <UserDetails status="Suspended" />
+        <UserOpened status="Active" userData={[]} />
       </Container>
     </div>
   );

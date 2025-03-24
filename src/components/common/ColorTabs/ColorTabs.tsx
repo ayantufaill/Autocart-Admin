@@ -71,7 +71,9 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
                       py: 1,
                     }}
                   >
-                    {tab.label} ({tab.count})
+                    {tab.label} {tab.count && "("}
+                    {tab.count}
+                    {tab.count && ")"}
                   </Typography>
                 </Box>
               }

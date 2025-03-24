@@ -1,13 +1,15 @@
-import UserDetails from "@/components/common/Users/UserDetails";
+import UserOpened from "@/components/common/Users/UserOpened";
 import { Container } from "@mui/material";
 import React from "react";
 
 const BannedUser: React.FC = () => {
-  return <div>
-    <Container>
-      <UserDetails status="Banned" />
-    </Container>
-  </div>;
+  return (
+    <div>
+      <Container>
+        <UserOpened status="Active" userData={[]} />
+      </Container>
+    </div>
+  );
 };
 
 export default BannedUser;

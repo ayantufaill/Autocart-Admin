@@ -15,6 +15,9 @@ import AdminHeader from "@/components/common/AdminCards/AdminHeader";
 import { FC } from "react";
 import IconTitleBox from "@/components/common/AdminCards/CardsHeading";
 
+
+// check emailManagement
+
 interface StatData {
   title: string;
   value: string;
@@ -324,38 +327,25 @@ const index = () => {
             </Box>
 
             {/* Right Section */}
-            <Box>
-              <Button
-                variant="outlined"
-                startIcon={
-                  <CalendarMonthOutlinedIcon
-                    sx={{ width: "26px", height: "26px", color: "#9CA3AF" }}
-                  />
-                }
-                sx={{
-                  width: { xs: "100%", md: "160px" },
-                  height: "40px",
-                  borderRadius: "12px",
-                  border: "0.5px solid #CACACA",
-                  color: "#9CA3AF",
-                  textTransform: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  py: "4px",
-                  px: "4px",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: { xs: "16px", md: "18px" },
-                    color: "#9CA3AF",
-                  }}
-                >
-                  Change Date
-                </Typography>
-              </Button>
-            </Box>
+            <Button
+              variant="outlined"
+              startIcon={<CalendarMonthOutlinedIcon />}
+              sx={{
+                width: { xs: "100%", md: "160px" },
+                height: "40px",
+                borderRadius: "12px",
+                border: "0.5px solid #CACACA",
+                color: "#9CA3AF",
+                textTransform: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                py: "4px",
+                px: "4px",
+              }}
+            >
+              Change Date
+            </Button>
           </Box>
         </Box>
 
