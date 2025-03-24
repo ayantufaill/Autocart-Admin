@@ -55,21 +55,21 @@ const Sidebar = () => {
       icon: <MonetizationOnOutlinedIcon />,
       path: "/admin/finance",
     },
-    {
-      text: "Email Management",
-      icon: <EmailOutlinedIcon />,
-      path: "/admin/emailmanagement",
-    },
-    {
-      text: "Message Management",
-      icon: <ChatOutlinedIcon />,
-      path: "/admin/messagemanagement",
-    },
-    {
-      text: "Story Management",
-      icon: <AutoStoriesOutlinedIcon />,
-      path: "/admin/story",
-    },
+    // {
+    //   text: "Email Management",
+    //   icon: <EmailOutlinedIcon />,
+    //   path: "/admin/emailmanagement",
+    // },
+    // {
+    //   text: "Message Management",
+    //   icon: <ChatOutlinedIcon />,
+    //   path: "/admin/messagemanagement",
+    // },
+    // {
+    //   text: "Story Management",
+    //   icon: <AutoStoriesOutlinedIcon />,
+    //   path: "/admin/story",
+    // },
   ];
 
   return (
