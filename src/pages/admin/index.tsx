@@ -15,6 +15,9 @@ import AdminHeader from "@/components/common/AdminCards/AdminHeader";
 import { FC } from "react";
 import IconTitleBox from "@/components/common/AdminCards/CardsHeading";
 
+
+// check emailManagement
+
 interface StatData {
   title: string;
   value: string;
