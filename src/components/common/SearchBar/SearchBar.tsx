@@ -25,6 +25,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ placeholder, setSearch }) => {
           borderRadius: "10px",
           maxHeight: "43px",
         },
+        "& ::placeholder": {
+          color: "#CBCED4",
+        },
       }}
       InputProps={{
         startAdornment: (

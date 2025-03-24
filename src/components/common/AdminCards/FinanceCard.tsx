@@ -81,7 +81,7 @@ const FinanceStatCard: React.FC<FinanceStatCardProps> = ({
             sx={{
               color: "#1F2937",
               fontSize: { xs: "18px", md: "20px", xl: "22px" },
-              fontWeight: 500,
+              fontWeight: 600,
             }}
           >
             {amount}

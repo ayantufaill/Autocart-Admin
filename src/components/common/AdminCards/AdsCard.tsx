@@ -73,7 +73,7 @@ const ContentCards: React.FC<ContentCardsProps> = ({
         <Typography
           sx={{
             fontSize: { xs: "18px", md: "20px", xl: "22px" },
-            fontWeight: 500,
+            fontWeight: 600,
             color: "#1F2937",
           }}
         >

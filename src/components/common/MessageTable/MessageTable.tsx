@@ -74,7 +74,7 @@ const MessagesTable: React.FC<MessagesTableProps> = ({
                     fontWeight: 600,
                     textAlign: "center",
                     backgroundColor: "#F3F4F6",
-                    color: "#B2B7C1",
+                    color: "#9CA3AF",
                     borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                     borderBottom: "none",
                   }}
@@ -119,7 +119,7 @@ const MessagesTable: React.FC<MessagesTableProps> = ({
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "start",
+                      justifyContent: "center",
                       gap: "8px",
                       backgroundColor: statusConfig[message.status].color,
                       padding: "6px 12px",

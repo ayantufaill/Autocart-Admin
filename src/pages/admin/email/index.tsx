@@ -66,7 +66,7 @@ const index = () => {
   return (
     <div style={{ backgroundColor: "#F9F9F9", paddingBottom: "20px" }}>
       <ColorTabs tabData={tabs} defaultTab={0} />
-      <Container sx={{ py: 3 }}>
+      <Container sx={{ pb: 3 }}>
         <EmailActions search={search} setSearch={setSearch} />
         <Box>
           {Mails.map((mail, index) => (
