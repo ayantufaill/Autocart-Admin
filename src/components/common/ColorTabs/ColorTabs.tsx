@@ -8,7 +8,6 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useRouter } from "next/router";
 
 type TabDataItem = {
