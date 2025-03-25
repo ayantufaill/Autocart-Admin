@@ -1,17 +1,12 @@
 import { userData } from "@/types/type";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchUsers } from "../api/userApi";
 
 export const fetchUserData = createAsyncThunk(
-  "/users",
-  async (payload: any, { rejectWithValue }) => {
-    try {
-      const response = await payload;
-      return response.data;
-    } catch (err: any) {
-      return rejectWithValue(
-        err.response?.data?.message || "Failed to register."
-      );
-    }
+  "user/fetchUserData",
+  async () => {
+    const response = await fetchUsers();
+    return response;
   }
 );
 
@@ -20,7 +15,7 @@ interface UserState {
   success: boolean;
   error: string | null;
   message: string | null;
-  data: userData;
+  data: userData[];
 }
 
 const initialState: UserState = {
@@ -28,19 +23,7 @@ const initialState: UserState = {
   success: false,
   error: null,
   message: null,
-  data: {
-    id: "",
-    name: "",
-    email: "",
-    role: "",
-    status: "",
-    phoneNumber: "",
-    createdAt: "",
-    updatedAt: "",
-    _count: {
-      ads: 0,
-    },
-  },
+  data: [],
 };
 
 const userSlice = createSlice({
@@ -49,9 +32,19 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserData.pending, (state) => {})
-      .addCase(fetchUserData.fulfilled, (state, action) => {})
-      .addCase(fetchUserData.rejected, (state, action) => {});
+      .addCase(fetchUserData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchUserData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.message = action.payload?.message;
+        state.data = action.payload?.data;
+      })
+      .addCase(fetchUserData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 

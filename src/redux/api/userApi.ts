@@ -1,7 +1,13 @@
 import api from "@/services/api";
-import { UserData } from "next-auth/providers/42-school";
+import { userData } from "../../types/type";
 
-export const getUserDataApi = async (): Promise<UserData> => {
+interface UserApiResponse {
+  success: boolean;
+  message: string;
+  data: userData[];
+}
+
+export const fetchUsers = async (): Promise<UserApiResponse> => {
   const response = await api.get("/users");
   return response.data;
 };
