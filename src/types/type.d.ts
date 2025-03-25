@@ -50,3 +50,19 @@ export interface loginUser {
   email: string;
   password: string;
 }
+
+// User
+
+export interface userData {
+  id: string;
+  name: string;
+  email: string;
+  role: string; // change status to actual values
+  status: string; // change status to actual values
+  phoneNumber: string;
+  createdAt: string;
+  updatedAt: string;
+  _count: {
+    ads: number;
+  };
+}

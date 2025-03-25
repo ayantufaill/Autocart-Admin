@@ -14,14 +14,20 @@ type TabDataItem = {
   label: string;
   count?: number;
   path: string;
+  status: string;
 };
 
 type ColorTabsProps = {
   tabData: TabDataItem[];
   defaultTab: number;
+  setStatus: (status: string) => void;
 };
 
-const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
+const ColorTabs: React.FC<ColorTabsProps> = ({
+  tabData,
+  defaultTab = 0,
+  setStatus,
+}) => {
   const [selectedTab, setSelectedTab] = useState(defaultTab);
   const route = useRouter();
 
@@ -56,7 +62,11 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
           {tabData.map((tab, index) => (
             <Tab
               disableTouchRipple
-              onClick={() => route.push(tab.path)}
+              onClick={() => {
+                // route.push(tab.path)
+                console.log(tab.status);
+                setStatus(tab.status)
+              }}
               key={index}
               sx={{ px: 0 }}
               label={
