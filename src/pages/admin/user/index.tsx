@@ -1,97 +1,51 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "@/redux/slices/usersSlice";
+import { RootState, AppDispatch } from "@/redux/store";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import UserTable from "@/components/common/UserTable/UserTable";
 import { Container } from "@mui/material";
-import React from "react";
-
-const users: {
-  status: "Active" | "Suspended" | "Banned";
-  name: string;
-  email: string;
-  adsPosted: number;
-  userId: string;
-  imageUrl: string;
-  regDate: string;
-}[] = [
-  {
-    status: "Active",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    adsPosted: 10,
-    userId: "USR12345",
-    imageUrl: "/Images/Users/john.png",
-    regDate: "2023-05-15",
-  },
-  {
-    status: "Suspended",
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    adsPosted: 5,
-    userId: "USR67890",
-    imageUrl: "/Images/Users/jane.png",
-    regDate: "2022-11-23",
-  },
-  {
-    status: "Banned",
-    name: "Michael Johnson",
-    email: "michael.j@example.com",
-    adsPosted: 2,
-    userId: "USR24680",
-    imageUrl: "/Images/Users/michael.png",
-    regDate: "2021-08-30",
-  },
-  {
-    status: "Active",
-    name: "Emily Brown",
-    email: "emily.brown@example.com",
-    adsPosted: 8,
-    userId: "USR13579",
-    imageUrl: "/Images/Users/emily.png",
-    regDate: "2022-02-14",
-  },
-  {
-    status: "Active",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    adsPosted: 10,
-    userId: "USR12345",
-    imageUrl: "/Images/Users/john.png",
-    regDate: "2023-05-15",
-  },
-  {
-    status: "Suspended",
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    adsPosted: 5,
-    userId: "USR67890",
-    imageUrl: "/Images/Users/jane.png",
-    regDate: "2022-11-23",
-  },
-  {
-    status: "Banned",
-    name: "Michael Johnson",
-    email: "michael.j@example.com",
-    adsPosted: 2,
-    userId: "USR24680",
-    imageUrl: "/Images/Users/michael.png",
-    regDate: "2021-08-30",
-  },
-  {
-    status: "Active",
-    name: "Emily Brown",
-    email: "emily.brown@example.com",
-    adsPosted: 8,
-    userId: "USR13579",
-    imageUrl: "/Images/Users/emily.png",
-    regDate: "2022-02-14",
-  },
-];
 
 const User: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { users, loading } = useSelector((state: RootState) => state.users);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
+  const activeUsers = users.filter((user) => user.status === "Active").length;
+  const suspendedUsers = users.filter(
+    (user) => user.status === "Suspended"
+  ).length;
+  const bannedUsers = users.filter((user) => user.status === "Banned").length;
+
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
-      <ColorTabs />
+      <ColorTabs
+        tabData={[
+          { label: "All Users", count: users.length, path: "/admin/user" },
+          {
+            label: "Active Users",
+            count: activeUsers,
+            path: "/admin/active/user",
+          },
+          {
+            label: "Suspended Users",
+            count: suspendedUsers,
+            path: "/admin/suspended/user",
+          },
+          {
+            label: "Banned Users",
+            count: bannedUsers,
+            path: "/admin/banned/user",
+          },
+        ]}
+        defaultTab={0}
+      />
       <Container sx={{ pb: 10 }}>
-        <UserTable Users={users} />
+        {loading ? <p>Loading...</p> : <UserTable Users={users} />}
       </Container>
     </div>
   );
