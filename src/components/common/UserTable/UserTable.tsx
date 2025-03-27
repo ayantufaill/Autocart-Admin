@@ -55,7 +55,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
       <TableContainer
         sx={{
           minWidth: "100%",
-          width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
+          width: { xs: "210px", sm: "490px", md: "650px", lg: "95%" },
           overflowX: { xs: "scroll", md: "auto" },
           mt: 2,
         }}
@@ -99,9 +99,15 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
             </TableRow>
             {filteredUsers.map((user, index, arr) => (
               <TableRow
+                onClick={() =>
+                  router.push(`/admin/user/${user.status.toLowerCase()}`)
+                }
                 key={index}
                 sx={{
                   backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
+                  cursor: "pointer",
+                  transition: "opacity 0.2s",
+                  "&:hover": { opacity: 0.7 },
                 }}
               >
                 <TableCell
@@ -113,9 +119,6 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                   }}
                 >
                   <Box
-                    onClick={() =>
-                      router.push(`/admin/user/${user.status.toLowerCase()}`)
-                    }
                     sx={{
                       display: "flex",
                       alignItems: "center",
@@ -126,9 +129,6 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                       borderRadius: "6px",
                       fontWeight: "light",
                       color: statusConfig[user.status].textColor,
-                      cursor: "pointer",
-                      transition: "opacity 0.2s",
-                      "&:hover": { opacity: 0.8 },
                     }}
                   >
                     <Box

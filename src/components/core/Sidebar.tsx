@@ -86,7 +86,8 @@ const Sidebar = () => {
       sx={{
         height: "calc(100vh - 80px)",
         width: {
-          xs: isExpanded ? "250px" : "80px",
+          xs: "60px",
+          sm: "80px",
           md: "260px",
           lg: "260px",
           xl: "280px",
@@ -95,7 +96,8 @@ const Sidebar = () => {
         flexShrink: 0,
         "& .MuiDrawer-paper": {
           width: {
-            xs: isExpanded ? "250px" : "80px",
+            xs: "60px",
+            sm: "80px",
             md: "260px",
             lg: "260px",
             xl: "280px",
@@ -153,9 +155,9 @@ const Sidebar = () => {
             <ListItemText
               primary={item.text}
               sx={{
-                display: { xs: isExpanded ? "block" : "none", md: "block" },
+                display: { xs: "none", md: "block" },
                 whiteSpace: "nowrap",
-                ml: "20px",
+                ml: { md: "12px", lg: "20px" },
                 typography: "body1",
               }}
             />

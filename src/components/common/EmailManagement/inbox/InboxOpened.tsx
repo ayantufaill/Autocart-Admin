@@ -30,10 +30,12 @@ const InboxOpened: React.FC<InboxProps> = ({ status }) => {
           replyPath="/"
         />
         {/* Mail */}
-        <EmailDisplay
-          subject="Report on a glitch that Occurred on the app"
-          content={mailContent}
-        />
+        <Box mb={6}>
+          <EmailDisplay
+            subject="Report on a glitch that Occurred on the app"
+            content={mailContent}
+          />
+        </Box>
         {/* Details */}
         <UserDetails status="Active" />
       </Container>

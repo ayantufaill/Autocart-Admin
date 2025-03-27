@@ -46,7 +46,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status }) => {
       <Typography
         sx={{
           color: "#1F2937",
-          fontWeight: 500,
+          fontWeight: 600,
           fontSize: { xs: "16px", md: "20px", xl: "22px" },
         }}
       >
@@ -54,7 +54,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status }) => {
       </Typography>
       <Divider sx={{ my: 2 }} />
 
-      <Grid container spacing={2}>
+      <Grid container spacing={{xs: 4, lg: 2}}>
         <Grid size={{ xs: 12, lg: 6 }}>
           <Box
             display="grid"
@@ -84,7 +84,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status }) => {
                 <Typography
                   sx={{
                     color: "#1F2937",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     fontSize: { xs: "14px", md: "16px", xl: "22px" },
                   }}
                 >
@@ -95,7 +95,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status }) => {
           </Box>
         </Grid>
 
-        <Grid size={{ xs: 12, lg: 6 }}>
+        <Grid size={{ xs: 12, lg: 6 }} textAlign={{xs: "center", lg: "start"}}>
           <img
             alt="user"
             src="/Images/user/user.svg"

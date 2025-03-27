@@ -45,7 +45,7 @@ const InboxHeader: React.FC<MailHeaderProps> = ({
         <Button
           variant="outlined"
           startIcon={<Reply />}
-          sx={{ borderColor: "#9CA3AF", color: "#9CA3AF" }}
+          sx={{ borderColor: "#9CA3AF", color: "#9CA3AF", maxWidth: "210px", borderRadius: 2 }}
           href={replyPath}
         >
           Reply Mail
@@ -53,7 +53,7 @@ const InboxHeader: React.FC<MailHeaderProps> = ({
         <Button
           variant="outlined"
           startIcon={<Forward />}
-          sx={{ borderColor: "#9CA3AF", color: "#9CA3AF" }}
+          sx={{ borderColor: "#9CA3AF", color: "#9CA3AF", maxWidth: "210px", borderRadius: 2 }}
           href={forwardPath}
         >
           Forward Mail

@@ -276,9 +276,14 @@ const index = () => {
               py: { xs: "8px", md: "8px" },
               border: "0.5px solid #CACACA",
               display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexDirection: { xs: "column", lg: "row" },
+              flexDirection: { xs: "column", sm: "row" },
+              alignItems: {
+                xs: "center",
+                sm: "start",
+                md: "center",
+                lg: "center",
+              },
+              justifyContent: { xs: "start", lg: "space-between" },
               gap: { xs: 2, lg: 0 },
             }}
           >
@@ -286,7 +291,7 @@ const index = () => {
             <Box
               sx={{
                 width: "100%",
-                textAlign: { xs: "center", lg: "left" },
+                textAlign: { xs: "center", sm: "left" },
               }}
             >
               <Typography
@@ -301,8 +306,7 @@ const index = () => {
               <Box
                 sx={{
                   display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: { xs: "center", lg: "flex-start" },
+                  justifyContent: { xs: "center", sm: "flex-start" },
                   gap: { xs: 1, md: 4 },
                 }}
               >
@@ -326,30 +330,27 @@ const index = () => {
             </Box>
 
             {/* Right Section */}
-            <Button
-              variant="outlined"
-              startIcon={<CalendarMonthOutlinedIcon />}
-              sx={{
-                width: { xs: "100%", md: "160px" },
-                height: "40px",
-                borderRadius: "12px",
-                border: "0.5px solid #CACACA",
-                color: "#9CA3AF",
-                textTransform: "none",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                py: "4px",
-                px: "4px",
-              }}
-            >
-              Change Date
-            </Button>
+            <Box>
+              <Button
+                variant="outlined"
+                startIcon={<CalendarMonthOutlinedIcon />}
+                sx={{
+                  width: { xs: "160px", md: "200px", xl: "160px" },
+                  height: "40px",
+                  borderRadius: "12px",
+                  borderColor: "#CACACA",
+                  color: "#9CA3AF",
+                  textTransform: "none",
+                }}
+              >
+                Change Date
+              </Button>
+            </Box>
           </Box>
         </Box>
 
         {/* Ads Section */}
-        <Box sx={{ width: "100%" }}>
+        <Box>
           {/* Heading */}
           <Box
             sx={{
@@ -382,7 +383,7 @@ const index = () => {
           <Box>
             <Grid container spacing={2}>
               {stats.map((stat, index) => (
-                <Grid item xs={12} md={6} lg={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} key={index}>
                   <ContentCards {...stat} />
                 </Grid>
               ))}
@@ -423,7 +424,7 @@ const index = () => {
           <Box>
             <Grid container spacing={2}>
               {users.map((user, index) => (
-                <Grid item xs={12} md={6} lg={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} key={index}>
                   <ContentCards {...user} />
                 </Grid>
               ))}
@@ -432,19 +433,14 @@ const index = () => {
         </Box>
 
         {/* Finance Section + Bar Chart*/}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "37px",
-          }}
-        >
+        <Box sx={{ mb: 1 }}>
           {/* Heading */}
           <Box
             sx={{
               display: "flex",
               gap: { xs: "10px", md: "16px" },
               alignItems: "center",
+              mb: 3,
             }}
           >
             <PaidOutlinedIcon
@@ -468,7 +464,7 @@ const index = () => {
           <Box>
             <Grid container spacing={2}>
               {financeData.map((data, index) => (
-                <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} xl={3} key={index}>
                   <FinanceStatCard {...data} />
                 </Grid>
               ))}
@@ -527,7 +523,7 @@ const index = () => {
             </Typography>
             <Grid container spacing={2}>
               {flaggedMessage.map((data, index) => (
-                <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} xl={3} key={index}>
                   <FinanceStatCard {...data} />
                 </Grid>
               ))}
@@ -546,7 +542,7 @@ const index = () => {
             </Typography>
             <Grid container spacing={2}>
               {reportedMessage.map((data, index) => (
-                <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} xl={3} key={index}>
                   <FinanceStatCard {...data} />
                 </Grid>
               ))}
@@ -600,7 +596,7 @@ const index = () => {
             </Typography>
             <Grid container spacing={2}>
               {inboxMail.map((data, index) => (
-                <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} xl={3} key={index}>
                   <FinanceStatCard {...data} />
                 </Grid>
               ))}
@@ -619,7 +615,7 @@ const index = () => {
             </Typography>
             <Grid container spacing={2}>
               {outboxMail.map((data, index) => (
-                <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} xl={3} key={index}>
                   <FinanceStatCard {...data} />
                 </Grid>
               ))}
@@ -628,19 +624,14 @@ const index = () => {
         </Box>
 
         {/* Stories*/}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "27px",
-          }}
-        >
+        <Box sx={{ md: 1 }}>
           {/* Heading */}
           <Box
             sx={{
               display: "flex",
               gap: { xs: "10px", md: "16px" },
               alignItems: "center",
+              mb: 3,
             }}
           >
             <AutoStoriesOutlinedIcon
@@ -664,7 +655,7 @@ const index = () => {
           <Box>
             <Grid container spacing={2}>
               {stories.map((data, index) => (
-                <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
+                <Grid item xs={12} sm={6} lg={3} xl={3} key={index}>
                   <FinanceStatCard {...data} />
                 </Grid>
               ))}

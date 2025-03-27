@@ -19,7 +19,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ placeholder, setSearch }) => {
         color: "#BFC3CB",
         marginBottom: 2,
         backgroundColor: "#F9F9F9",
-        width: { xs: "100%", md: "70%" },
+        width: { xs: "90%", md: "70%" },
         maxWidth: "600px",
         "& .MuiOutlinedInput-root": {
           borderRadius: "10px",

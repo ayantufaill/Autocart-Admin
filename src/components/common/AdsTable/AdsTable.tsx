@@ -68,7 +68,7 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
       <TableContainer
         sx={{
           minWidth: "100%",
-          width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
+          width: { xs: "210px", sm: "480px", md: "700px", lg: "100%" },
           overflowX: { xs: "scroll", md: "auto" },
           mt: 2
         }}
@@ -183,7 +183,7 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                       sx={{
                         display: "flex",
                         flexDirection: { xs: "column", lg: "row" },
-                        alignItems: { xs: "left", lg: "center" },
+                        alignItems: "center",
                         gap: 1,
                         bgcolor: sellerConfig[ad.sellerType].color,
                         p: "6px 12px",

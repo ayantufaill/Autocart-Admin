@@ -108,7 +108,7 @@ const StoryManagement: React.FC = () => {
           mt={4}
         >
           {financeData.map((data, index) => (
-            <Grid item xs={12} md={6} lg={6} xl={3} key={index}>
+            <Grid item xs={12} sm={6} lg={6} xl={3} key={index}>
               <FinanceStatCard {...data} />
             </Grid>
           ))}

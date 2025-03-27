@@ -21,8 +21,8 @@ const UserOpened: React.FC<UserDetailsProps> = ({ status, userData }) => {
       <Stack
         spacing={2}
         direction={{ xs: "column", md: "row" }}
-        alignItems={{ xs: "start", md: "center" }}
-        justifyContent={{ xs: "center", md: "space-between" }}
+        alignItems={"center"}
+        justifyContent={{ xs: "center", lg: "space-between" }}
         py={3}
       >
         <Stack direction={"row"} alignItems={"center"} gap={1}>
@@ -37,7 +37,7 @@ const UserOpened: React.FC<UserDetailsProps> = ({ status, userData }) => {
           <Typography
             sx={{
               color: "#1F2937",
-              fontWeight: 500,
+              fontWeight: 600,
               fontSize: { xs: "16px", md: "20px", xl: "22px" },
             }}
           >
@@ -45,24 +45,36 @@ const UserOpened: React.FC<UserDetailsProps> = ({ status, userData }) => {
             AbdulMuizz Ayeleke
           </Typography>
         </Stack>
-        <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+        <Stack direction={{ xs: "column", lg: "row" }} spacing={2}>
           <Button
             variant="contained"
-            sx={{ bgcolor: "#60A5FA", textTransform: "none" }}
+            sx={{
+              bgcolor: "#60A5FA",
+              textTransform: "none",
+              maxWidth: "220px",
+            }}
             startIcon={<Edit />}
           >
             Edit User
           </Button>
           <Button
             variant="contained"
-            sx={{ bgcolor: "#F97316", textTransform: "none" }}
+            sx={{
+              bgcolor: "#F97316",
+              textTransform: "none",
+              maxWidth: "220px",
+            }}
             startIcon={<Pause />}
           >
             {status === "Suspended" ? "Unsuspend User" : "Suspend User"}
           </Button>
           <Button
             variant="contained"
-            sx={{ bgcolor: "#F87171", textTransform: "none" }}
+            sx={{
+              bgcolor: "#F87171",
+              textTransform: "none",
+              maxWidth: "220px",
+            }}
             startIcon={<Cancel />}
           >
             {status === "Banned" ? "Lift Ban on User" : "Ban User"}

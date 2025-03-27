@@ -48,7 +48,7 @@ const FinanceTable: React.FC<FinanceTableProps> = ({ finance }) => {
       <TableContainer
         sx={{
           minWidth: "100%",
-          width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
+          width: { xs: "210px", sm: "490px", md: "650px", lg: "95%" },
           overflowX: { xs: "scroll", md: "auto" },
           mt: 2,
         }}

@@ -70,17 +70,22 @@ const RejectedAds: React.FC = () => {
         </Container>
       </Box>
 
-      <Stack direction={"row"} spacing={3} pt={3} pl={3}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={3}
+        pt={3}
+        pl={{ xs: 0, sm: 3 }}
+      >
         <Button
           variant="contained"
-          sx={{ bgcolor: "#60A5FA" }}
+          sx={{ bgcolor: "#60A5FA", maxWidth: "200px" }}
           startIcon={<FileCopyOutlined />}
         >
           Approve All Ads
         </Button>
         <Button
           variant="contained"
-          sx={{ bgcolor: "#F87171" }}
+          sx={{ bgcolor: "#F87171", maxWidth: "200px" }}
           startIcon={<Close />}
         >
           Reject All Ads

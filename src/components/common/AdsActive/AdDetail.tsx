@@ -15,7 +15,7 @@ const AdDetails: React.FC<AdDetailsProps> = ({ details, description }) => {
     <Box>
       <Typography
         sx={{
-          fontSize: { xs: "20px", sm: "24px", md: "28px" },
+          fontSize: { xs: "20px", sm: "22px", md: "24px" },
           fontWeight: 600,
           color: "#1F2937",
         }}
@@ -29,7 +29,7 @@ const AdDetails: React.FC<AdDetailsProps> = ({ details, description }) => {
         <Grid item xs={12} md={6} lg={5}>
           <Grid container spacing={4}>
             {details.map((column, colIndex) => (
-              <Grid key={colIndex} item xs={12} sm={6}>
+              <Grid key={colIndex} item xs={12} sm={6} md={12} lg={6}>
                 <Box
                   sx={{ display: "flex", flexDirection: "column", gap: "40px" }}
                 >
@@ -42,7 +42,12 @@ const AdDetails: React.FC<AdDetailsProps> = ({ details, description }) => {
                         gap: "8px",
                       }}
                     >
-                      <Typography sx={{ fontSize: "13px", color: "#9CA3AF" }}>
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "13px", md: "15px" },
+                          color: "#9CA3AF",
+                        }}
+                      >
                         {item.label}
                       </Typography>
                       <Typography
@@ -62,7 +67,7 @@ const AdDetails: React.FC<AdDetailsProps> = ({ details, description }) => {
         </Grid>
 
         {/* Description Section */}
-        <Grid item xs={12} md={6} lg={7}>
+        <Grid item xs={12} md={6} lg={6}>
           <Box
             sx={{
               border: "0.5px solid #CACACA",
@@ -71,11 +76,21 @@ const AdDetails: React.FC<AdDetailsProps> = ({ details, description }) => {
               height: "100%",
             }}
           >
-            <Typography sx={{ fontSize: "20px", fontWeight: 600, mb: "12px" }}>
+            <Typography
+              sx={{
+                fontSize: { xs: "16px", md: "18px" },
+                fontWeight: 600,
+                mb: "12px",
+              }}
+            >
               Description
             </Typography>
             <Typography
-              sx={{ fontSize: "18px", color: "#4B5563", lineHeight: "30px" }}
+              sx={{
+                fontSize: { xs: "14px", sm: "16px" },
+                color: "#9CA3AF",
+                lineHeight: "30px",
+              }}
             >
               {description}
             </Typography>

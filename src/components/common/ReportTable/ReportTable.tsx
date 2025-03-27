@@ -54,7 +54,7 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
         sx={{
           my: 2,
           minWidth: "100%",
-          width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
+          width: { xs: "210px", sm: "400px", md: "670px", lg: "90%" },
           overflowX: { xs: "scroll", md: "auto" },
         }}
       >

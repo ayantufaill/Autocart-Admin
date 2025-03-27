@@ -74,6 +74,7 @@ const ComposeEmail = () => {
                 borderColor: "#9CA3AF",
                 borderRadius: "10px",
                 height: "43px",
+                maxWidth: "220px"
               }}
               startIcon={btn.icon}
             >

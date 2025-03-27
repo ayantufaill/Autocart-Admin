@@ -1,9 +1,10 @@
 import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 
 import { chartsGridClasses } from "@mui/x-charts/ChartsGrid";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 const data = [
   { day: "01", value: 20 },
@@ -31,69 +32,76 @@ const data = [
 
 export default function CustomBarChart() {
   return (
-    <Grid container>
-      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-        <Box
+    <Box textAlign={{ xs: "left", lg: "right" }}>
+      <Button
+        variant="outlined"
+        sx={{ borderColor: "#CACACA", color: "#9CA3AF" }}
+        endIcon={<UnfoldMoreIcon sx={{ color: "#1F2937" }} />}
+      >
+        Jan 2025
+      </Button>
+      <Box
+        sx={{
+          width: "100%",
+          overflowX: "auto",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BarChart
+          borderRadius={8}
+          grid={{
+            horizontal: true,
+          }}
+          dataset={data}
+          xAxis={[
+            {
+              scaleType: "band",
+              dataKey: "day",
+            },
+          ]}
+          yAxis={[
+            {
+              valueFormatter: (value) => `$${value}`,
+            },
+          ]}
+          series={[
+            {
+              dataKey: "value",
+              color: "url(#redGradient)",
+            },
+          ]}
+          height={400}
           sx={{
-            width: "100%",
-            overflowX: "auto",
-            display: "flex",
-            justifyContent: "center",
+            [`& .${axisClasses.line}`]: {
+              display: "none",
+            },
+            [`& .${chartsGridClasses.line}`]: {
+              strokeDasharray: "5 5",
+              strokeWidth: 1,
+            },
+            [`& .${axisClasses.left} text`]: {
+              fill: "#9CA3AF",
+            },
+            [`& .${axisClasses.bottom} text`]: {
+              fill: "#9CA3AF",
+            },
+            [`& .${axisClasses.tick}`]: {
+              display: "none",
+            },
+            // gap: 10,
           }}
         >
-          <BarChart
-            borderRadius={8}
-            grid={{
-              horizontal: true,
-            }}
-            dataset={data}
-            xAxis={[
-              {
-                scaleType: "band",
-                dataKey: "day",
-              },
-            ]}
-            yAxis={[
-              {
-                valueFormatter: (value) => `$${value}`,
-              },
-            ]}
-            series={[
-              {
-                dataKey: "value",
-                color: "url(#redGradient)",
-              },
-            ]}
-            height={400}
-            sx={{
-              // made the line hidden
-              [`& .${axisClasses.line}`]: {
-                display: "none",
-              },
-              [`& .${chartsGridClasses.line}`]: {
-                strokeDasharray: "5 5",
-                strokeWidth: 1,
-              },
-              [`& .${axisClasses.left} text`]: {
-                fill: "#9CA3AF",
-              },
-              [`& .${axisClasses.bottom} text`]: {
-                fill: "#9CA3AF",
-              },
-              gap: 5,
-            }}
-          >
-            <svg width="0" height="0">
-              <defs>
-                <linearGradient id="redGradient" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stopColor="#E36B5F" />
-                  <stop offset="100%" stopColor="#EFB590" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </BarChart>
-        </Box>
-      </Grid>
-    </Grid>
+          <svg width="0" height="0">
+            <defs>
+              <linearGradient id="redGradient" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stopColor="#E36B5F" />
+                <stop offset="100%" stopColor="#EFB590" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </BarChart>
+      </Box>
+    </Box>
   );
 }

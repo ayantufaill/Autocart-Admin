@@ -47,7 +47,7 @@ const EmailTable: React.FC<EmailTableProps> = ({
     <TableContainer
       sx={{
         minWidth: "100%",
-        width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
+        width: { xs: "210px", sm: "490px", md: "650px", lg: "95%" },
         overflowX: { xs: "scroll", md: "auto" },
       }}
     >
@@ -164,9 +164,10 @@ const EmailTable: React.FC<EmailTableProps> = ({
                 }}
               >
                 <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
+                  gap={{ xs: 1, lg: 0 }}
+                  direction={{ xs: "column", lg: "row" }}
+                  justifyContent={{ xs: "start", lg: "space-between" }}
+                  alignItems={{ xs: "start", lg: "center" }}
                 >
                   <Typography fontSize="14px">{email.content}</Typography>
                   <span style={{ fontSize: "10px" }}>08:47am</span>

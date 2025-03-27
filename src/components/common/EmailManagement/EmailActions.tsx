@@ -43,6 +43,7 @@ const EmailActions: React.FC<EmailActionsProps> = ({ search, setSearch }) => {
               borderRadius: "10px",
               maxHeight: "43px",
               color: "#9CA3AF",
+              maxWidth: "220px"
             }}
           >
             From Date
@@ -56,6 +57,7 @@ const EmailActions: React.FC<EmailActionsProps> = ({ search, setSearch }) => {
               borderRadius: "10px",
               maxHeight: "43px",
               color: "#9CA3AF",
+              maxWidth: "220px"
             }}
           >
             To Date
@@ -73,6 +75,7 @@ const EmailActions: React.FC<EmailActionsProps> = ({ search, setSearch }) => {
               borderColor: "#9CA3AF",
               borderRadius: "10px",
               height: "43px",
+              maxWidth: "220px"
             }}
             startIcon={btn.icon}
           >

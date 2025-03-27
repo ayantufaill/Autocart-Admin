@@ -6,7 +6,7 @@ const BannedUser: React.FC = () => {
   return (
     <div>
       <Container>
-        <UserOpened status="Active" userData={[]} />
+        <UserOpened status="Banned" userData={[]} />
       </Container>
     </div>
   );

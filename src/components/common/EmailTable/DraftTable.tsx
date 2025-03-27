@@ -42,7 +42,7 @@ const DraftTable: React.FC<EmailTableProps> = ({
     <TableContainer
       sx={{
         minWidth: "100%",
-        width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" }, 
+        width: { xs: "210px", sm: "490px", md: "650px", lg: "95%" },
         overflowX: { xs: "scroll", md: "auto" },
       }}
     >
@@ -141,7 +141,11 @@ const DraftTable: React.FC<EmailTableProps> = ({
                     index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                 }}
               >
-                <Stack direction="row" alignItems="center" spacing={3}>
+                <Stack
+                  direction={{ xs: "column", lg: "row" }}
+                  alignItems="center"
+                  spacing={3}
+                >
                   <Typography fontSize="14px" fontWeight={600}>
                     {email.dateSaved}
                   </Typography>

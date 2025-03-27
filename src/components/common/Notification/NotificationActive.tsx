@@ -18,8 +18,9 @@ const NotificationActive = () => {
         sx={{
           height: "108px",
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: { xs: "space-around", sm: "space-between" },
+          alignItems: { sm: "center" },
         }}
       >
         <Box
@@ -55,6 +56,7 @@ const NotificationActive = () => {
           sx={{
             py: 1,
             bgcolor: "#A5C5F8",
+            maxWidth: "144px",
           }}
           startIcon={<FileCopyOutlinedIcon />}
         >
@@ -69,6 +71,7 @@ const NotificationActive = () => {
           display: "flex",
           gap: { xs: "12px", sm: "24px" },
           alignItems: "center",
+          mt: { xs: 1, sm: 0 },
         }}
       >
         <Box
