@@ -1,7 +1,8 @@
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import ReportTable from "@/components/common/ReportTable/ReportTable";
-import { Container } from "@mui/material";
-import React from "react";
+import { Search } from "@mui/icons-material";
+import { Container, InputAdornment, TextField } from "@mui/material";
+import React, { useState } from "react";
 
 const report: {
   status: "Unread" | "Read";
@@ -79,24 +80,75 @@ const report: {
 ];
 
 const User: React.FC = () => {
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("");
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <ColorTabs
         tabData={[
-          { label: "All Reports", count: 90, path: "/admin/report" },
-          { label: "Read", count: 50, path: "/admin/report/read" },
+          {
+            label: "All Reports",
+            count: 90,
+            path: "/admin/report",
+            status: "",
+          },
+          {
+            label: "Read",
+            count: 50,
+            path: "/admin/report/read",
+            status: "Read",
+          },
           {
             label: "Unread",
             count: 40,
             path: "/admin/report/unread",
+            status: "Unread",
           },
-          { label: "Ad Report", count: 35, path: "/admin/report/adreport" },
-          { label: "User Report", count: 45, path: "/admin/report/userreport" },
+          {
+            label: "Ad Report",
+            count: 35,
+            path: "/admin/report/adreport",
+            status: "",
+          }, // missing
+          {
+            label: "User Report",
+            count: 45,
+            path: "/admin/report/userreport",
+            status: "",
+          }, // missing
         ]}
         defaultTab={0}
+        setStatus={setStatus}
       />
       <Container sx={{ pb: 10 }}>
-        <ReportTable Reports={report} />
+        <TextField
+          placeholder={"Search User"}
+          variant="outlined"
+          onChange={(e) => setSearch(e.target.value)}
+          sx={{
+            fontSize: "12px",
+            color: "#BFC3CB",
+            marginBottom: 2,
+            backgroundColor: "#F9F9F9",
+            width: { xs: "100%", md: "70%" },
+            maxWidth: "600px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              maxHeight: "43px",
+            },
+            "& ::placeholder": {
+              color: "#CBCED4",
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search sx={{ color: "#BFC3CB" }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <ReportTable Reports={report} search={search} />
       </Container>
     </div>
   );

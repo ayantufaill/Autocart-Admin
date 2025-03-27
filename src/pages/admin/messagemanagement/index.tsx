@@ -133,31 +133,60 @@ const messages: Message[] = [
 
 const FlaggedMessagesGrid = () => {
   const [search, setSearch] = useState<string>("");
-
-  const [activeTab, setActiveTab] = useState<string>("Message Overview");
+  const [status, setStatus] = useState<string>("");
+  // const [activeTab, setActiveTab] = useState<string>("Message Overview");
   //tabs need to be changed
 
   return (
     <Box bgcolor={"#F9F9F9"} pb={5}>
       <ColorTabs
         tabData={[
-          { label: "Message Overview", path: "/admin/messagemanagement" },
+          {
+            label: "Message Overview",
+            path: "/admin/messagemanagement",
+            status: "",
+          },
           {
             label: "Flagged Messages",
             path: "/admin/messagemanagement/flagged",
+            status: "Flagged",
           },
           {
             label: "Reported Messages",
             path: "/admin/messagemanagement/reported",
+            status: "Reported",
           },
         ]}
         defaultTab={0}
+        setStatus={setStatus}
       />
       <Container>
-        <SearchBar
-          placeholder="Search User"
-          search={search}
-          setSearch={setSearch}
+        <TextField
+          placeholder={"Search User"}
+          variant="outlined"
+          onChange={(e) => setSearch(e.target.value)}
+          sx={{
+            fontSize: "12px",
+            color: "#BFC3CB",
+            marginBottom: 2,
+            backgroundColor: "#F9F9F9",
+            width: { xs: "100%", md: "70%" },
+            maxWidth: "600px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              maxHeight: "43px",
+            },
+            "& ::placeholder": {
+              color: "#CBCED4",
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search sx={{ color: "#BFC3CB" }} />
+              </InputAdornment>
+            ),
+          }}
         />
 
         <Box

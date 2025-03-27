@@ -34,6 +34,7 @@ interface Ad {
 
 interface AdsTableProps {
   ads: Ad[];
+  search: string;
 }
 
 const statusConfig = {
@@ -50,8 +51,8 @@ const sellerConfig = {
   "Trade Seller": { icon: "#06B6D4", color: "#ECFEFF" },
 };
 
-const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
-  const [search, setSearch] = useState("");
+const AdsTable: React.FC<AdsTableProps> = ({ ads, search }) => {
+  // const [search, setSearch] = useState("");
   const router = useRouter();
 
   const filteredAds = ads.filter((ad) =>
@@ -60,11 +61,11 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
 
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
-      <SearchBar
+      {/* <SearchBar
         placeholder="Search Ads"
         search={search}
         setSearch={setSearch}
-      />
+      /> */}
       <TableContainer
         sx={{
           minWidth: "100%",

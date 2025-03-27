@@ -25,6 +25,7 @@ export interface Story {
 
 interface StoryTableProps {
   stories: Story[];
+  search: string;
 }
 
 const statusConfig = {
@@ -34,8 +35,8 @@ const statusConfig = {
   Flagged: { color: "#FEFCE8", textColor: "#9CA3AF", icon: "#EAB308" },
 };
 
-const StoryTable: React.FC<StoryTableProps> = ({ stories }) => {
-  const [search, setSearch] = useState("");
+const StoryTable: React.FC<StoryTableProps> = ({ stories, search }) => {
+  // const [search, setSearch] = useState("");
   const router = useRouter();
 
   const filteredStories = stories.filter((story) =>

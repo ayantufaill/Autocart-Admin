@@ -27,6 +27,7 @@ interface Report {
 
 interface ReportsTableProps {
   Reports: Report[];
+  search: string;
 }
 
 const statusConfig = {
@@ -34,8 +35,8 @@ const statusConfig = {
   Read: { color: "#F9FAFB", textColor: "#9CA3AF", icon: "#6B7280" },
 };
 
-const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
-  const [search, setSearch] = useState("");
+const ReportTable: React.FC<ReportsTableProps> = ({ Reports, search }) => {
+  // const [search, setSearch] = useState("");
   const router = useRouter();
 
   const filteredReports = Reports.filter((Report) =>
@@ -44,11 +45,11 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
 
   return (
     <div>
-      <SearchBar
+      {/* <SearchBar
         placeholder="Search Reports"
         search={search}
         setSearch={setSearch}
-      />
+      /> */}
 
       <TableContainer
         sx={{
@@ -69,7 +70,7 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                 "Date Issued",
               ].map((header, index) => (
                 <TableCell
-                  key={header}
+                  key={index} // key to change
                   sx={{
                     fontWeight: "bold",
                     textAlign: "center",
@@ -90,7 +91,7 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
             </TableRow>
             {filteredReports.map((report, index, arr) => (
               <TableRow
-                key={report.category}
+                key={index} // key to change
                 sx={{
                   backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
                 }}

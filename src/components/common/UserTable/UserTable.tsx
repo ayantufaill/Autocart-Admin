@@ -28,6 +28,7 @@ interface User {
 
 interface UsersTableProps {
   Users: User[];
+  search: string;
 }
 
 const statusConfig = {
@@ -36,8 +37,8 @@ const statusConfig = {
   Banned: { color: "#FEF2F2", textColor: "#B91C1C", icon: "#EF4444" },
 };
 
-const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
-  const [search, setSearch] = useState("");
+const UsersTable: React.FC<UsersTableProps> = ({ Users, search }) => {
+  // const [search, setSearch] = useState("");
   const router = useRouter();
 
   const filteredUsers = Users.filter((user) =>
@@ -46,11 +47,11 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
 
   return (
     <div>
-      <SearchBar
+      {/* <SearchBar
         placeholder="Search User"
         search={search}
         setSearch={setSearch}
-      />
+      /> */}
 
       <TableContainer
         sx={{

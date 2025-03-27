@@ -1,7 +1,8 @@
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import UserTable from "@/components/common/UserTable/UserTable";
-import { Container } from "@mui/material";
-import React from "react";
+import { Search } from "@mui/icons-material";
+import { Container, InputAdornment, TextField } from "@mui/material";
+import React, { useState } from "react";
 
 const users: {
   status: "Active" | "Suspended" | "Banned";
@@ -86,24 +87,63 @@ const users: {
   },
 ];
 
+const tabs = [
+  { label: "All Users", count: 5247, path: "/admin/user", status: "" },
+  {
+    label: "Active Users",
+    count: 924,
+    path: "/admin/active/user",
+    status: "Active",
+  },
+  {
+    label: "Suspended Users",
+    count: 74,
+    path: "/admin/suspended/user",
+    status: "Suspended",
+  },
+  {
+    label: "Banned Users",
+    count: 80,
+    path: "/admin/banned/user",
+    status: "Banned",
+  },
+];
+
 const User: React.FC = () => {
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("");
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
-      <ColorTabs
-        tabData={[
-          { label: "All Users", count: 5247, path: "/admin/user" },
-          { label: "Active Users", count: 924, path: "/admin/active/user" },
-          {
-            label: "Suspended Users",
-            count: 74,
-            path: "/admin/suspended/user",
-          },
-          { label: "Banned Users", count: 80, path: "/admin/banned/user" },
-        ]}
-        defaultTab={0}
-      />
+      <ColorTabs tabData={tabs} defaultTab={0} setStatus={setStatus} />
       <Container sx={{ pb: 10 }}>
-        <UserTable Users={users} />
+        <TextField
+          placeholder={"Search User"}
+          variant="outlined"
+          onChange={(e) => setSearch(e.target.value)}
+          sx={{
+            fontSize: "12px",
+            color: "#BFC3CB",
+            marginBottom: 2,
+            backgroundColor: "#F9F9F9",
+            width: { xs: "100%", md: "70%" },
+            maxWidth: "600px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              maxHeight: "43px",
+            },
+            "& ::placeholder": {
+              color: "#CBCED4",
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search sx={{ color: "#BFC3CB" }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <UserTable Users={users} search={search} />
       </Container>
     </div>
   );

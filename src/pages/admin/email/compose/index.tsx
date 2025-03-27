@@ -4,12 +4,14 @@ import {
   Container,
   Divider,
   IconButton,
+  InputAdornment,
   Paper,
   Stack,
+  TextField,
 } from "@mui/material";
 import React, { useState } from "react";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Add, Send } from "@mui/icons-material";
+import { Add, Search, Send } from "@mui/icons-material";
 import WriteEmailMessage from "@/components/common/EmailManagement/WriteEmailMessage";
 import SearchBar from "@/components/common/SearchBar/SearchBar";
 
@@ -31,23 +33,28 @@ const tabs = [
   {
     label: "Mail Overview",
     path: "/admin/email",
+    status: "",
   },
   {
     label: "Inbox Mail",
     path: "/admin/email/inbox",
+    status: "Inbox",
   },
   {
     label: "Outbox Mail",
     path: "/admin/email/outbox",
+    status: "Outbox",
   },
   {
     label: "Draft Mail",
     path: "/admin/email/draft",
+    status: "Draft",
   },
 ];
 
 const ComposeEmail = () => {
   const [search, setSearch] = useState<string>("");
+  const [status, setStatus] = useState<String>("");
   const route = useRouter();
 
   return (
@@ -56,13 +63,35 @@ const ComposeEmail = () => {
         backgroundColor: "#F9F9F9",
       }}
     >
-      <ColorTabs tabData={tabs} defaultTab={-1} />
+      <ColorTabs tabData={tabs} defaultTab={4} setStatus={setStatus} />
       <Container>
         <Stack direction={{ sm: "row" }} spacing={{ xs: 2 }} mb={3}>
-          <SearchBar
-            placeholder="Search User"
-            search={search}
-            setSearch={setSearch}
+          <TextField
+            placeholder={"Search User"}
+            variant="outlined"
+            onChange={(e) => setSearch(e.target.value)}
+            sx={{
+              fontSize: "12px",
+              color: "#BFC3CB",
+              marginBottom: 2,
+              backgroundColor: "#F9F9F9",
+              width: { xs: "100%", md: "70%" },
+              maxWidth: "600px",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "10px",
+                maxHeight: "43px",
+              },
+              "& ::placeholder": {
+                color: "#CBCED4",
+              },
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search sx={{ color: "#BFC3CB" }} />
+                </InputAdornment>
+              ),
+            }}
           />
           {buttons.map((btn, index) => (
             <Button
