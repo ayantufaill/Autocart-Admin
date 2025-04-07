@@ -30,10 +30,28 @@ interface UsersTableProps {
   Users: User[];
 }
 
-const statusConfig = {
-  Active: { color: "#F0FDF4", textColor: "#047857", icon: "#07B007" },
-  Suspended: { color: "#FEFCE8", textColor: "#D97706", icon: "#EAB308" },
-  Banned: { color: "#FEF2F2", textColor: "#B91C1C", icon: "#EF4444" },
+const statusConfig: Record<
+  string,
+  { color: string; text: string; textColor: string; icon: string }
+> = {
+  Active: {
+    color: "#F0FDF4",
+    text: "Active",
+    textColor: "#9CA3AF",
+    icon: "#07B007",
+  },
+  Suspended: {
+    color: "#FEFCE8",
+    text: "Suspended",
+    textColor: "#9CA3AF",
+    icon: "#EAB308",
+  },
+  Banned: {
+    color: "#FEF2F2",
+    text: "Banned",
+    textColor: "#9CA3AF",
+    icon: "#EF4444",
+  },
 };
 
 const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
@@ -46,11 +64,11 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
 
   return (
     <div>
-      <SearchBar
+      {/* <SearchBar
         placeholder="Search User"
         search={search}
         setSearch={setSearch}
-      />
+      /> */}
 
       <TableContainer
         sx={{
@@ -113,19 +131,17 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                   }}
                 >
                   <Box
-                    onClick={() =>
-                      router.push(`/admin/user/${user.status.toLowerCase()}`)
-                    }
                     sx={{
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       gap: "8px",
-                      backgroundColor: statusConfig[user.status].color,
+                      backgroundColor:
+                        statusConfig[user.status]?.color || "#D3D3D3", // Default gray
                       padding: "6px 12px",
                       borderRadius: "6px",
                       fontWeight: "light",
-                      color: statusConfig[user.status].textColor,
+                      color: statusConfig[user.status]?.textColor || "#000000", // Default black
                       cursor: "pointer",
                       transition: "opacity 0.2s",
                       "&:hover": { opacity: 0.8 },
@@ -135,7 +151,8 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                       sx={{
                         width: 10,
                         height: 10,
-                        backgroundColor: statusConfig[user.status].icon,
+                        backgroundColor:
+                          statusConfig[user.status]?.icon || "#808080", // Default gray icon
                         borderRadius: "3px",
                       }}
                     />

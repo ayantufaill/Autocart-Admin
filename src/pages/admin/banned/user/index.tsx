@@ -1,77 +1,56 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "@/redux/store";
+import { fetchActiveUsers, fetchBannedUsers } from "@/redux/slices/userSlice";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import UserTable from "@/components/common/UserTable/UserTable";
-import { Container } from "@mui/material";
-import React from "react";
-
-const users: {
-  status: "Active" | "Suspended" | "Banned";
-  name: string;
-  email: string;
-  adsPosted: number;
-  userId: string;
-  imageUrl: string;
-  regDate: string;
-}[] = [
-  {
-    status: "Banned",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    adsPosted: 10,
-    userId: "USR12345",
-    imageUrl: "/Images/Users/john.png",
-    regDate: "2023-05-15",
-  },
-  {
-    status: "Banned",
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    adsPosted: 5,
-    userId: "USR67890",
-    imageUrl: "/Images/Users/jane.png",
-    regDate: "2022-09-10",
-  },
-  {
-    status: "Banned",
-    name: "Michael Johnson",
-    email: "michael.j@example.com",
-    adsPosted: 3,
-    userId: "USR54321",
-    imageUrl: "/Images/Users/michael.png",
-    regDate: "2021-12-25",
-  },
-  {
-    status: "Banned",
-    name: "Sarah Williams",
-    email: "sarah.williams@example.com",
-    adsPosted: 8,
-    userId: "USR09876",
-    imageUrl: "/Images/Users/sarah.png",
-    regDate: "2023-03-20",
-  },
-  {
-    status: "Banned",
-    name: "David Brown",
-    email: "david.brown@example.com",
-    adsPosted: 6,
-    userId: "USR11223",
-    imageUrl: "/Images/Users/david.png",
-    regDate: "2022-06-30",
-  },
-];
+import { Container, CircularProgress } from "@mui/material";
 
 const BannedUsers: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const users = useSelector((state: RootState) => state.user.users);
+  const loading = useSelector((state: RootState) => state.user.loading);
+  const error = useSelector((state: RootState) => state.user.error);
+
+  useEffect(() => {
+    dispatch(fetchBannedUsers());
+  }, [dispatch]);
+
+  console.log("Users Dataaa:", users);
+
+  const activeUsers = users.filter(
+    (user: any) => user.status === "Active"
+  ).length;
+  const suspendedUsers = users.filter(
+    (user: any) => user.status === "Suspended"
+  ).length;
+  const bannedUsers = users.filter(
+    (user: any) => user.status === "Banned"
+  ).length;
+
+  if (loading) return <CircularProgress />;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <ColorTabs
         tabData={[
-          { label: "All Users", count: 5247, path: "/admin/user" },
-          { label: "Active Users", count: 924, path: "/admin/active/user" },
+          { label: "All Users", count: users.length, path: "/admin/user" },
+          {
+            label: "Active Users",
+            count: activeUsers,
+            path: "/admin/active/user",
+          },
           {
             label: "Suspended Users",
-            count: 74,
+            count: suspendedUsers,
             path: "/admin/suspended/user",
           },
-          { label: "Banned Users", count: 80, path: "/admin/banned/user" },
+          {
+            label: "Banned Users",
+            count: bannedUsers,
+            path: "/admin/banned/user",
+          },
         ]}
         defaultTab={3}
       />

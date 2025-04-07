@@ -50,3 +50,18 @@ export interface loginUser {
   email: string;
   password: string;
 }
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: "Active" | "Suspended" | "Banned";
+  phoneNumber: string;
+  createdAt: string;
+  updatedAt: string;
+  adsPosted?: number;
+  userId?: string;
+  imageUrl?: string;
+  regDatets?: string;
+}

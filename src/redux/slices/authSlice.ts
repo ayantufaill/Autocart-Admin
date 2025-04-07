@@ -7,6 +7,7 @@ interface AuthState {
   error: string | null;
   message: string | null;
   email: string | null;
+  token: string | null; // ✅ Add token state
 }
 
 const initialState: AuthState = {
@@ -15,6 +16,7 @@ const initialState: AuthState = {
   error: null,
   message: null,
   email: null,
+  token: typeof window !== "undefined" ? localStorage.getItem("token") : null, // ✅ Fix SSR issue
 };
 
 // Existing Register Thunk
@@ -38,6 +40,7 @@ export const verifyUserThunk = createAsyncThunk(
   async (payload: { email: string; code: string }, { rejectWithValue }) => {
     try {
       const response = await verifyUserApi(payload);
+      localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (err: any) {
       return rejectWithValue(
@@ -68,6 +71,7 @@ const authSlice = createSlice({
       state.success = false;
       state.error = null;
       state.message = null;
+      localStorage.removeItem("token");
     },
     // ✅ New reducer to manually set email
     setAuthEmail: (state, action: PayloadAction<string>) => {
@@ -85,6 +89,7 @@ const authSlice = createSlice({
         state.success = true;
         state.message = "Login successful!";
         state.email = action.payload.email; // Store email in Redux
+        state.token = action.payload.token;
       })
       .addCase(loginUserThunk.rejected, (state, action) => {
         state.loading = false;
