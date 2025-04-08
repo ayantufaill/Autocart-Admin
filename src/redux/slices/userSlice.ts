@@ -4,7 +4,7 @@ import {
   createAsyncThunk,
   createSelector,
 } from "@reduxjs/toolkit";
-import { fetchSearchUsersDataApi } from "../api/userApi";
+import { fetchSearchUsersDataApi, fetchUserByIdApi } from "../api/userApi";
 
 interface User {
   userId: string;
@@ -16,6 +16,26 @@ interface User {
   regDate: string;
 }
 
+export interface UserById {
+  address: string | null;
+  backgroundImage: string | null;
+  businessName: string | null;
+  createdAt: string;
+  dealerLicense: string;
+  email: string;
+  id: string;
+  is_emailVerified: boolean;
+  lastLogin: string | null;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  profileImage: string;
+  role: "SUPER_ADMIN" | "ADMIN" | "USER";
+  status: "ACTIVE" | "SUSPENDED" | "BANNED";
+  updatedAt: string;
+  vatNumber: string;
+}
+
 interface UsersState {
   users: User[];
   activeUsers: User[];
@@ -23,6 +43,7 @@ interface UsersState {
   bannedUsers: User[];
   loading: boolean;
   error: string | null;
+  userById: UserById | null; // added
 }
 
 const mapStatus = (status: string): "Active" | "Suspended" | "Banned" => {
@@ -97,10 +118,24 @@ export const fetchUsers = createAsyncThunk(
     }
   }
 );
+
 export const fetchSearchUsers = createAsyncThunk(
   "users/fetchUsers",
   async (search: string = "") => {
     return await fetchSearchUsersDataApi(search);
+  }
+);
+
+// Fetch User by ID thunk
+export const fetchUserById = createAsyncThunk(
+  "users/fetchUserById",
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      const userData = await fetchUserByIdApi(userId);
+      return userData;
+    } catch (error: any) {
+      return rejectWithValue(error.message || "Failed to fetch user");
+    }
   }
 );
 
@@ -111,6 +146,7 @@ const initialState: UsersState = {
   bannedUsers: [],
   loading: false,
   error: null,
+  userById: null,
 };
 
 const usersSlice = createSlice({
@@ -173,6 +209,20 @@ const usersSlice = createSlice({
         state.loading = false;
         state.error =
           (action.payload as string) || "Failed to fetch banned users";
+      })
+      // Get user by id
+      .addCase(fetchUserById.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserById.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log(action.payload);
+        state.userById = action.payload?.data;
+      })
+      .addCase(fetchUserById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
