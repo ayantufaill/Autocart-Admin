@@ -5,6 +5,7 @@ import { Box } from "@mui/material";
 import Header from "../Header";
 import Sidebar from "@/components/core/Sidebar";
 import { Source_Sans_3 } from "next/font/google";
+import AuthGuard from "../../AuthGuard/AuthGuard";
 
 interface LayoutProps {
   children: ReactNode;
@@ -23,30 +24,34 @@ const CustomLayout = ({ children }: LayoutProps) => {
     "/authentication/sign-in",
     "/authentication/sign-up",
     "/authentication/otp",
+    "/authentication/forgot-password",
+    "/authentication/reset-password",
   ];
   const isAuthPage = authRoutes.includes(router.pathname);
 
   return (
-    <Box
-      className={sans.className}
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        "& .css-s2t35c-MuiTabs-scroller": {
-          fontFamily: "Source-Sans-3",
-        },
-      }}
-    >
-      {!isAuthPage && <Header />}
+    <AuthGuard>
+      <Box
+        className={sans.className}
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          "& .css-s2t35c-MuiTabs-scroller": {
+            fontFamily: "Source-Sans-3",
+          },
+        }}
+      >
+        {!isAuthPage && <Header />}
 
-      <main className={sans.className}>
-        <Box sx={{ display: "flex" }}>
-          {!isAuthPage && <Sidebar />}
-          <Box sx={{ flex: 1 }}>{children}</Box>
-        </Box>
-      </main>
-    </Box>
+        <main className={sans.className}>
+          <Box sx={{ display: "flex" }}>
+            {!isAuthPage && <Sidebar />}
+            <Box sx={{ flex: 1 }}>{children}</Box>
+          </Box>
+        </main>
+      </Box>
+    </AuthGuard>
   );
 };
 
