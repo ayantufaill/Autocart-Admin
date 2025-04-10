@@ -5,6 +5,19 @@ export const fetchUsersDataApi = async () => {
   const response = await api.get("/users");
   return response.data.data as User[];
 };
+
+// fetch User By Id
+export const fetchUserByIdApi = async (id: string) => {
+  const response = await api.get(`/users/${id}`);
+  return response.data;
+};
+
+// Delete User By Id
+export const deleteUserByIdApi = async (id: string) => {
+  const response = await api.delete(`/users/${id}`);
+  return response.data;
+};
+
 export const fetchActiveUsersDataApi = async () => {
   const response = await api.get(`/users?status=ACTIVE`);
   return response.data.data as User[];

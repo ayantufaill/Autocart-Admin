@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import SearchBar from "../SearchBar/SearchBar";
-
 interface User {
   status: "Active" | "Suspended" | "Banned";
   name: string;
@@ -25,11 +24,9 @@ interface User {
   imageUrl: string;
   regDate: string;
 }
-
 interface UsersTableProps {
   Users: User[];
 }
-
 const statusConfig: Record<
   string,
   { color: string; text: string; textColor: string; icon: string }
@@ -53,15 +50,12 @@ const statusConfig: Record<
     icon: "#EF4444",
   },
 };
-
 const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
   const [search, setSearch] = useState("");
   const router = useRouter();
-
   const filteredUsers = Users.filter((user) =>
     user.name.toLowerCase().includes(search.toLowerCase())
   );
-
   return (
     <div>
       {/* <SearchBar
@@ -69,7 +63,6 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
         search={search}
         setSearch={setSearch}
       /> */}
-
       <TableContainer
         sx={{
           minWidth: "100%",
@@ -104,7 +97,6 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
               ))}
             </TableRow>
           </TableHead>
-
           <TableBody>
             {/* Empty Row to add gap */}
             <TableRow>
@@ -145,6 +137,9 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
                       cursor: "pointer",
                       transition: "opacity 0.2s",
                       "&:hover": { opacity: 0.8 },
+                    }}
+                    onClick={() => {
+                      router.push("/admin/user/" + user?.userId);
                     }}
                   >
                     <Box
@@ -230,5 +225,4 @@ const UsersTable: React.FC<UsersTableProps> = ({ Users }) => {
     </div>
   );
 };
-
 export default UsersTable;
