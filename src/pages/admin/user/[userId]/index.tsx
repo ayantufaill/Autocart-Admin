@@ -1,7 +1,7 @@
 import UserOpened from "@/components/common/Users/UserOpened";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchUserById } from "@/redux/slices/userSlice";
-import { CircularProgress, Container } from "@mui/material";
+import { Box, CircularProgress, Container } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
@@ -19,15 +19,24 @@ const index: React.FC = () => {
   }, [userId]);
 
   return (
-    <div>
-      <Container>
-        {loading ? (
+    <Container sx={{ mt: 4 }}>
+      {loading && !userById && (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
           <CircularProgress />
-        ) : (
-          <UserOpened status={userById?.status} userData={userById} />
-        )}
-      </Container>
-    </div>
+        </Box>
+      )}
+
+      {!loading && userById && (
+        <UserOpened status={userById.status || "ACTIVE"} userData={userById} />
+      )}
+    </Container>
   );
 };
 

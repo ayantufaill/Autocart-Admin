@@ -6,6 +6,7 @@ import { Source_Sans_3 } from "next/font/google";
 
 import store from "@/redux/store";
 import Layout from "@/components/core/Header/Layout/Layout";
+import { ToastContainer } from "react-toastify";
 
 const sourceSans = Source_Sans_3({
   subsets: ["latin"],
@@ -16,12 +17,15 @@ const sourceSans = Source_Sans_3({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={sourceSans.className}>
-      <Provider store={store}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </Provider>
-    </div>
+    <>
+      <div className={sourceSans.className}>
+        <Provider store={store}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Provider>
+      </div>
+      <ToastContainer />
+    </>
   );
 }

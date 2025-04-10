@@ -4,7 +4,12 @@ import {
   createAsyncThunk,
   createSelector,
 } from "@reduxjs/toolkit";
-import { fetchSearchUsersDataApi, fetchUserByIdApi } from "../api/userApi";
+import {
+  deleteUserByIdApi,
+  fetchSearchUsersDataApi,
+  fetchUserByIdApi,
+} from "../api/userApi";
+import { toast } from "react-toastify";
 
 interface User {
   userId: string;
@@ -139,6 +144,20 @@ export const fetchUserById = createAsyncThunk(
   }
 );
 
+// Delete User by ID thunk
+export const deleteUserById = createAsyncThunk(
+  "users/deleteUserById",
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      const response = await deleteUserByIdApi(userId);
+      console.log(response);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.message || "Failed to Delete user");
+    }
+  }
+);
+
 const initialState: UsersState = {
   users: [],
   activeUsers: [],
@@ -223,6 +242,22 @@ const usersSlice = createSlice({
       .addCase(fetchUserById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+      // delete user by id
+      .addCase(deleteUserById.pending, (state, action) => {
+        console.log("pending payload", action.payload);
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteUserById.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log(action.payload);
+        // toast.success(action.payload);
+      })
+      .addCase(deleteUserById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+        toast.error(action.payload as string);
       });
   },
 });

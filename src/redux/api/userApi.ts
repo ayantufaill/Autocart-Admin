@@ -8,7 +8,13 @@ export const fetchUsersDataApi = async () => {
 
 // fetch User By Id
 export const fetchUserByIdApi = async (id: string) => {
-  const response = await api.get("/users/" + id);
+  const response = await api.get(`/users/${id}`);
+  return response.data;
+};
+
+// Delete User By Id
+export const deleteUserByIdApi = async (id: string) => {
+  const response = await api.delete(`/users/${id}`);
   return response.data;
 };
 

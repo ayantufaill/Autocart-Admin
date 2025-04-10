@@ -1,8 +1,11 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
-import React from "react";
-import { Cancel, Edit, Pause } from "@mui/icons-material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import { Cancel, Delete, Edit, Pause } from "@mui/icons-material";
 import UserDetails from "./UserDetails";
-import { UserById } from "@/redux/slices/userSlice";
+import { deleteUserById, UserById } from "@/redux/slices/userSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const configStatus = {
   ACTIVE: "#07B007",
@@ -12,20 +15,18 @@ const configStatus = {
 
 interface UserDetailsProps {
   status: "ACTIVE" | "SUSPENDED" | "BANNED"; // default value
-  // userData: {
-  //   name: string;
-  //   country: string;
-  //   email: string;
-  //   area: string;
-  //   phoneNumber: string;
-  //   type: string;
-  //   followers: string;
-  //   following: string;
-  // } | null;
   userData: UserById | null;
 }
 
 const UserOpened: React.FC<UserDetailsProps> = ({ status, userData }) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleDelete = (id: string) => {
+    dispatch(deleteUserById(id));
+    router.push("/admin/user");
+  };
+
   return (
     <div>
       {/* Header */}
@@ -56,6 +57,14 @@ const UserOpened: React.FC<UserDetailsProps> = ({ status, userData }) => {
           </Typography>
         </Stack>
         <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => userData?.id && handleDelete(userData.id)}
+          >
+            <Delete />
+          </Button>
+
           <Button
             variant="contained"
             sx={{ bgcolor: "#60A5FA", textTransform: "none" }}
