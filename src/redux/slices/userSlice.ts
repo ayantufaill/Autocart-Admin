@@ -39,7 +39,8 @@ const mapStatus = (status: string): "Active" | "Suspended" | "Banned" => {
 };
 
 const transformUsers = (data: any): User[] => {
-  return data.data.map((user: any) => ({
+  const usersArray = data.data?.users || [];
+  return usersArray.map((user: any) => ({
     userId: user.id,
     name: user.name,
     email: user.email,

@@ -26,3 +26,8 @@ export const fetchSearchUsersDataApi = async (search: string = "") => {
   });
   return response.data.data; // This will return the array of users
 };
+
+export const fetchUsersAnalyticsApi = async () => {
+  const response = await api.get("/dashboard-analytics/users");
+  return response.data;
+};

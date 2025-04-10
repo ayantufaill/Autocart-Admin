@@ -13,7 +13,7 @@ import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import { useRouter } from "next/router";
 
@@ -41,6 +41,18 @@ const Sidebar = () => {
     setActiveIndex(index);
   }, [route.pathname]);
 
+  const handleLogout = () => {
+    const token = localStorage.getItem("token");
+    console.log("Before Logout - Token in localStorage:", token);
+
+    localStorage.clear();
+
+    const checkToken = localStorage.getItem("token");
+    console.log("After Logout - Token in localStorage:", checkToken);
+
+    route.push("/authentication/sign-in");
+  };
+
   const menuItems = [
     { text: "Dashboard", icon: <DashboardOutlinedIcon />, path: "/" },
     {
@@ -58,21 +70,21 @@ const Sidebar = () => {
       icon: <AnalyticsOutlinedIcon />,
       path: "/admin/report",
     },
-    {
-      text: "Financial Management",
-      icon: <MonetizationOnOutlinedIcon />,
-      path: "/admin/finance",
-    },
-    {
-      text: "Email Management",
-      icon: <EmailOutlinedIcon />,
-      path: "/admin/email",
-    },
-    {
-      text: "Message Management",
-      icon: <ChatOutlinedIcon />,
-      path: "/admin/messagemanagement",
-    },
+    // {
+    //   text: "Financial Management",
+    //   icon: <MonetizationOnOutlinedIcon />,
+    //   path: "/admin/finance",
+    // },
+    // {
+    //   text: "Email Management",
+    //   icon: <EmailOutlinedIcon />,
+    //   path: "/admin/email",
+    // },
+    // {
+    //   text: "Message Management",
+    //   icon: <ChatOutlinedIcon />,
+    //   path: "/admin/messagemanagement",
+    // },
     {
       text: "Story Management",
       icon: <AutoStoriesOutlinedIcon />,
@@ -161,6 +173,47 @@ const Sidebar = () => {
             />
           </ListItem>
         ))}
+
+        <ListItem
+          onClick={handleLogout}
+          sx={{
+            mt: "auto",
+            color: "#B91C1C",
+            "&:hover": {
+              backgroundColor: "#F87171",
+              color: "white",
+            },
+            borderRadius: "10px 0px 0px 10px",
+            cursor: "pointer",
+            padding: "10px",
+            justifyContent: { xs: "center", md: "start" },
+            height: { xs: "68px", lg: "58px" },
+            width: { md: "calc(100% - 30px)" },
+            ml: { md: "30px" },
+          }}
+        >
+          <ListItemIcon
+            sx={{
+              color: "inherit",
+              minWidth: "auto",
+              height: "36px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <LogoutOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Logout"
+            sx={{
+              display: { xs: isExpanded ? "block" : "none", md: "block" },
+              whiteSpace: "nowrap",
+              ml: "20px",
+              typography: "body1",
+            }}
+          />
+        </ListItem>
       </List>
     </Drawer>
   );

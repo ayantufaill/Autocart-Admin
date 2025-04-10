@@ -3,6 +3,7 @@ import {
   fetchActiveUsersDataApi,
   fetchBannedUsersDataApi,
   fetchSuspendedUsersDataApi,
+  fetchUsersAnalyticsApi,
   fetchUsersDataApi,
 } from "../api/userApi";
 
@@ -108,6 +109,21 @@ export const fetchBannedUsers = createAsyncThunk(
     }
   }
 );
+
+export const fetchUsersAnalytics = createAsyncThunk(
+  "usersAnalytics/fetch",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchUsersAnalyticsApi();
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(
+        error?.response?.data?.message || "Failed to fetch users analytics"
+      );
+    }
+  }
+);
+
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   const data = await fetchUsersDataApi();
   return transformUsers(data);

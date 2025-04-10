@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, Grid, Button } from "@mui/material";
 import AdsClickOutlinedIcon from "@mui/icons-material/AdsClickOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
@@ -14,6 +14,11 @@ import CustomBarChart from "@/components/common/AdminCards/BarChart";
 import AdminHeader from "@/components/common/AdminCards/AdminHeader";
 import { FC } from "react";
 import IconTitleBox from "@/components/common/AdminCards/CardsHeading";
+import { fetchAdsAnalytics } from "@/redux/thunk/adsAnalytics.thunk";
+
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
+import { fetchUsersAnalytics } from "@/redux/thunk/userThunk";
 
 // check emailManagement
 
@@ -24,97 +29,6 @@ interface StatData {
   change: string;
   unit: string;
 }
-
-// comment to verify beanch story
-
-const stats = [
-  {
-    title: "Total Ads",
-    value: "7,854,472",
-    color: "#1E40AF",
-    change: "+9.2%",
-    unit: "Ads",
-  },
-  {
-    title: "Pending Ads",
-    value: "7,854,472",
-    color: "#854D0E",
-    change: "+9.2%",
-    unit: "Ads",
-  },
-  {
-    title: "Active Ads",
-    value: "7,854,472",
-    color: "#166534",
-    change: "+9.2%",
-    unit: "Ads",
-  },
-  {
-    title: "Daily Ads Created",
-    value: "2,854,472",
-    color: "#991B1B",
-    change: "+9.2%",
-    unit: "Ads",
-  },
-];
-
-const users = [
-  {
-    title: "Total Users",
-    value: "7,854,472",
-    color: "#1E40AF",
-    change: "+9.2%",
-    unit: "Users",
-  },
-  {
-    title: "Active Users",
-    value: "7,854,472",
-    color: "#166534",
-    change: "+9.2%",
-    unit: "Users",
-  },
-  {
-    title: "Daily Register Users",
-    value: "7,854,472",
-    color: "#854D0E",
-    change: "+9.2%",
-    unit: "Users",
-  },
-  {
-    title: "Daily Login",
-    value: "7,854,472",
-    color: "#991B1B",
-    change: "-9.2%",
-    unit: "Users",
-  },
-];
-
-const financeData = [
-  {
-    title: "Daily",
-    amount: "$6,733,345",
-    percentage: "+9.2%",
-    comparisonText: "Compared to yesterday",
-  },
-  {
-    title: "Weekly",
-    amount: "$6,767,345",
-    percentage: "+9.4%",
-    comparisonText: "Compared to yesterday",
-  },
-  {
-    title: "Monthly",
-    amount: "$6,833,345",
-    percentage: "-9.9%",
-    comparisonText: "Compared to yesterday",
-  },
-  {
-    title: "Yearly",
-    amount: "$6,733,395",
-    percentage: "+9.1%",
-    comparisonText: "Compared to yesterday",
-  },
-];
 
 const flaggedMessage = [
   {
@@ -251,7 +165,100 @@ const stories = [
   },
 ];
 
-const index = () => {
+const Index = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { totalAds, todayAdsCount, statusCounts } = useSelector(
+    (state: RootState) => state.adsAnalytics
+  );
+
+  useEffect(() => {
+    dispatch(fetchAdsAnalytics());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchUsersAnalytics());
+    console.log("users analytics: ", {
+      totalUsers,
+      activeUsers,
+      dailyRegistered,
+      dailyLoggedIn,
+    });
+  }, [dispatch]);
+  const { totalUsers, activeUsers, dailyRegistered, dailyLoggedIn } =
+    useSelector((state: RootState) => state.userAnalytics);
+
+  const users = [
+    {
+      title: "Total Users",
+      value: totalUsers?.toLocaleString?.() || "0",
+      color: "#1E40AF",
+      change: "+9.2%", // Placeholder
+      unit: "Users",
+    },
+    {
+      title: "Active Users",
+      value: activeUsers?.toLocaleString?.() || "0",
+      color: "#166534",
+      change: "+9.2%",
+      unit: "Users",
+    },
+    {
+      title: "Daily Register Users",
+      value: dailyRegistered?.toLocaleString?.() || "0",
+      color: "#854D0E",
+      change: "+9.2%",
+      unit: "Users",
+    },
+    {
+      title: "Daily Login",
+      value: dailyLoggedIn?.toLocaleString?.() || "0",
+      color: "#991B1B",
+      change: "-9.2%",
+      unit: "Users",
+    },
+  ];
+
+  const getStatusCount = (status: string) => {
+    return (
+      statusCounts.find(
+        (s: { status: string }) =>
+          s.status.toUpperCase() === status.toUpperCase()
+      )?.count || 0
+    );
+  };
+
+  const stats = [
+    {
+      title: "Total Ads",
+      value: totalAds.toLocaleString(),
+      color: "#1E40AF",
+      change: "+9.2%",
+      unit: "Ads",
+    },
+    {
+      title: "Pending Ads",
+      value: getStatusCount("PENDING").toLocaleString(),
+      color: "#854D0E",
+      change: "+9.2%",
+      unit: "Ads",
+    },
+    {
+      title: "Active Ads",
+      value: getStatusCount("ACTIVE").toLocaleString(),
+      color: "#166534",
+      change: "+9.2%",
+      unit: "Ads",
+    },
+    {
+      title: "Daily Ads Created",
+      value: todayAdsCount.toLocaleString(),
+      color: "#991B1B",
+      change: "+9.2%",
+      unit: "Ads",
+    },
+  ];
+
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <Box
@@ -265,7 +272,6 @@ const index = () => {
           gap: { xs: "20px", md: "50px" },
         }}
       >
-        {/* Top Section */}
         <Box sx={{ height: { xs: "auto", md: "84px" } }}>
           <Box
             sx={{
@@ -282,7 +288,6 @@ const index = () => {
               gap: { xs: 2, lg: 0 },
             }}
           >
-            {/* Left Section */}
             <Box
               sx={{
                 width: "100%",
@@ -325,7 +330,6 @@ const index = () => {
               </Box>
             </Box>
 
-            {/* Right Section */}
             <Button
               variant="outlined"
               startIcon={<CalendarMonthOutlinedIcon />}
@@ -348,9 +352,7 @@ const index = () => {
           </Box>
         </Box>
 
-        {/* Ads Section */}
         <Box sx={{ width: "100%" }}>
-          {/* Heading */}
           <Box
             sx={{
               display: "flex",
@@ -378,7 +380,6 @@ const index = () => {
             </Typography>
           </Box>
 
-          {/* Cards */}
           <Box>
             <Grid container spacing={2}>
               {stats.map((stat, index) => (
@@ -390,9 +391,7 @@ const index = () => {
           </Box>
         </Box>
 
-        {/* Users Section */}
         <Box sx={{ mb: 1 }}>
-          {/* Heading */}
           <Box
             sx={{
               display: "flex",
@@ -419,7 +418,6 @@ const index = () => {
             </Typography>
           </Box>
 
-          {/* Cards */}
           <Box>
             <Grid container spacing={2}>
               {users.map((user, index) => (
@@ -431,57 +429,6 @@ const index = () => {
           </Box>
         </Box>
 
-        {/* Finance Section + Bar Chart*/}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "37px",
-          }}
-        >
-          {/* Heading */}
-          <Box
-            sx={{
-              display: "flex",
-              gap: { xs: "10px", md: "16px" },
-              alignItems: "center",
-            }}
-          >
-            <PaidOutlinedIcon
-              sx={{
-                height: { xs: "22px", xl: "24px" },
-                width: { xs: "22px", xl: "24px" },
-                color: "#9CA3AF",
-              }}
-            />
-            <Typography
-              sx={{
-                fontSize: { xs: "18px", md: "20px", xl: "22px" },
-                color: "#1F2937",
-                fontWeight: 600,
-              }}
-            >
-              Finance Overview
-            </Typography>
-          </Box>
-          {/* Cards */}
-          <Box>
-            <Grid container spacing={2}>
-              {financeData.map((data, index) => (
-                <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
-                  <FinanceStatCard {...data} />
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-
-          {/* Bar Chart */}
-          <Box sx={{ my: { xs: "20px", lg: "60px" } }}>
-            <CustomBarChart />
-          </Box>
-        </Box>
-
-        {/* Message*/}
         <Box
           sx={{
             display: "flex",
@@ -489,7 +436,6 @@ const index = () => {
             gap: "17px",
           }}
         >
-          {/* Heading */}
           <Box
             sx={{
               display: "flex",
@@ -514,7 +460,7 @@ const index = () => {
               Message
             </Typography>
           </Box>
-          {/* Cards 1*/}
+
           <Box>
             <Typography
               sx={{
@@ -533,7 +479,7 @@ const index = () => {
               ))}
             </Grid>
           </Box>
-          {/* Cards 2*/}
+
           <Box>
             <Typography
               sx={{
@@ -554,7 +500,6 @@ const index = () => {
           </Box>
         </Box>
 
-        {/* Mail*/}
         <Box
           sx={{
             display: "flex",
@@ -562,7 +507,6 @@ const index = () => {
             gap: "17px",
           }}
         >
-          {/* Heading */}
           <Box
             sx={{
               display: "flex",
@@ -587,7 +531,7 @@ const index = () => {
               Mail
             </Typography>
           </Box>
-          {/* Cards 1*/}
+
           <Box>
             <Typography
               sx={{
@@ -627,7 +571,6 @@ const index = () => {
           </Box>
         </Box>
 
-        {/* Stories*/}
         <Box
           sx={{
             display: "flex",
@@ -635,7 +578,6 @@ const index = () => {
             gap: "27px",
           }}
         >
-          {/* Heading */}
           <Box
             sx={{
               display: "flex",
@@ -660,7 +602,7 @@ const index = () => {
               Stories
             </Typography>
           </Box>
-          {/* Cards */}
+
           <Box>
             <Grid container spacing={2}>
               {stories.map((data, index) => (
@@ -676,4 +618,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
