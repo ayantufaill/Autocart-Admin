@@ -14,6 +14,7 @@ const BannedUsers: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchBannedUsers());
+    console.log("fetch banners: ", fetchBannedUsers);
   }, [dispatch]);
 
   console.log("Users Dataaa:", users);

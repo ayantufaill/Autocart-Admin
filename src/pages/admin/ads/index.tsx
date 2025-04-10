@@ -1,71 +1,68 @@
-import AdsTable from "@/components/common/AdsTable/AdsTable";
-import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Container } from "@mui/material";
-
-import React from "react";
-
-const adsData: {
-  id: string;
-  sellerType: "Private Seller" | "Trade Seller";
-  title: string;
-  category: string;
-  userId: string;
-  status: "Active" | "Pending" | "Rejected";
-  dateCreated: string;
-  expiryDate: string;
-  imageUrl: string;
-}[] = [
-  {
-    id: "AC2500",
-    sellerType: "Private Seller",
-    title: "BMW Sport",
-    category: "Car Parts",
-    userId: "USER200",
-    status: "Active",
-    dateCreated: "20/01/2025",
-    expiryDate: "20/02/2025",
-    imageUrl: "/images/bmw.jpg",
-  },
-  {
-    id: "AC2501",
-    sellerType: "Trade Seller",
-    title: "BMW Sport",
-    category: "Dealership",
-    userId: "USER200",
-    status: "Rejected",
-    dateCreated: "20/01/2025",
-    expiryDate: "20/02/2025",
-    imageUrl: "/images/bmw2.jpg",
-  },
-  {
-    id: "AC2502",
-    sellerType: "Private Seller",
-    title: "BMW Sport",
-    category: "Vintage Car",
-    userId: "USER200",
-    status: "Pending",
-    dateCreated: "20/01/2025",
-    expiryDate: "20/02/2025",
-    imageUrl: "/images/bmw3.jpg",
-  },
-];
+import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
+import AdsTable from "@/components/common/AdsTable/AdsTable";
+import { fetchAds } from "@/redux/slices/adsManagementSlice";
+import { AppDispatch, RootState } from "@/redux/store";
 
 export default function Index() {
+  const dispatch = useDispatch<AppDispatch>();
+  const ads = useSelector((state: RootState) => state.ads.ads);
+  const loading = useSelector((state: RootState) => state.ads.loading);
+
+  const adsArray = Array.isArray(ads) ? ads : [];
+
+  useEffect(() => {
+    dispatch(fetchAds());
+  }, [dispatch]);
+
+  const formattedAds = adsArray.map((ad) => ({
+    id: ad.id,
+    sellerType:
+      ad.user?.role === "PRIVATE_SELLER"
+        ? "Private Seller"
+        : ("Trade Seller" as "Private Seller" | "Trade Seller"),
+    title: ad.itemName,
+    category: ad.adType || "Unknown",
+    userId: ad.user?.id || "N/A",
+    status:
+      ad.status === "ACTIVE"
+        ? "Active"
+        : ad.status === "REJECTED"
+        ? "Rejected"
+        : ("Pending" as "Active" | "Pending" | "Rejected"),
+    dateCreated: new Date(ad.createDate).toLocaleDateString("en-GB"),
+    expiryDate: "20/02/2025",
+    imageUrl: ad.uploadImagesForAd?.[0] || "/images/default.jpg",
+  }));
+
   return (
     <div style={{ backgroundColor: "#F9F9F9", paddingBottom: 20 }}>
       <ColorTabs
         tabData={[
-          { label: "All Ads", count: 428, path: "/admin/ads" },
-          { label: "Pending Ads", count: 37, path: "/admin/pending/ads" },
-          { label: "Renew Ads", count: 42, path: "/" },
-          { label: "Deleted Ads", count: 84, path: "/" },
-          { label: "Approved Ads", count: 27, path: "/admin/active/ads" },
-          { label: "Rejected Ads", count: 58, path: "/admin/rejected/ads" },
+          { label: "All Ads", count: adsArray.length, path: "/admin/ads" },
+          {
+            label: "Pending Ads",
+            count: adsArray.filter((a) => a.status === "PENDING").length,
+            path: "/admin/pending/ads",
+          },
+
+          {
+            label: "Approved Ads",
+            count: adsArray.filter((a) => a.status === "ACTIVE").length,
+            path: "/admin/active/ads",
+          },
+          {
+            label: "Rejected Ads",
+            count: adsArray.filter((a) => a.status === "REJECTED").length,
+            path: "/admin/rejected/ads",
+          },
         ]}
         defaultTab={0}
       />
       <Container>
-        <AdsTable ads={adsData} />
+        {loading ? <div>Loading ads...</div> : <AdsTable ads={formattedAds} />}
       </Container>
     </div>
   );

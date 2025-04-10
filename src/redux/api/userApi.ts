@@ -27,7 +27,6 @@ export const fetchSuspendedUsersDataApi = async () => {
   const response = await api.get(`/users?status=SUSPENDED`);
   return response.data.data as User[];
 };
-
 export const fetchBannedUsersDataApi = async () => {
   const response = await api.get(`/users?status=BANNED`);
   return response.data.data as User[];
@@ -37,7 +36,7 @@ export const fetchSearchUsersDataApi = async (search: string = "") => {
   const response = await api.get(`/users`, {
     params: { search },
   });
-  return response.data.data; // This will return the array of users
+  return response.data.data;
 };
 
 export const fetchUsersAnalyticsApi = async () => {

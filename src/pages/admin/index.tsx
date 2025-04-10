@@ -272,7 +272,7 @@ const Index = () => {
           gap: { xs: "20px", md: "50px" },
         }}
       >
-        <Box sx={{ height: { xs: "auto", md: "84px" } }}>
+        {/* <Box sx={{ height: { xs: "auto", md: "84px" } }}>
           <Box
             sx={{
               backgroundColor: "white",
@@ -350,7 +350,7 @@ const Index = () => {
               Change Date
             </Button>
           </Box>
-        </Box>
+        </Box> */}
 
         <Box sx={{ width: "100%" }}>
           <Box

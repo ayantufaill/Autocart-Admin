@@ -3,6 +3,7 @@ import authSlice from "./slices/authSlice";
 import userReducer from "./slices/userSlice";
 import adsAnalyticsReducer from "./slices/adsSlice";
 import userAnalyticsReducer from "./slices/userAnalyticsSlice";
+import adsReducer from "./slices/adsManagementSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     user: userReducer,
     adsAnalytics: adsAnalyticsReducer,
     userAnalytics: userAnalyticsReducer,
+    ads: adsReducer,
   },
 });
 
