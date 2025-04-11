@@ -2,7 +2,7 @@ import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import { Box, Button, Container, Stack } from "@mui/material";
 import { Close, FileCopyOutlined } from "@mui/icons-material";
-import { fetchRejectedAds } from "@/redux/slices/adsManagementSlice";
+import { fetchExpiredAds } from "@/redux/slices/adsManagementSlice";
 import { useEffect } from "react";
 import { useAppDispatch } from "@/redux/hooks";
 
@@ -12,52 +12,53 @@ const adsData: {
   title: string;
   category: string;
   userId: string;
-  status: "Active" | "Pending" | "Rejected";
+  status: "Active" | "Pending" | "Expired";
   dateCreated: string;
   expiryDate: string;
   imageUrl: string;
 }[] = [
   {
-    id: "AC2500",
+    id: "AC3500",
     sellerType: "Private Seller",
-    title: "BMW Sport",
+    title: "Toyota Supra",
     category: "Car Parts",
-    userId: "USER200",
-    status: "Rejected",
-    dateCreated: "20/01/2025",
-    expiryDate: "20/02/2025",
-    imageUrl: "/images/bmw.jpg",
+    userId: "USER300",
+    status: "Expired",
+    dateCreated: "01/02/2025",
+    expiryDate: "01/03/2025",
+    imageUrl: "/images/toyota1.jpg",
   },
   {
-    id: "AC2501",
+    id: "AC3501",
     sellerType: "Trade Seller",
-    title: "BMW Sport",
+    title: "Toyota Supra",
     category: "Dealership",
-    userId: "USER200",
-    status: "Rejected",
-    dateCreated: "20/01/2025",
-    expiryDate: "20/02/2025",
-    imageUrl: "/images/bmw2.jpg",
+    userId: "USER300",
+    status: "Expired",
+    dateCreated: "01/02/2025",
+    expiryDate: "01/03/2025",
+    imageUrl: "/images/toyota2.jpg",
   },
   {
-    id: "AC2502",
+    id: "AC3502",
     sellerType: "Private Seller",
-    title: "BMW Sport",
+    title: "Toyota Supra",
     category: "Vintage Car",
-    userId: "USER200",
-    status: "Rejected",
-    dateCreated: "20/01/2025",
-    expiryDate: "20/02/2025",
-    imageUrl: "/images/bmw3.jpg",
+    userId: "USER300",
+    status: "Expired",
+    dateCreated: "01/02/2025",
+    expiryDate: "01/03/2025",
+    imageUrl: "/images/toyota3.jpg",
   },
 ];
 
-const RejectedAds: React.FC = () => {
+const ExpiredAds: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchRejectedAds());
+    dispatch(fetchExpiredAds());
   }, [dispatch]);
+
   return (
     <div>
       <ColorTabs
@@ -68,7 +69,7 @@ const RejectedAds: React.FC = () => {
           { label: "Pending Ads", count: 37, path: "/admin/pending/ads" },
           { label: "Rejected Ads", count: 58, path: "/admin/rejected/ads" },
         ]}
-        defaultTab={4}
+        defaultTab={2} // "Expired Ads" tab index
       />
 
       <Box sx={{ backgroundColor: "#F9F9F9", pb: "20px" }}>
@@ -97,4 +98,4 @@ const RejectedAds: React.FC = () => {
   );
 };
 
-export default RejectedAds;
+export default ExpiredAds;

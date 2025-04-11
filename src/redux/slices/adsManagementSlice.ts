@@ -1,5 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchAdsMangementApi } from "../api/adsManagement";
+import {
+  fetchActiveAdsApi,
+  fetchAdsMangementApi,
+  fetchExpiredAdsApi,
+  fetchPendingAdsApi,
+  fetchRejectedAdsApi,
+} from "../api/adsManagement";
 
 interface User {
   role: string;
@@ -37,12 +43,20 @@ interface AdsState {
   ads: Ad[];
   loading: boolean;
   error: string | null;
+  activeAds: Ad[];
+  expiredAds: Ad[];
+  pendingAds: Ad[];
+  rejectedAds: Ad[];
 }
 
 const initialState: AdsState = {
   ads: [],
   loading: false,
   error: null,
+  activeAds: [],
+  expiredAds: [],
+  pendingAds: [],
+  rejectedAds: [],
 };
 
 export const fetchAds = createAsyncThunk(
@@ -51,6 +65,62 @@ export const fetchAds = createAsyncThunk(
     try {
       const response = await fetchAdsMangementApi();
       return response.data; // since the ads array is inside `data`
+    } catch (error: any) {
+      return rejectWithValue(
+        error?.response?.data?.message || "Failed to fetch ads"
+      );
+    }
+  }
+);
+
+export const fetchActiveAds = createAsyncThunk(
+  "ads/fetchActiveAds",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchActiveAdsApi();
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(
+        error?.response?.data?.message || "Failed to fetch ads"
+      );
+    }
+  }
+);
+
+export const fetchPendingAds = createAsyncThunk(
+  "ads/fetchPendingAds",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchPendingAdsApi();
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(
+        error?.response?.data?.message || "Failed to fetch ads"
+      );
+    }
+  }
+);
+
+export const fetchExpiredAds = createAsyncThunk(
+  "ads/fetchExpiredAds",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchExpiredAdsApi();
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(
+        error?.response?.data?.message || "Failed to fetch ads"
+      );
+    }
+  }
+);
+
+export const fetchRejectedAds = createAsyncThunk(
+  "ads/fetchRejectedAds",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchRejectedAdsApi();
+      return response.data;
     } catch (error: any) {
       return rejectWithValue(
         error?.response?.data?.message || "Failed to fetch ads"

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Avatar,
@@ -20,6 +20,16 @@ const Header: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const route = useRouter();
   const [showLogout, setShowLogout] = useState<boolean>(false);
+  const [user, setUser] = useState<null | { name: string; email: string }>(
+    null
+  );
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   return (
     <Box
@@ -66,10 +76,10 @@ const Header: React.FC = () => {
               variant="subtitle1"
               sx={{ fontWeight: "bold", color: "green" }}
             >
-              Ayeleke Abdulmuizz
+              {user?.name}
             </Typography>
             <Typography variant="body2" sx={{ color: "green" }}>
-              ayelekeabdulmuizz@gmail.com
+              {user?.email}
             </Typography>
           </Box>
 

@@ -51,26 +51,26 @@ const sellerConfig = {
 };
 
 const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const router = useRouter();
 
-  const filteredAds = ads.filter((ad) =>
-    ad.title.toLowerCase().includes(search.toLowerCase())
-  );
+  // const filteredAds = ads.filter((ad) =>
+  //   ad.title.toLowerCase().includes(search.toLowerCase())
+  // );
 
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
-      <SearchBar
+      {/* <SearchBar
         placeholder="Search Ads"
         search={search}
         setSearch={setSearch}
-      />
+      /> */}
       <TableContainer
         sx={{
           minWidth: "100%",
           width: { xs: "270px", sm: "500px", md: "700px", lg: "100%" },
           overflowX: { xs: "scroll", md: "auto" },
-          mt: 2
+          mt: 2,
         }}
       >
         <Table stickyHeader>
@@ -92,7 +92,7 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     textAlign: "center",
                     backgroundColor: "#F3F4F6",
                     color: "#9CA3AF",
-                    // padding: "12px",
+                    visibility: ads.length > 0 ? "visible" : "hidden",
                     borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                   }}
                 >
@@ -112,11 +112,12 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                 }}
               />
             </TableRow>
-            {filteredAds.map((ad, index, arr) => (
+            {ads.map((ad, index) => (
               <TableRow
                 key={ad.id}
                 sx={{
                   backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
+                  "&:last-child td": { border: 0 },
                 }}
               >
                 {/* ✅ Clickable Status */}
@@ -124,8 +125,6 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                   sx={{
                     textAlign: "center",
                     padding: "12px",
-                    borderBottom:
-                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Box
@@ -166,8 +165,6 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     textAlign: "center",
                     fontWeight: 600,
                     borderLeft: "0.5px solid #CACACA",
-                    borderBottom:
-                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Stack
@@ -212,8 +209,6 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     textAlign: "center",
                     fontWeight: 600,
                     borderLeft: "0.5px solid #CACACA",
-                    borderBottom:
-                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Box
@@ -244,8 +239,6 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     textAlign: "center",
                     fontWeight: 600,
                     borderLeft: "0.5px solid #CACACA",
-                    borderBottom:
-                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {ad.category}
@@ -256,8 +249,6 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     textAlign: "center",
                     fontWeight: 600,
                     borderLeft: "0.5px solid #CACACA",
-                    borderBottom:
-                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Box
@@ -281,8 +272,6 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     textAlign: "center",
                     fontWeight: 600,
                     borderLeft: "0.5px solid #CACACA",
-                    borderBottom:
-                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {ad.dateCreated}
@@ -293,8 +282,6 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     textAlign: "center",
                     fontWeight: 600,
                     borderLeft: "0.5px solid #CACACA",
-                    borderBottom:
-                      index === arr.length - 1 ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {ad.expiryDate}

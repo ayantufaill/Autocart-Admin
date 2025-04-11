@@ -4,12 +4,9 @@ import {
   createAsyncThunk,
   createSelector,
 } from "@reduxjs/toolkit";
-import {
-  deleteUserByIdApi,
-  fetchSearchUsersDataApi,
-  fetchUserByIdApi,
-} from "../api/userApi";
+import { deleteUserByIdApi, fetchUserByIdApi } from "../api/userApi";
 import { toast } from "react-toastify";
+import { fetchSearch } from "../thunk/fetchSearch";
 
 interface User {
   userId: string;
@@ -125,13 +122,6 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-export const fetchSearchUsers = createAsyncThunk(
-  "users/fetchUsers",
-  async (search: string = "") => {
-    return await fetchSearchUsersDataApi(search);
-  }
-);
-
 // Fetch User by ID thunk
 export const fetchUserById = createAsyncThunk(
   "users/fetchUserById",
@@ -195,7 +185,8 @@ const usersSlice = createSlice({
       })
       .addCase(fetchActiveUsers.fulfilled, (state, action) => {
         state.loading = false;
-        state.users = action.payload;
+        state.activeUsers = action.payload.length > 0 ? action.payload : [];
+        if (action.payload.length === 0) state.error = "No Active Users";
       })
       .addCase(fetchActiveUsers.rejected, (state, action) => {
         state.loading = false;
@@ -209,7 +200,9 @@ const usersSlice = createSlice({
       .addCase(fetchSuspendedUsers.fulfilled, (state, action) => {
         state.loading = false;
         state.suspendedUsers = action.payload.length > 0 ? action.payload : [];
-        if (action.payload.length === 0) state.error = "No Suspended Users";
+        if (action.payload.length === 0) {
+          state.error = "No Suspended Users";
+        }
       })
       .addCase(fetchSuspendedUsers.rejected, (state, action) => {
         state.loading = false;
@@ -259,6 +252,29 @@ const usersSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
         toast.error(action.payload as string);
+      })
+      // fetch search users
+      .addCase(fetchSearch.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSearch.fulfilled, (state, action) => {
+        state.loading = false;
+
+        const { data, targetKey } = action.payload;
+        const transformedUsers = transformUsers(data);
+
+        if (targetKey && state.hasOwnProperty(targetKey)) {
+          console.log(
+            "does state have this property? ",
+            state.hasOwnProperty(targetKey)
+          );
+          (state as any)[targetKey] = transformedUsers;
+        }
+      })
+      .addCase(fetchSearch.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });

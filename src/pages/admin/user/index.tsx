@@ -1,20 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState, AppDispatch } from "@/redux/store";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import UserTable from "@/components/common/UserTable/UserTable";
-import { Container } from "@mui/material";
+import {
+  Alert,
+  Box,
+  CircularProgress,
+  Container,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import { fetchUsers } from "@/redux/slices/userSlice";
+import { Search } from "@mui/icons-material";
+import { fetchSearch } from "@/redux/thunk/fetchSearch";
 
 const User: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { users, loading } = useSelector((state: RootState) => state.user);
+  const { users, loading, error } = useSelector(
+    (state: RootState) => state.user
+  );
+  const [filteredName, setFilteredName] = useState<string>("");
 
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+    if (filteredName) {
+      dispatch(
+        fetchSearch({
+          url: "users",
+          search: filteredName,
+          targetKey: "users",
+        })
+      );
+    } else {
+      dispatch(fetchUsers());
+    }
+    console.log(users);
+  }, [dispatch, filteredName]);
 
   const activeUsers = users.filter(
     (user: { status: string }) => user.status === "Active"
@@ -25,7 +47,7 @@ const User: React.FC = () => {
   const bannedUsers = users.filter((user) => user.status === "Banned").length;
 
   return (
-    <div style={{ backgroundColor: "#F9F9F9" }}>
+    <div style={{ backgroundColor: "#F9F9F9", minHeight: "100%" }}>
       <ColorTabs
         tabData={[
           { label: "All Users", count: users.length, path: "/admin/user" },
@@ -48,7 +70,59 @@ const User: React.FC = () => {
         defaultTab={0}
       />
       <Container sx={{ pb: 10 }}>
-        {loading ? <p>Loading...</p> : <UserTable Users={users} />}
+        <TextField
+          placeholder={"Search User"}
+          variant="outlined"
+          onChange={(e) => setFilteredName(e.target.value)}
+          value={filteredName}
+          sx={{
+            fontSize: "12px",
+            color: "#BFC3CB",
+            marginBottom: 2,
+            backgroundColor: "#F9F9F9",
+            width: { xs: "100%", md: "70%" },
+            maxWidth: "600px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              maxHeight: "43px",
+            },
+            "& ::placeholder": {
+              color: "#CBCED4",
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search sx={{ color: "#BFC3CB" }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+        {loading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "60vh",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : error ? (
+          <Box
+            sx={{
+              display: "flex",
+              // justifyContent: "center",
+              alignItems: "center",
+              // height: "60vh",
+            }}
+          >
+            <Alert severity="error">{error}</Alert>
+          </Box>
+        ) : (
+          <UserTable Users={users} />
+        )}
       </Container>
     </div>
   );
