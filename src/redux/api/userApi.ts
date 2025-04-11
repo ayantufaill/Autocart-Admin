@@ -32,13 +32,6 @@ export const fetchBannedUsersDataApi = async () => {
   return response.data.data as User[];
 };
 
-export const fetchSearchUsersDataApi = async (search: string = "") => {
-  const response = await api.get(`/users`, {
-    params: { search },
-  });
-  return response.data.data;
-};
-
 export const fetchUsersAnalyticsApi = async () => {
   const response = await api.get("/dashboard-analytics/users");
   return response.data;

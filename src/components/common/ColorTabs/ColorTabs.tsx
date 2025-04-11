@@ -56,7 +56,9 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
           {tabData.map((tab, index) => (
             <Tab
               disableTouchRipple
-              onClick={() => route.push(tab.path)}
+              onClick={() => {
+                route.push(tab.path);
+              }}
               key={index}
               sx={{ px: 0 }}
               label={
@@ -72,9 +74,7 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
                       borderRadius: 1,
                     }}
                   >
-                    {tab.label} {tab.count && "("}
-                    {tab.count}
-                    {tab.count && ")"}
+                    {tab.label} ({tab.count})
                   </Typography>
                 </Box>
               }

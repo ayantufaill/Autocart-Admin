@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { loginUserApi, registerUserApi, verifyUserApi } from "../api/authApi";
 
+const capitalizeName = (name: string) => {
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+};
+
 interface AuthState {
   loading: boolean;
   success: boolean;
@@ -90,6 +94,15 @@ const authSlice = createSlice({
         state.message = "Login successful!";
         state.email = action.payload.email; // Store email in Redux
         state.token = action.payload.token;
+
+        localStorage.setItem(
+          "loggedInUser",
+          JSON.stringify({
+            name: capitalizeName(action.payload.data.name),
+            // avatar: action.payload.data.avatar,
+            email: action.payload.data.email,
+          })
+        );
       })
       .addCase(loginUserThunk.rejected, (state, action) => {
         state.loading = false;
