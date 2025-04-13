@@ -7,7 +7,6 @@ export const fetchAdsMangementApi = async () => {
 
 export const fetchActiveAdsApi = async () => {
   const response = await api.get("/ads?status=ACTIVE");
-  console.log(response.data);
   return response.data;
 };
 

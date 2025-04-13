@@ -43,10 +43,10 @@ interface AdsState {
   ads: Ad[];
   loading: boolean;
   error: string | null;
-  activeAds: Ad[];
-  expiredAds: Ad[];
-  pendingAds: Ad[];
-  rejectedAds: Ad[];
+  activeAds: any[]; // change type here
+  expiredAds: any[];
+  pendingAds: any[];
+  rejectedAds: any[];
 }
 
 const initialState: AdsState = {
@@ -57,6 +57,28 @@ const initialState: AdsState = {
   expiredAds: [],
   pendingAds: [],
   rejectedAds: [],
+};
+
+export const formattedAds = (adsArray: any[]) => {
+  return adsArray.map((ad) => ({
+    id: ad.id,
+    sellerType:
+      ad.user?.role === "PRIVATE_SELLER"
+        ? "Private Seller"
+        : ("Trade Seller" as "Private Seller" | "Trade Seller"),
+    title: ad.itemName,
+    category: ad.adType || "Unknown",
+    userId: ad.user?.id || "N/A",
+    status:
+      ad.status === "ACTIVE"
+        ? "Active"
+        : ad.status === "REJECTED"
+        ? "Rejected"
+        : ("Pending" as "Active" | "Pending" | "Rejected"),
+    dateCreated: new Date(ad.createDate).toLocaleDateString("en-GB"),
+    expiryDate: "20/02/2025",
+    imageUrl: ad.uploadImagesForAd?.[0] || "/images/default.jpg",
+  }));
 };
 
 export const fetchAds = createAsyncThunk(
@@ -92,6 +114,7 @@ export const fetchPendingAds = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetchPendingAdsApi();
+      console.log();
       return response.data;
     } catch (error: any) {
       return rejectWithValue(
@@ -144,6 +167,70 @@ const adsSlice = createSlice({
         state.ads = action.payload || [];
       })
       .addCase(fetchAds.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      
+      // active
+      .addCase(fetchActiveAds.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchActiveAds.fulfilled, (state, action) => {
+        state.loading = false;
+        const newAds = formattedAds(action.payload);
+        state.activeAds = newAds || [];
+        state.error = newAds.length > 0 ? null : "No Active Users found";
+      })
+      .addCase(fetchActiveAds.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // expired
+      .addCase(fetchExpiredAds.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchExpiredAds.fulfilled, (state, action) => {
+        state.loading = false;
+        const newAds = formattedAds(action.payload);
+        state.expiredAds = newAds || [];
+        state.error = newAds.length > 0 ? null : "No Expired Users found";
+      })
+      .addCase(fetchExpiredAds.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // pending
+      .addCase(fetchPendingAds.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchPendingAds.fulfilled, (state, action) => {
+        state.loading = false;
+        const newAds = formattedAds(action.payload);
+        state.pendingAds = newAds || [];
+        state.error = newAds.length > 0 ? null : "No Pending Users found";
+      })
+      .addCase(fetchPendingAds.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // rejected
+      .addCase(fetchRejectedAds.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchRejectedAds.fulfilled, (state, action) => {
+        state.loading = false;
+        const newAds = formattedAds(action.payload);
+        state.rejectedAds = newAds || [];
+        state.error = newAds.length > 0 ? null : "No Rejected Users found";
+      })
+      .addCase(fetchRejectedAds.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

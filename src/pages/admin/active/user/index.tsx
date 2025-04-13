@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { fetchSearch } from "@/redux/thunk/fetchSearch";
+import Loading from "@/components/common/Loading/Loading";
+import ErrorState from "@/components/common/Error";
 
 const ActiveUsers: React.FC = () => {
   const [filteredName, setFilteredName] = useState<string>("");
@@ -102,27 +104,9 @@ const ActiveUsers: React.FC = () => {
           }}
         />
         {loading ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "60vh",
-            }}
-          >
-            <CircularProgress />
-          </Box>
+          <Loading />
         ) : error ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "60vh",
-            }}
-          >
-            <Alert severity="error">{error}</Alert>
-          </Box>
+          <ErrorState error={error} />
         ) : (
           <UserTable Users={ActiveUsers} />
         )}

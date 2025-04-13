@@ -16,6 +16,8 @@ import {
 } from "@mui/material";
 import { Cancel, Pause, Search } from "@mui/icons-material";
 import { fetchSearch } from "@/redux/thunk/fetchSearch";
+import Loading from "@/components/common/Loading/Loading";
+import ErrorState from "@/components/common/Error";
 
 const BannedUsers: React.FC = () => {
   const [filteredName, setFilteredName] = useState<string>("");
@@ -54,7 +56,7 @@ const BannedUsers: React.FC = () => {
   ).length;
 
   return (
-    <div style={{ backgroundColor: "#F9F9F9", minHeight: "100%" }}>
+    <div style={{ minHeight: "100%" }}>
       <ColorTabs
         tabData={[
           { label: "All Users", count: users.length, path: "/admin/user" },
@@ -76,79 +78,61 @@ const BannedUsers: React.FC = () => {
         ]}
         defaultTab={2}
       />
-      <Container sx={{ pb: 10 }}>
-        <TextField
-          placeholder={"Search User"}
-          variant="outlined"
-          onChange={(e) => setFilteredName(e.target.value)}
-          value={filteredName}
-          sx={{
-            fontSize: "12px",
-            color: "#BFC3CB",
-            marginBottom: 2,
-            backgroundColor: "#F9F9F9",
-            width: { xs: "100%", md: "70%" },
-            maxWidth: "600px",
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "10px",
-              maxHeight: "43px",
-            },
-            "& ::placeholder": {
-              color: "#CBCED4",
-            },
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Search sx={{ color: "#BFC3CB" }} />
-              </InputAdornment>
-            ),
-          }}
-        />
-        {loading ? (
-          <Box
+      <Box sx={{ minHeight: "58vh", backgroundColor: "#F9F9F9", }}>
+        <Container>
+          <TextField
+            placeholder={"Search User"}
+            variant="outlined"
+            onChange={(e) => setFilteredName(e.target.value)}
+            value={filteredName}
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "60vh",
+              fontSize: "12px",
+              color: "#BFC3CB",
+              marginBottom: 2,
+              backgroundColor: "#F9F9F9",
+              width: { xs: "100%", md: "70%" },
+              maxWidth: "600px",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "10px",
+                maxHeight: "43px",
+              },
+              "& ::placeholder": {
+                color: "#CBCED4",
+              },
             }}
-          >
-            <CircularProgress />
-          </Box>
-        ) : error ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "60vh",
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search sx={{ color: "#BFC3CB" }} />
+                </InputAdornment>
+              ),
             }}
-          >
-            <Alert severity="error">{error}</Alert>
-          </Box>
-        ) : (
-          <>
+          />
+          {loading ? (
+            <Loading />
+          ) : error ? (
+            <ErrorState error={error} />
+          ) : (
             <UserTable Users={SuspendedUsers} />
-            <Stack spacing={4} direction={{ xs: "column", sm: "row" }} mt={6}>
-              <Button
-                variant="contained"
-                sx={{ bgcolor: "#F97316", textTransform: "none", width: 209 }}
-                startIcon={<Pause />}
-              >
-                Unsuspend All Users
-              </Button>
-              <Button
-                variant="contained"
-                sx={{ bgcolor: "#F87171", textTransform: "none", width: 159 }}
-                startIcon={<Cancel />}
-              >
-                Ban all Users
-              </Button>
-            </Stack>
-          </>
-        )}
-      </Container>
+          )}
+        </Container>
+      </Box>
+      <Stack spacing={4} direction={{ xs: "column", sm: "row" }} pt={3} pl={6}>
+        <Button
+          variant="contained"
+          sx={{ bgcolor: "#F97316", textTransform: "none", width: 209 }}
+          startIcon={<Pause />}
+        >
+          Unsuspend All Users
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ bgcolor: "#F87171", textTransform: "none", width: 159 }}
+          startIcon={<Cancel />}
+        >
+          Ban all Users
+        </Button>
+      </Stack>
     </div>
   );
 };

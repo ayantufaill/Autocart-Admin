@@ -1,45 +1,90 @@
 import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
-import { useAppDispatch } from "@/redux/hooks";
-import { fetchPendingAds } from "@/redux/slices/adsManagementSlice";
-import { Close, FileCopyOutlined } from "@mui/icons-material";
-import { Box, Button, Container, Stack } from "@mui/material";
-import { useEffect } from "react";
+import ErrorState from "@/components/common/Error";
+import Loading from "@/components/common/Loading/Loading";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { fetchAds, fetchPendingAds } from "@/redux/slices/adsManagementSlice";
+import { Close, FileCopyOutlined, Search } from "@mui/icons-material";
+import { Box, Button, Container, InputAdornment, Stack, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+
 const PendingAds: React.FC = () => {
   const dispatch = useAppDispatch();
 
+  const [filteredAds, setFilteredAds] = useState<string>("");
+  const { ads, pendingAds, loading, error } = useAppSelector((state) => state.ads);
+
+  const approvedAdsCount = ads.filter(ad => ad.status === "ACTIVE").length;
+  const expiredAdsCount = ads.filter(ad => ad.status === "EXPIRED").length;
+  const rejectedAdsCount = ads.filter(ad => ad.status === "REJECTED").length;
+
   useEffect(() => {
+    dispatch(fetchAds());
     dispatch(fetchPendingAds());
   }, [dispatch]);
 
+
+
   return (
-    <div>
+    <div style={{ minHeight: "100%" }}>
       <ColorTabs
         tabData={[
-          { label: "All Ads", count: 428, path: "/admin/ads" },
-          { label: "Approved Ads", count: 27, path: "/admin/active/ads" },
-          { label: "Expired Ads", count: 42, path: "/admin/expired/ads" },
-          { label: "Pending Ads", count: 37, path: "/admin/pending/ads" },
-          { label: "Rejected Ads", count: 58, path: "/admin/rejected/ads" },
+          { label: "All Ads", count: ads.length, path: "/admin/ads" },
+          { label: "Approved Ads", count: approvedAdsCount, path: "/admin/active/ads" },
+          { label: "Expired Ads", count: expiredAdsCount, path: "/admin/expired/ads" },
+          { label: "Pending Ads", count: pendingAds.length, path: "/admin/pending/ads" },
+          { label: "Rejected Ads", count: rejectedAdsCount, path: "/admin/rejected/ads" },
         ]}
         defaultTab={3}
       />
-      <Box sx={{ bgcolor: "#F9F9F9", pb: "40px" }}>
+      <Box sx={{ minHeight: "60vh", bgcolor: "#F9F9F9" }}>
         <Container>
-          <AdsTable ads={[]} />
+          <TextField
+            placeholder={"Search User"}
+            variant="outlined"
+            onChange={(e) => setFilteredAds(e.target.value)}
+            value={filteredAds}
+            sx={{
+              fontSize: "12px",
+              color: "#BFC3CB",
+              marginBottom: 2,
+              backgroundColor: "#F9F9F9",
+              width: { xs: "100%", md: "70%" },
+              maxWidth: "600px",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "10px",
+                maxHeight: "43px",
+              },
+              "& ::placeholder": {
+                color: "#CBCED4",
+              },
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search sx={{ color: "#BFC3CB" }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {loading ? (
+            <Loading />
+          ) : error ? <ErrorState error={error} /> : (
+            <AdsTable ads={pendingAds} />
+          )}
         </Container>
       </Box>
-      <Stack direction={"row"} spacing={3} pt={3} pl={3}>
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={3} pt={3} pl={6}>
         <Button
           variant="contained"
-          sx={{ bgcolor: "#60A5FA" }}
+          sx={{ bgcolor: "#60A5FA", maxWidth: "260px" }}
           startIcon={<FileCopyOutlined />}
         >
           Approve All Ads
         </Button>
         <Button
           variant="contained"
-          sx={{ bgcolor: "#F87171" }}
+          sx={{ bgcolor: "#F87171", maxWidth: "260px" }}
           startIcon={<Close />}
         >
           Reject All Ads

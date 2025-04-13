@@ -11,8 +11,9 @@ import {
   Box,
   Stack,
   Typography,
+  Chip,
 } from "@mui/material";
-import SearchBar from "../SearchBar/SearchBar";
+import CircleIcon from "@mui/icons-material/Circle";
 
 interface Ad {
   id: string;
@@ -21,12 +22,12 @@ interface Ad {
   category: string;
   userId: string;
   status:
-    | "Active"
-    | "Pending"
-    | "Rejected"
-    | "Expired"
-    | "Flagged"
-    | "Reported";
+  | "Active"
+  | "Pending"
+  | "Rejected"
+  | "Expired"
+  | "Flagged"
+  | "Reported";
   dateCreated: string;
   expiryDate: string;
   imageUrl: string;
@@ -73,7 +74,7 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
           mt: 2,
         }}
       >
-        <Table stickyHeader>
+        <Table stickyHeader sx={{ visibility: ads.length > 0 ? "visible" : "hidden", }}>
           <TableHead>
             <TableRow>
               {[
@@ -92,7 +93,6 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     textAlign: "center",
                     backgroundColor: "#F3F4F6",
                     color: "#9CA3AF",
-                    visibility: ads.length > 0 ? "visible" : "hidden",
                     borderLeft: index === 0 ? "0px" : "0.5px solid #CACACA",
                   }}
                 >
@@ -117,7 +117,7 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                 key={ad.id}
                 sx={{
                   backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
-                  "&:last-child td": { border: 0 },
+                  "&:last-child td": { borderBottom: 0 },
                 }}
               >
                 {/* ✅ Clickable Status */}
@@ -176,30 +176,25 @@ const AdsTable: React.FC<AdsTableProps> = ({ ads }) => {
                     <Typography variant="subtitle2" fontWeight={600}>
                       {ad.id}
                     </Typography>
-                    <Box
+                    <Chip
+                      icon={
+                        <CircleIcon
+                          sx={{
+                            fill: sellerConfig[ad.sellerType].icon,
+                            width: "10px",
+                          }}
+                        />
+                      }
+                      label={ad.sellerType}
                       sx={{
-                        display: "flex",
-                        flexDirection: { xs: "column", lg: "row" },
-                        alignItems: { xs: "left", lg: "center" },
-                        gap: 1,
-                        bgcolor: sellerConfig[ad.sellerType].color,
-                        p: "6px 12px",
-                        borderRadius: 1,
+                        backgroundColor: sellerConfig[ad.sellerType].color,
                         fontSize: "10px",
                         color: "#9CA3AF",
                         fontWeight: "light",
+                        height: "24px",
                       }}
-                    >
-                      <Box
-                        sx={{
-                          width: 7,
-                          height: 7,
-                          bgcolor: sellerConfig[ad.sellerType].icon,
-                          borderRadius: "50%",
-                        }}
-                      />
-                      {ad.sellerType}
-                    </Box>
+                      size="small"
+                    />
                   </Stack>
                 </TableCell>
 

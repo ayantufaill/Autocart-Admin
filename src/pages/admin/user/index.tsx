@@ -15,6 +15,8 @@ import {
 import { fetchUsers } from "@/redux/slices/userSlice";
 import { Search } from "@mui/icons-material";
 import { fetchSearch } from "@/redux/thunk/fetchSearch";
+import Loading from "@/components/common/Loading/Loading";
+import ErrorState from "@/components/common/Error";
 
 const User: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -99,27 +101,9 @@ const User: React.FC = () => {
           }}
         />
         {loading ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "60vh",
-            }}
-          >
-            <CircularProgress />
-          </Box>
+          <Loading />
         ) : error ? (
-          <Box
-            sx={{
-              display: "flex",
-              // justifyContent: "center",
-              alignItems: "center",
-              // height: "60vh",
-            }}
-          >
-            <Alert severity="error">{error}</Alert>
-          </Box>
+          <ErrorState error={error} />
         ) : (
           <UserTable Users={users} />
         )}
