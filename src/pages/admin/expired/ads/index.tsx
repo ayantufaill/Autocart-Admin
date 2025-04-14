@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import ErrorState from "@/components/common/Error";
 import Loading from "@/components/common/Loading/Loading";
+import { fetchSearch } from "@/redux/thunk/fetchSearch";
 
 const ExpiredAds: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,12 +19,20 @@ const ExpiredAds: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchAds());
-    dispatch(fetchExpiredAds());
-  }, [dispatch]);
+  }, []);
 
-  const activeAdsCount = ads.filter((ad) => ad.status === "ACTIVE").length;
-  const pendingAdsCount = ads.filter((ad) => ad.status === "PENDING").length;
-  const rejectedAdsCount = ads.filter((ad) => ad.status === "REJECTED").length;
+  useEffect(() => {
+    if (filteredAds) {
+      dispatch(fetchSearch({ url: "ads", search: filteredAds, status: "EXPIRED", targetKey: "expiredAds" }))
+    }
+    else {
+      dispatch(fetchExpiredAds());
+    }
+  }, [dispatch, filteredAds]);
+
+  const activeAdsCount = ads.filter((ad) => ad.status === "Active").length;
+  const pendingAdsCount = ads.filter((ad) => ad.status === "Pending").length;
+  const rejectedAdsCount = ads.filter((ad) => ad.status === "Rejected").length;
 
   return (
     <div

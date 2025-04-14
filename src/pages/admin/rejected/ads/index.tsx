@@ -4,6 +4,7 @@ import ErrorState from "@/components/common/Error";
 import Loading from "@/components/common/Loading/Loading";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchAds, fetchRejectedAds } from "@/redux/slices/adsManagementSlice";
+import { fetchSearch } from "@/redux/thunk/fetchSearch";
 import { FileCopyOutlined, Search } from "@mui/icons-material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Box, Button, Container, InputAdornment, Stack, TextField } from "@mui/material";
@@ -15,14 +16,22 @@ const RejectedAds: React.FC = () => {
 
   const { ads, rejectedAds, loading, error } = useAppSelector((state) => state.ads);
 
-  const approvedAdsCount = ads.filter(ad => ad.status === "ACTIVE").length;
-  const expiredAdsCount = ads.filter(ad => ad.status === "EXPIRED").length;
-  const pendingAdsCount = ads.filter(ad => ad.status === "PENDING").length;
+  const approvedAdsCount = ads.filter(ad => ad.status === "Active").length;
+  const expiredAdsCount = ads.filter(ad => ad.status === "Expired").length;
+  const pendingAdsCount = ads.filter(ad => ad.status === "Pending").length;
 
   useEffect(() => {
     dispatch(fetchAds());
-    dispatch(fetchRejectedAds());
-  }, [dispatch]);
+  }, [])
+
+  useEffect(() => {
+    if (filteredAds) {
+      dispatch(fetchSearch({ url: "ads", status: "REJECTED", search: filteredAds, targetKey: "rejectedAds" }))
+    }
+    else {
+      dispatch(fetchRejectedAds());
+    }
+  }, [dispatch, filteredAds]);
 
   return (
     <div style={{ minHeight: "100%" }}>

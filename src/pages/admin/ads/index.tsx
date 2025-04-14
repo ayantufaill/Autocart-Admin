@@ -60,7 +60,7 @@ export default function Index() {
           { label: "All Ads", count: adsArray.length, path: "/admin/ads" },
           {
             label: "Approved Ads",
-            count: adsArray.filter((a) => a.status === "ACTIVE").length,
+            count: adsArray.filter((a) => a.status === "Active").length,
             path: "/admin/active/ads",
           },
           {
@@ -71,12 +71,12 @@ export default function Index() {
           },
           {
             label: "Pending Ads",
-            count: adsArray.filter((a) => a.status === "PENDING").length,
+            count: adsArray.filter((a) => a.status === "Pending").length,
             path: "/admin/pending/ads",
           },
           {
             label: "Rejected Ads",
-            count: adsArray.filter((a) => a.status === "REJECTED").length,
+            count: adsArray.filter((a) => a.status === "Rejected").length,
             path: "/admin/rejected/ads",
           },
         ]}
