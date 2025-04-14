@@ -38,7 +38,7 @@ const OutboxOpened: React.FC<OutboxOpenedProps> = ({ status }) => {
         <Box my={6}>
           <UserReply content={["no reply yet..."]} />
         </Box>
-        <UserDetails status="Banned" />
+        <UserDetails status="BANNED" userData={null} />
       </Container>
     </div>
   );

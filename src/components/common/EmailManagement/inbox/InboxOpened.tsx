@@ -35,7 +35,7 @@ const InboxOpened: React.FC<InboxProps> = ({ status }) => {
           content={mailContent}
         />
         {/* Details */}
-        <UserDetails status="Active" />
+        <UserDetails status="ACTIVE" userData={null} />
       </Container>
     </div>
   );

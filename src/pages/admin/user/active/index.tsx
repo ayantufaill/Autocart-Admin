@@ -6,7 +6,7 @@ const ActiveUser: React.FC = () => {
   return (
     <div>
       <Container>
-        <UserOpened status="Active" userData={[]} />
+        <UserOpened status="ACTIVE" userData={null} />
       </Container>
     </div>
   );
