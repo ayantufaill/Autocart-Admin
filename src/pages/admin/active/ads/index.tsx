@@ -1,18 +1,25 @@
 import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
+import ErrorState from "@/components/common/Error";
+import Loading from "@/components/common/Loading/Loading";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchActiveAds } from "@/redux/slices/adsManagementSlice";
-import { Container } from "@mui/material";
-import React, { useEffect } from "react";
+import { fetchActiveAds, fetchAds } from "@/redux/slices/adsManagementSlice";
+import { RootState } from "@/redux/store";
+import { Search } from "@mui/icons-material";
+import { Container, InputAdornment, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const index: React.FC = () => {
   const dispatch = useAppDispatch();
+  const [filteredAds, setFilteredAds] = useState<string>("");
 
-  const ActiveAds = useAppSelector((state) => state);
+  const { ads, error, activeAds, loading } = useSelector((state: RootState) => state.ads);
+
 
   useEffect(() => {
-    console.log("Hit api");
     dispatch(fetchActiveAds());
+    dispatch(fetchAds())
   }, [dispatch]);
 
   return (
@@ -25,16 +32,48 @@ const index: React.FC = () => {
     >
       <ColorTabs
         tabData={[
-          { label: "All Ads", count: 428, path: "/admin/ads" },
-          { label: "Approved Ads", count: 27, path: "/admin/active/ads" },
-          { label: "Expired Ads", count: 42, path: "/admin/expired/ads" },
-          { label: "Pending Ads", count: 37, path: "/admin/pending/ads" },
-          { label: "Rejected Ads", count: 58, path: "/admin/rejected/ads" },
+          { label: "All Ads", count: ads.length, path: "/admin/ads" },
+          { label: "Approved Ads", count: activeAds.length, path: "/admin/active/ads" },
+          { label: "Expired Ads", count: ads.filter(ad => ad.status == "EXPIRED").length, path: "/admin/expired/ads" },
+          { label: "Pending Ads", count: ads.filter(ad => ad.status == "PENDING").length, path: "/admin/pending/ads" },
+          { label: "Rejected Ads", count: ads.filter(ad => ad.status == "REJECTED").length, path: "/admin/rejected/ads" },
         ]}
         defaultTab={1}
       />
       <Container>
-        <AdsTable ads={[]} />
+        <TextField
+          placeholder={"Search User"}
+          variant="outlined"
+          onChange={(e) => setFilteredAds(e.target.value)}
+          value={filteredAds}
+          sx={{
+            fontSize: "12px",
+            color: "#BFC3CB",
+            marginBottom: 2,
+            backgroundColor: "#F9F9F9",
+            width: { xs: "100%", md: "70%" },
+            maxWidth: "600px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              maxHeight: "43px",
+            },
+            "& ::placeholder": {
+              color: "#CBCED4",
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search sx={{ color: "#BFC3CB" }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+        {loading ? (
+          <Loading />
+        ) : error ? <ErrorState error={error} /> : (
+          <AdsTable ads={activeAds} />
+        )}
       </Container>
     </div>
   );

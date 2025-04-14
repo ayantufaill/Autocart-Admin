@@ -13,7 +13,10 @@ export const fetchSearchApi = async ({
   status,
   targetKey,
 }: FetchSearch) => {
-  const response = await api.get(`/${url}?status=${status}&search=${search}`);
+  let query = url;
+  if (status) query += `?status=${status}`;
+
+  const response = await api.get(`/${query}`, { params: { search } });
 
   return { data: response.data, targetKey };
 };

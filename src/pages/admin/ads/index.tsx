@@ -7,11 +7,12 @@ import { fetchAds } from "@/redux/slices/adsManagementSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { Search } from "@mui/icons-material";
 import { fetchSearch } from "@/redux/thunk/fetchSearch";
+import Loading from "@/components/common/Loading/Loading";
+import ErrorState from "@/components/common/Error";
 
 export default function Index() {
   const dispatch = useDispatch<AppDispatch>();
-  const ads = useSelector((state: RootState) => state.ads.ads);
-  const loading = useSelector((state: RootState) => state.ads.loading);
+  const { error, ads, loading } = useSelector((state: RootState) => state.ads);
   const [filteredAds, setFilteredAds] = useState<string>("");
 
   const adsArray = Array.isArray(ads) ? ads : [];
@@ -39,8 +40,8 @@ export default function Index() {
       ad.status === "ACTIVE"
         ? "Active"
         : ad.status === "REJECTED"
-        ? "Rejected"
-        : ("Pending" as "Active" | "Pending" | "Rejected"),
+          ? "Rejected"
+          : ("Pending" as "Active" | "Pending" | "Rejected"),
     dateCreated: new Date(ad.createDate).toLocaleDateString("en-GB"),
     expiryDate: "20/02/2025",
     imageUrl: ad.uploadImagesForAd?.[0] || "/images/default.jpg",
@@ -64,8 +65,8 @@ export default function Index() {
           },
           {
             label: "Expired Ads",
-            // count: adsArray.filter((a) => a.status === "REJECTED").length,
-            count: 0, // change here
+            count: adsArray.filter((a) => a.status === "Expired").length,
+            // count: 0, // change here
             path: "/admin/expired/ads",
           },
           {
@@ -110,7 +111,7 @@ export default function Index() {
             ),
           }}
         />
-        {loading ? <div>Loading ads...</div> : <AdsTable ads={formattedAds} />}
+        {loading ? <Loading /> : error ? <ErrorState error={error} /> : <AdsTable ads={formattedAds} />}
       </Container>
     </div>
   );

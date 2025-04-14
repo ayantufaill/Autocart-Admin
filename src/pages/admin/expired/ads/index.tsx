@@ -1,99 +1,86 @@
 import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
-import { Box, Button, Container, Stack } from "@mui/material";
-import { Close, FileCopyOutlined } from "@mui/icons-material";
-import { fetchExpiredAds } from "@/redux/slices/adsManagementSlice";
-import { useEffect } from "react";
-import { useAppDispatch } from "@/redux/hooks";
-
-const adsData: {
-  id: string;
-  sellerType: "Private Seller" | "Trade Seller";
-  title: string;
-  category: string;
-  userId: string;
-  status: "Active" | "Pending" | "Expired";
-  dateCreated: string;
-  expiryDate: string;
-  imageUrl: string;
-}[] = [
-  {
-    id: "AC3500",
-    sellerType: "Private Seller",
-    title: "Toyota Supra",
-    category: "Car Parts",
-    userId: "USER300",
-    status: "Expired",
-    dateCreated: "01/02/2025",
-    expiryDate: "01/03/2025",
-    imageUrl: "/images/toyota1.jpg",
-  },
-  {
-    id: "AC3501",
-    sellerType: "Trade Seller",
-    title: "Toyota Supra",
-    category: "Dealership",
-    userId: "USER300",
-    status: "Expired",
-    dateCreated: "01/02/2025",
-    expiryDate: "01/03/2025",
-    imageUrl: "/images/toyota2.jpg",
-  },
-  {
-    id: "AC3502",
-    sellerType: "Private Seller",
-    title: "Toyota Supra",
-    category: "Vintage Car",
-    userId: "USER300",
-    status: "Expired",
-    dateCreated: "01/02/2025",
-    expiryDate: "01/03/2025",
-    imageUrl: "/images/toyota3.jpg",
-  },
-];
+import { Container, InputAdornment, TextField } from "@mui/material";
+import { Search } from "@mui/icons-material";
+import { fetchAds, fetchExpiredAds } from "@/redux/slices/adsManagementSlice";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import ErrorState from "@/components/common/Error";
+import Loading from "@/components/common/Loading/Loading";
 
 const ExpiredAds: React.FC = () => {
   const dispatch = useAppDispatch();
+  const [filteredAds, setFilteredAds] = useState<string>("");
+
+  const { ads, expiredAds, loading, error } = useAppSelector(
+    (state) => state.ads
+  );
 
   useEffect(() => {
+    dispatch(fetchAds());
     dispatch(fetchExpiredAds());
   }, [dispatch]);
 
+  const activeAdsCount = ads.filter((ad) => ad.status === "ACTIVE").length;
+  const pendingAdsCount = ads.filter((ad) => ad.status === "PENDING").length;
+  const rejectedAdsCount = ads.filter((ad) => ad.status === "REJECTED").length;
+
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#F9F9F9",
+        paddingBottom: "40px",
+        minHeight: "100%",
+      }}
+    >
       <ColorTabs
         tabData={[
-          { label: "All Ads", count: 428, path: "/admin/ads" },
-          { label: "Approved Ads", count: 27, path: "/admin/active/ads" },
-          { label: "Expired Ads", count: 42, path: "/admin/expired/ads" },
-          { label: "Pending Ads", count: 37, path: "/admin/pending/ads" },
-          { label: "Rejected Ads", count: 58, path: "/admin/rejected/ads" },
+          { label: "All Ads", count: ads.length, path: "/admin/ads" },
+          { label: "Approved Ads", count: activeAdsCount, path: "/admin/active/ads" },
+          { label: "Expired Ads", count: expiredAds.length, path: "/admin/expired/ads" },
+          { label: "Pending Ads", count: pendingAdsCount, path: "/admin/pending/ads" },
+          { label: "Rejected Ads", count: rejectedAdsCount, path: "/admin/rejected/ads" },
         ]}
-        defaultTab={2} // "Expired Ads" tab index
+        defaultTab={2}
       />
 
-      <Box sx={{ backgroundColor: "#F9F9F9", pb: "20px" }}>
-        <Container>
-          <AdsTable ads={adsData} />
-        </Container>
-      </Box>
-
-      <Stack direction={"row"} spacing={3} pt={3} pl={3}>
-        <Button
-          variant="contained"
-          sx={{ bgcolor: "#60A5FA" }}
-          startIcon={<FileCopyOutlined />}
-        >
-          Approve All Ads
-        </Button>
-        <Button
-          variant="contained"
-          sx={{ bgcolor: "#F87171" }}
-          startIcon={<Close />}
-        >
-          Reject All Ads
-        </Button>
-      </Stack>
+      <Container>
+        <TextField
+          placeholder={"Search User"}
+          variant="outlined"
+          onChange={(e) => setFilteredAds(e.target.value)}
+          value={filteredAds}
+          sx={{
+            fontSize: "12px",
+            color: "#BFC3CB",
+            marginBottom: 2,
+            backgroundColor: "#F9F9F9",
+            width: { xs: "100%", md: "70%" },
+            maxWidth: "600px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              maxHeight: "43px",
+            },
+            "& ::placeholder": {
+              color: "#CBCED4",
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search sx={{ color: "#BFC3CB" }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+        {loading ? (
+          <Loading />
+        ) : error ? (
+          <ErrorState error={error} />
+        ) : (
+          <AdsTable ads={expiredAds.filter(ad => ad.userName.includes(filteredAds))} />
+        )}
+      </Container>
     </div>
   );
 };

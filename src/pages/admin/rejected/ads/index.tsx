@@ -1,96 +1,94 @@
 import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
-import { Box, Button, Container, Stack } from "@mui/material";
-import { Close, FileCopyOutlined } from "@mui/icons-material";
-import { fetchRejectedAds } from "@/redux/slices/adsManagementSlice";
-import { useEffect } from "react";
-import { useAppDispatch } from "@/redux/hooks";
-
-const adsData: {
-  id: string;
-  sellerType: "Private Seller" | "Trade Seller";
-  title: string;
-  category: string;
-  userId: string;
-  status: "Active" | "Pending" | "Rejected";
-  dateCreated: string;
-  expiryDate: string;
-  imageUrl: string;
-}[] = [
-  {
-    id: "AC2500",
-    sellerType: "Private Seller",
-    title: "BMW Sport",
-    category: "Car Parts",
-    userId: "USER200",
-    status: "Rejected",
-    dateCreated: "20/01/2025",
-    expiryDate: "20/02/2025",
-    imageUrl: "/images/bmw.jpg",
-  },
-  {
-    id: "AC2501",
-    sellerType: "Trade Seller",
-    title: "BMW Sport",
-    category: "Dealership",
-    userId: "USER200",
-    status: "Rejected",
-    dateCreated: "20/01/2025",
-    expiryDate: "20/02/2025",
-    imageUrl: "/images/bmw2.jpg",
-  },
-  {
-    id: "AC2502",
-    sellerType: "Private Seller",
-    title: "BMW Sport",
-    category: "Vintage Car",
-    userId: "USER200",
-    status: "Rejected",
-    dateCreated: "20/01/2025",
-    expiryDate: "20/02/2025",
-    imageUrl: "/images/bmw3.jpg",
-  },
-];
+import ErrorState from "@/components/common/Error";
+import Loading from "@/components/common/Loading/Loading";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { fetchAds, fetchRejectedAds } from "@/redux/slices/adsManagementSlice";
+import { FileCopyOutlined, Search } from "@mui/icons-material";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { Box, Button, Container, InputAdornment, Stack, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const RejectedAds: React.FC = () => {
   const dispatch = useAppDispatch();
+  const [filteredAds, setFilteredAds] = useState<string>("");
+
+  const { ads, rejectedAds, loading, error } = useAppSelector((state) => state.ads);
+
+  const approvedAdsCount = ads.filter(ad => ad.status === "ACTIVE").length;
+  const expiredAdsCount = ads.filter(ad => ad.status === "EXPIRED").length;
+  const pendingAdsCount = ads.filter(ad => ad.status === "PENDING").length;
 
   useEffect(() => {
+    dispatch(fetchAds());
     dispatch(fetchRejectedAds());
   }, [dispatch]);
+
   return (
-    <div>
+    <div style={{ minHeight: "100%" }}>
       <ColorTabs
         tabData={[
-          { label: "All Ads", count: 428, path: "/admin/ads" },
-          { label: "Approved Ads", count: 27, path: "/admin/active/ads" },
-          { label: "Expired Ads", count: 42, path: "/admin/expired/ads" },
-          { label: "Pending Ads", count: 37, path: "/admin/pending/ads" },
-          { label: "Rejected Ads", count: 58, path: "/admin/rejected/ads" },
+          { label: "All Ads", count: ads.length, path: "/admin/ads" },
+          { label: "Approved Ads", count: approvedAdsCount, path: "/admin/active/ads" },
+          { label: "Expired Ads", count: expiredAdsCount, path: "/admin/expired/ads" },
+          { label: "Pending Ads", count: pendingAdsCount, path: "/admin/pending/ads" },
+          { label: "Rejected Ads", count: rejectedAds.length, path: "/admin/rejected/ads" },
         ]}
         defaultTab={4}
       />
 
-      <Box sx={{ backgroundColor: "#F9F9F9", pb: "20px" }}>
+      <Box sx={{ minHeight: "60vh", bgcolor: "#F9F9F9" }}>
         <Container>
-          <AdsTable ads={adsData} />
+          <TextField
+            placeholder={"Search User"}
+            variant="outlined"
+            onChange={(e) => setFilteredAds(e.target.value)}
+            value={filteredAds}
+            sx={{
+              fontSize: "12px",
+              color: "#BFC3CB",
+              marginBottom: 2,
+              backgroundColor: "#F9F9F9",
+              width: { xs: "100%", md: "70%" },
+              maxWidth: "600px",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "10px",
+                maxHeight: "43px",
+              },
+              "& ::placeholder": {
+                color: "#CBCED4",
+              },
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search sx={{ color: "#BFC3CB" }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {loading ? (
+            <Loading />
+          ) : error ? <ErrorState error={error} /> : (
+            <AdsTable ads={rejectedAds} />
+          )}
         </Container>
       </Box>
 
-      <Stack direction={"row"} spacing={3} pt={3} pl={3}>
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={3} pt={3} pl={6}>
         <Button
           variant="contained"
-          sx={{ bgcolor: "#60A5FA" }}
+          sx={{ bgcolor: "#60A5FA", maxWidth: "260px" }}
           startIcon={<FileCopyOutlined />}
         >
           Approve All Ads
         </Button>
         <Button
           variant="contained"
-          sx={{ bgcolor: "#F87171" }}
-          startIcon={<Close />}
+          sx={{ bgcolor: "#F87171", maxWidth: "260px" }}
+          startIcon={<DeleteOutlineIcon />}
         >
-          Reject All Ads
+          Delete All Ads
         </Button>
       </Stack>
     </div>

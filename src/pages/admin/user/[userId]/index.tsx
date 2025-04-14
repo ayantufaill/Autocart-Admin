@@ -1,41 +1,37 @@
+import ErrorState from "@/components/common/Error";
+import Loading from "@/components/common/Loading/Loading";
 import UserOpened from "@/components/common/Users/UserOpened";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchUserById } from "@/redux/slices/userSlice";
-import { Box, CircularProgress, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const index: React.FC = () => {
   const dispatch = useAppDispatch();
   const { userById, loading, error } = useAppSelector((state) => state.user);
+  const [isUserLoading, setIsUserLoading] = useState<boolean>(true);
   const router = useRouter();
   const userId = router.query?.userId;
 
   useEffect(() => {
     if (!userId) return;
-    console.log(userById);
     const id = Array.isArray(userId) ? userId[0] : userId;
     dispatch(fetchUserById(id));
+
+    if (userById) {
+      setIsUserLoading(false);
+    }
+
   }, [userId]);
 
   return (
     <Container sx={{ mt: 4 }}>
-      {loading && !userById && (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100vh",
-          }}
-        >
-          <CircularProgress />
-        </Box>
-      )}
-
-      {!loading && userById && (
-        <UserOpened status={userById.status || "ACTIVE"} userData={userById} />
-      )}
+      {
+        loading || isUserLoading ? <Loading /> :
+          error ? <ErrorState error={error} /> :
+            userById && <UserOpened key={userById.id} status={userById.status || ""} userData={userById} />
+      }
     </Container>
   );
 };

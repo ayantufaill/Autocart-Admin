@@ -5,16 +5,6 @@ import { UserById } from "@/redux/slices/userSlice";
 
 interface UserDetailsProps {
   status: "ACTIVE" | "SUSPENDED" | "BANNED" | "";
-  // userData: {
-  //   name: string;
-  //   country: string;
-  //   email: string;
-  //   area: string;
-  //   phoneNumber: string;
-  //   type: string;
-  //   followers: string;
-  //   following: string;
-  // };
   userData: UserById | null;
 }
 
@@ -57,7 +47,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status, userData }) => {
                   fontSize: { xs: "14px", md: "16px", xl: "22px" },
                 }}
               >
-                {userData?.name}
+                {userData?.name || "N/A"}
               </Typography>
             </Stack>
 
@@ -75,7 +65,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status, userData }) => {
                   fontSize: { xs: "14px", md: "16px", xl: "22px" },
                 }}
               >
-                {userData?.address}
+                {userData?.address || "N/A"}
               </Typography>
             </Stack>
 
@@ -93,7 +83,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status, userData }) => {
                   fontSize: { xs: "14px", md: "16px", xl: "22px" },
                 }}
               >
-                {userData?.email}
+                {userData?.email || "N/A"}
               </Typography>
             </Stack>
 
@@ -112,7 +102,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status, userData }) => {
                   fontSize: { xs: "14px", md: "16px", xl: "22px" },
                 }}
               >
-                {userData?.dealerLicense}
+                {userData?.dealerLicense || "N/A"}
               </Typography>
             </Stack>
 
@@ -130,7 +120,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status, userData }) => {
                   fontSize: { xs: "14px", md: "16px", xl: "22px" },
                 }}
               >
-                {userData?.phoneNumber}
+                {userData?.phoneNumber || "N/A"}
               </Typography>
             </Stack>
 
@@ -148,7 +138,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status, userData }) => {
                   fontSize: { xs: "14px", md: "16px", xl: "22px" },
                 }}
               >
-                {userData?.role}
+                {userData?.role || "N/A"}
               </Typography>
             </Stack>
 
@@ -166,7 +156,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status, userData }) => {
                   fontSize: { xs: "14px", md: "16px", xl: "22px" },
                 }}
               >
-                {userData?.status}
+                {userData?.status || "N/A"}
               </Typography>
             </Stack>
 
@@ -184,7 +174,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ status, userData }) => {
                   fontSize: { xs: "14px", md: "16px", xl: "22px" },
                 }}
               >
-                {userData?.vatNumber}
+                {userData?.vatNumber || "N/A"}
               </Typography>
             </Stack>
           </Box>
