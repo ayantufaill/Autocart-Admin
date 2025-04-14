@@ -3,8 +3,7 @@ import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import ErrorState from "@/components/common/Error";
 import Loading from "@/components/common/Loading/Loading";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchAds, fetchRejectedAds } from "@/redux/slices/adsManagementSlice";
-import { fetchSearch } from "@/redux/thunk/fetchSearch";
+import { fetchAds, fetchRejectedAds, fetchSearchAds } from "@/redux/slices/adsManagementSlice";
 import { FileCopyOutlined, Search } from "@mui/icons-material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Box, Button, Container, InputAdornment, Stack, TextField } from "@mui/material";
@@ -26,7 +25,7 @@ const RejectedAds: React.FC = () => {
 
   useEffect(() => {
     if (filteredAds) {
-      dispatch(fetchSearch({ url: "ads", status: "REJECTED", search: filteredAds, targetKey: "rejectedAds" }))
+      dispatch(fetchSearchAds({ url: "ads", status: "REJECTED", search: filteredAds, targetKey: "rejectedAds" }))
     }
     else {
       dispatch(fetchRejectedAds());

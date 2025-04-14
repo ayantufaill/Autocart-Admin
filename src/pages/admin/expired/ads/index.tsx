@@ -2,12 +2,11 @@ import AdsTable from "@/components/common/AdsTable/AdsTable";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import { Container, InputAdornment, TextField } from "@mui/material";
 import { Search } from "@mui/icons-material";
-import { fetchAds, fetchExpiredAds } from "@/redux/slices/adsManagementSlice";
+import { fetchAds, fetchExpiredAds, fetchSearchAds } from "@/redux/slices/adsManagementSlice";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import ErrorState from "@/components/common/Error";
 import Loading from "@/components/common/Loading/Loading";
-import { fetchSearch } from "@/redux/thunk/fetchSearch";
 
 const ExpiredAds: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +22,7 @@ const ExpiredAds: React.FC = () => {
 
   useEffect(() => {
     if (filteredAds) {
-      dispatch(fetchSearch({ url: "ads", search: filteredAds, status: "EXPIRED", targetKey: "expiredAds" }))
+      dispatch(fetchSearchAds({ url: "ads", search: filteredAds, status: "EXPIRED", targetKey: "expiredAds" }))
     }
     else {
       dispatch(fetchExpiredAds());

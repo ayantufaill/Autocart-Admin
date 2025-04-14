@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
-import { fetchSuspendedUsers, fetchUsers } from "@/redux/slices/userSlice";
+import { fetchSearchUsers, fetchSuspendedUsers, fetchUsers } from "@/redux/slices/userSlice";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import UserTable from "@/components/common/UserTable/UserTable";
 import {
   Container,
-  CircularProgress,
   Box,
   InputAdornment,
   TextField,
-  Alert,
   Stack,
   Button,
 } from "@mui/material";
 import { Cancel, Pause, Search } from "@mui/icons-material";
-import { fetchSearch } from "@/redux/thunk/fetchSearch";
 import Loading from "@/components/common/Loading/Loading";
 import ErrorState from "@/components/common/Error";
 
@@ -30,9 +27,13 @@ const BannedUsers: React.FC = () => {
   const error = useSelector((state: RootState) => state.user.error);
 
   useEffect(() => {
+    dispatch(fetchUsers());
+  }, [])
+
+  useEffect(() => {
     if (filteredName) {
       dispatch(
-        fetchSearch({
+        fetchSearchUsers({
           url: "users",
           status: "SUSPENDED",
           search: filteredName,
@@ -42,7 +43,6 @@ const BannedUsers: React.FC = () => {
     } else {
       dispatch(fetchSuspendedUsers());
     }
-    dispatch(fetchUsers());
   }, [dispatch, filteredName]);
 
   const activeUsers = users.filter(

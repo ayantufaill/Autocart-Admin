@@ -3,8 +3,7 @@ import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import ErrorState from "@/components/common/Error";
 import Loading from "@/components/common/Loading/Loading";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchAds, fetchPendingAds } from "@/redux/slices/adsManagementSlice";
-import { fetchSearch } from "@/redux/thunk/fetchSearch";
+import { fetchAds, fetchPendingAds, fetchSearchAds } from "@/redux/slices/adsManagementSlice";
 import { Close, FileCopyOutlined, Search } from "@mui/icons-material";
 import { Box, Button, Container, InputAdornment, Stack, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -25,7 +24,7 @@ const PendingAds: React.FC = () => {
 
   useEffect(() => {
     if (filteredAds) {
-      dispatch(fetchSearch({ url: "ads", search: filteredAds, targetKey: "pendingAds", status: "PENDING" }))
+      dispatch(fetchSearchAds({ url: "ads", search: filteredAds, targetKey: "pendingAds", status: "PENDING" }))
     }
     else {
       dispatch(fetchPendingAds());

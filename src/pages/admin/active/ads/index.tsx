@@ -3,9 +3,8 @@ import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import ErrorState from "@/components/common/Error";
 import Loading from "@/components/common/Loading/Loading";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchActiveAds, fetchAds } from "@/redux/slices/adsManagementSlice";
+import { fetchActiveAds, fetchAds, fetchSearchAds } from "@/redux/slices/adsManagementSlice";
 import { RootState } from "@/redux/store";
-import { fetchSearch } from "@/redux/thunk/fetchSearch";
 import { Search } from "@mui/icons-material";
 import { Container, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -23,7 +22,7 @@ const index: React.FC = () => {
 
   useEffect(() => {
     if (filteredAds) {
-      dispatch(fetchSearch({ url: "ads", search: filteredAds, targetKey: "activeAds", status: "ACTIVE" }))
+      dispatch(fetchSearchAds({ url: "ads", search: filteredAds, targetKey: "activeAds", status: "ACTIVE" }))
     }
     else {
       dispatch(fetchActiveAds());

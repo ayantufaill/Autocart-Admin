@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
-import { fetchActiveUsers, fetchUsers } from "@/redux/slices/userSlice";
+import { fetchActiveUsers, fetchSearchUsers, fetchUsers } from "@/redux/slices/userSlice";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import UserTable from "@/components/common/UserTable/UserTable";
 import {
   Container,
-  CircularProgress,
-  Box,
-  Alert,
   InputAdornment,
   TextField,
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
-import { fetchSearch } from "@/redux/thunk/fetchSearch";
 import Loading from "@/components/common/Loading/Loading";
 import ErrorState from "@/components/common/Error";
 
@@ -26,9 +22,13 @@ const ActiveUsers: React.FC = () => {
   const error = useSelector((state: RootState) => state.user.error);
 
   useEffect(() => {
+    dispatch(fetchUsers());
+  }, [])
+
+  useEffect(() => {
     if (filteredName) {
       dispatch(
-        fetchSearch({
+        fetchSearchUsers({
           url: "users",
           status: "ACTIVE",
           search: filteredName,
@@ -38,7 +38,6 @@ const ActiveUsers: React.FC = () => {
     } else {
       dispatch(fetchActiveUsers());
     }
-    dispatch(fetchUsers());
   }, [dispatch, filteredName]);
 
   const activeUsers = ActiveUsers.filter(

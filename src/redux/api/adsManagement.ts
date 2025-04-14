@@ -1,4 +1,5 @@
 import api from "@/services/api";
+import { FetchSearch } from "@/types/type";
 
 export const fetchAdsMangementApi = async () => {
   const response = await api.get("/ads");
@@ -26,4 +27,18 @@ export const fetchRejectedAdsApi = async () => {
   const response = await api.get("/ads?status=REJECTED");
   console.log(response.data);
   return response.data;
+};
+
+export const fetchSearchAdsApi = async ({
+  url,
+  search,
+  status,
+  targetKey,
+}: FetchSearch) => {
+  let query = url;
+  if (status) query += `?status=${status}`;
+
+  const response = await api.get(`/${query}`, { params: { itemName: search } });
+
+  return { data: response.data, targetKey };
 };

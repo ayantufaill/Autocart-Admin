@@ -5,8 +5,9 @@ import {
   fetchExpiredAdsApi,
   fetchPendingAdsApi,
   fetchRejectedAdsApi,
+  fetchSearchAdsApi,
 } from "../api/adsManagement";
-import { fetchSearch } from "../thunk/fetchSearch";
+import { FetchSearch } from "@/types/type";
 
 interface User {
   role: string;
@@ -154,6 +155,31 @@ export const fetchRejectedAds = createAsyncThunk(
   }
 );
 
+export const fetchSearchAds = createAsyncThunk(
+  "fetch/searchAds",
+  async ({
+    url,
+    status,
+    search,
+    targetKey,
+  }: {
+    url: string;
+    status?: string;
+    search?: string;
+    targetKey: string;
+  }) => {
+    console.log(url);
+    const params: FetchSearch = {
+      url: url,
+      targetKey: targetKey,
+      search: search || "",
+      status: status || "",
+    };
+
+    return await fetchSearchAdsApi(params);
+  }
+);
+
 const adsSlice = createSlice({
   name: "ads",
   initialState,
@@ -237,11 +263,11 @@ const adsSlice = createSlice({
         state.error = action.payload as string;
       })
       // fetch ads search
-      .addCase(fetchSearch.pending, (state, action) => {
+      .addCase(fetchSearchAds.pending, (state, action) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchSearch.fulfilled, (state, action) => {
+      .addCase(fetchSearchAds.fulfilled, (state, action) => {
         state.loading = false;
 
         const { data, targetKey } = action.payload;
@@ -254,7 +280,7 @@ const adsSlice = createSlice({
           }
         }
       })
-      .addCase(fetchSearch.rejected, (state, action) => {
+      .addCase(fetchSearchAds.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

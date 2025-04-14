@@ -65,6 +65,14 @@ export interface User {
   imageUrl?: string;
   regDatets?: string;
 }
+
+export interface FetchSearch {
+  search: string;
+  status: string;
+  url: string;
+  targetKey: string;
+}
+
 const stats = [
   {
     title: "Total Ads",

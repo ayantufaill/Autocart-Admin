@@ -5,16 +5,12 @@ import { RootState, AppDispatch } from "@/redux/store";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import UserTable from "@/components/common/UserTable/UserTable";
 import {
-  Alert,
-  Box,
-  CircularProgress,
   Container,
   InputAdornment,
   TextField,
 } from "@mui/material";
-import { fetchUsers } from "@/redux/slices/userSlice";
+import { fetchSearchUsers, fetchUsers } from "@/redux/slices/userSlice";
 import { Search } from "@mui/icons-material";
-import { fetchSearch } from "@/redux/thunk/fetchSearch";
 import Loading from "@/components/common/Loading/Loading";
 import ErrorState from "@/components/common/Error";
 
@@ -28,7 +24,7 @@ const User: React.FC = () => {
   useEffect(() => {
     if (filteredName) {
       dispatch(
-        fetchSearch({
+        fetchSearchUsers({
           url: "users",
           search: filteredName,
           targetKey: "users",

@@ -1,5 +1,5 @@
 import api from "@/services/api";
-import { User } from "@/types/type";
+import { FetchSearch, User } from "@/types/type";
 
 export const fetchUsersDataApi = async () => {
   const response = await api.get("/users");
@@ -35,4 +35,18 @@ export const fetchBannedUsersDataApi = async () => {
 export const fetchUsersAnalyticsApi = async () => {
   const response = await api.get("/dashboard-analytics/users");
   return response.data;
+};
+
+export const fetchSearchUsersApi = async ({
+  url,
+  search,
+  status,
+  targetKey,
+}: FetchSearch) => {
+  let query = url;
+  if (status) query += `?status=${status}`;
+
+  const response = await api.get(`/${query}`, { params: { search } });
+
+  return { data: response.data, targetKey };
 };

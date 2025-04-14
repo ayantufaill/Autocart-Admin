@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, InputAdornment, TextField } from "@mui/material";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import AdsTable from "@/components/common/AdsTable/AdsTable";
-import { fetchAds } from "@/redux/slices/adsManagementSlice";
+import { fetchAds, fetchSearchAds } from "@/redux/slices/adsManagementSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { Search } from "@mui/icons-material";
-import { fetchSearch } from "@/redux/thunk/fetchSearch";
+
 import Loading from "@/components/common/Loading/Loading";
 import ErrorState from "@/components/common/Error";
 
@@ -20,7 +20,7 @@ export default function Index() {
   useEffect(() => {
     if (filteredAds) {
       dispatch(
-        fetchSearch({ url: "ads", search: filteredAds, targetKey: "ads" })
+        fetchSearchAds({ url: "ads", search: filteredAds, targetKey: "ads" })
       );
     } else {
       dispatch(fetchAds());
@@ -60,23 +60,23 @@ export default function Index() {
           { label: "All Ads", count: adsArray.length, path: "/admin/ads" },
           {
             label: "Approved Ads",
-            count: adsArray.filter((a) => a.status === "Active").length,
+            count: adsArray.filter((a) => a.status === "ACTIVE").length,
             path: "/admin/active/ads",
           },
           {
             label: "Expired Ads",
-            count: adsArray.filter((a) => a.status === "Expired").length,
+            count: adsArray.filter((a) => a.status === "EXPIRED").length,
             // count: 0, // change here
             path: "/admin/expired/ads",
           },
           {
             label: "Pending Ads",
-            count: adsArray.filter((a) => a.status === "Pending").length,
+            count: adsArray.filter((a) => a.status === "PENDING").length,
             path: "/admin/pending/ads",
           },
           {
             label: "Rejected Ads",
-            count: adsArray.filter((a) => a.status === "Rejected").length,
+            count: adsArray.filter((a) => a.status === "REJECTED").length,
             path: "/admin/rejected/ads",
           },
         ]}

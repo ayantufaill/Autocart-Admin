@@ -4,9 +4,13 @@ import {
   createAsyncThunk,
   createSelector,
 } from "@reduxjs/toolkit";
-import { deleteUserByIdApi, fetchUserByIdApi } from "../api/userApi";
+import {
+  deleteUserByIdApi,
+  fetchSearchUsersApi,
+  fetchUserByIdApi,
+} from "../api/userApi";
 import { toast } from "react-toastify";
-import { fetchSearch } from "../thunk/fetchSearch";
+import { FetchSearch } from "@/types/type";
 
 interface User {
   userId: string;
@@ -149,6 +153,31 @@ export const deleteUserById = createAsyncThunk(
   }
 );
 
+export const fetchSearchUsers = createAsyncThunk(
+  "fetch/searchUsers",
+  async ({
+    url,
+    status,
+    search,
+    targetKey,
+  }: {
+    url: string;
+    status?: string;
+    search?: string;
+    targetKey: string;
+  }) => {
+    console.log(url);
+    const params: FetchSearch = {
+      url: url,
+      targetKey: targetKey,
+      search: search || "",
+      status: status || "",
+    };
+
+    return await fetchSearchUsersApi(params);
+  }
+);
+
 const initialState: UsersState = {
   users: [],
   activeUsers: [],
@@ -254,11 +283,11 @@ const usersSlice = createSlice({
         toast.error(action.payload as string);
       })
       // fetch search users
-      .addCase(fetchSearch.pending, (state, action) => {
+      .addCase(fetchSearchUsers.pending, (state, action) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchSearch.fulfilled, (state, action) => {
+      .addCase(fetchSearchUsers.fulfilled, (state, action) => {
         state.loading = false;
 
         const { data, targetKey } = action.payload;
@@ -272,7 +301,7 @@ const usersSlice = createSlice({
           (state as any)[targetKey] = transformedUsers;
         }
       })
-      .addCase(fetchSearch.rejected, (state, action) => {
+      .addCase(fetchSearchUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
