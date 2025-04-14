@@ -141,11 +141,6 @@ const FlaggedMessagesGrid = () => {
     <Box bgcolor={"#F9F9F9"} pb={5}>
       <ColorTabs
         tabData={[
-          { label: "Message Overview", path: "/admin/messagemanagement" },
-          {
-            label: "Flagged Messages",
-            path: "/admin/messagemanagement/flagged",
-          },
           {
             label: "Reported Messages",
             path: "/admin/messagemanagement/reported",

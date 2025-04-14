@@ -6,20 +6,17 @@ import {
   Avatar,
   Typography,
   useMediaQuery,
-  IconButton,
-  Button,
 } from "@mui/material";
 import { useTheme } from "@mui/system";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import { Settings } from "@mui/icons-material";
+import Link from "next/link";
 
 const Header: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const route = useRouter();
-  const [showLogout, setShowLogout] = useState<boolean>(false);
+  const router = useRouter();
   const [user, setUser] = useState<null | { name: string; email: string }>(
     null
   );
@@ -50,7 +47,8 @@ const Header: React.FC = () => {
           alt="Logo"
           width={49}
           height={38}
-          style={{ objectFit: "contain" }}
+          style={{ objectFit: "contain", cursor: "pointer" }}
+          onClick={() => router.push("/")}
         />
       </Box>
 
@@ -83,21 +81,23 @@ const Header: React.FC = () => {
             </Typography>
           </Box>
 
-          <Avatar
-            src="/Images/Header/image.png"
-            alt="Profile"
-            sx={{
-              width: "50px",
-              height: "50px",
-              display: "flex",
-              alignItems: "center",
-              bgcolor: "red",
-            }}
-          ></Avatar>
+          <Link href={"/"}>
+            <Avatar
+              src="/Images/Header/image.png"
+              alt="Profile"
+              sx={{
+                width: "50px",
+                height: "50px",
+                display: "flex",
+                alignItems: "center",
+                bgcolor: "red",
+                cursor: "pointer"
+              }}
+            /></Link>
         </Box>
       )}
 
-      <Box
+      {/* <Box
         position={"relative"}
         sx={{
           ml: isMobile ? 2 : 5,
@@ -109,17 +109,17 @@ const Header: React.FC = () => {
       >
         <NotificationsNoneIcon
           onClick={() => {
-            route.push("/admin/notification/active");
+            router.push("/admin/notification/active");
           }}
           sx={{
             backgroundColor:
-              route.pathname === "/admin/notification/active" ||
-              route.pathname === "/admin/notification/empty"
+              router.pathname === "/admin/notification/active" ||
+              router.pathname === "/admin/notification/empty"
                 ? "#07B007"
                 : "transparent",
             color:
-              route.pathname === "/admin/notification/active" ||
-              route.pathname === "/admin/notification/empty"
+              router.pathname === "/admin/notification/active" ||
+              router.pathname === "/admin/notification/empty"
                 ? "white"
                 : "black",
             padding: "3px",
@@ -129,7 +129,7 @@ const Header: React.FC = () => {
             height: "32px",
           }}
         />
-      </Box>
+      </Box> */}
     </Box>
   );
 };

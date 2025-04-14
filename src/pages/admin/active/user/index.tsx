@@ -23,6 +23,7 @@ const ActiveUsers: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchUsers());
+    console.log(localStorage.getItem("usersCount"))
   }, [])
 
   useEffect(() => {

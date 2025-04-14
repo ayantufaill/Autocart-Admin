@@ -21,6 +21,26 @@ const User: React.FC = () => {
   );
   const [filteredName, setFilteredName] = useState<string>("");
 
+  const allUsers = users.length
+
+  const activeUsers = users.filter(
+    (user: { status: string }) => user.status === "Active"
+  ).length;
+  const suspendedUsers = users.filter(
+    (user) => user.status === "Suspended"
+  ).length;
+  const bannedUsers = users.filter((user) => user.status === "Banned").length;
+
+  useEffect(() => {
+    localStorage.setItem("usersCount", JSON.stringify({
+      allUsers: allUsers,
+      activeUsers: activeUsers,
+      suspendedUsers: suspendedUsers,
+      bannedUsers: bannedUsers,
+    }))
+
+  }, [allUsers, activeUsers, suspendedUsers, bannedUsers])
+
   useEffect(() => {
     if (filteredName) {
       dispatch(
@@ -33,22 +53,13 @@ const User: React.FC = () => {
     } else {
       dispatch(fetchUsers());
     }
-    console.log(users);
   }, [dispatch, filteredName]);
-
-  const activeUsers = users.filter(
-    (user: { status: string }) => user.status === "Active"
-  ).length;
-  const suspendedUsers = users.filter(
-    (user) => user.status === "Suspended"
-  ).length;
-  const bannedUsers = users.filter((user) => user.status === "Banned").length;
 
   return (
     <div style={{ backgroundColor: "#F9F9F9", minHeight: "100%" }}>
       <ColorTabs
         tabData={[
-          { label: "All Users", count: users.length, path: "/admin/user" },
+          { label: "All Users", count: allUsers, path: "/admin/user" },
           {
             label: "Active Users",
             count: activeUsers,

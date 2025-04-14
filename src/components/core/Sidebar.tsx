@@ -71,7 +71,7 @@ const Sidebar = () => {
     {
       text: "Message Management",
       icon: <ChatOutlinedIcon />,
-      path: "/admin/messagemanagement",
+      path: "/admin/messagemanagement/reported",
     },
     {
       text: "Story Management",

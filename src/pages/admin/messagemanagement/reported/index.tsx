@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -15,6 +15,10 @@ import { Search } from "@mui/icons-material";
 import MessagesTable, {
   Message,
 } from "@/components/common/MessageTable/MessageTable";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { fetchReportedMessages } from "@/redux/slices/messageManagementSlice";
+import Loading from "@/components/common/Loading/Loading";
+import ErrorState from "@/components/common/Error";
 
 const reported = [
   {
@@ -98,25 +102,29 @@ const messages: Message[] = [
   },
 ];
 
+
+
 const Index = () => {
   const [activeTab, setActiveTab] = useState<string>("Flagged Messages");
   const [search, setSearch] = useState<string>("");
 
+  const dispatch = useAppDispatch()
+  const { reportedMessages, loading, error } = useAppSelector(state => state.messages)
+  useEffect(() => {
+    console.log("Messages called");
+    dispatch(fetchReportedMessages());
+  }, [dispatch])
+
   return (
-    <Box bgcolor={"#F9F9F9"} pb={5}>
+    <Box bgcolor={"#F9F9F9"} pb={5} minHeight={"100%"}>
       <ColorTabs
         tabData={[
-          { label: "Message Overview", path: "/admin/messagemanagement" },
-          {
-            label: "Flagged Messages",
-            path: "/admin/messagemanagement/flagged",
-          },
           {
             label: "Reported Messages",
             path: "/admin/messagemanagement/reported",
           },
         ]}
-        defaultTab={2}
+        defaultTab={0}
       />
       <Container>
         <TextField
@@ -141,32 +149,35 @@ const Index = () => {
             ),
           }}
         />
-
-        <Box
-          sx={{ display: "flex", flexDirection: "column", gap: "28px", mb: 3 }}
-        >
-          <Typography
-            sx={{
-              color: "#1F2937",
-              fontSize: { xs: "18px", md: "20px", xl: "22px" },
-              fontWeight: 600,
-            }}
-          >
-            Flagged Messages
-          </Typography>
-          <Grid container spacing={2}>
-            {reported.map((item) => (
-              <Grid item xs={12} sm={6} md={6} lg={3} key={item.id}>
-                <FlaggedMessage {...item} />
+        {loading ? <Loading /> : error ? <ErrorState error={error} /> :
+          <>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", gap: "28px", mb: 3 }}
+            >
+              <Typography
+                sx={{
+                  color: "#1F2937",
+                  fontSize: { xs: "18px", md: "20px", xl: "22px" },
+                  fontWeight: 600,
+                }}
+              >
+                Reported Messages
+              </Typography>
+              <Grid container spacing={2}>
+                {reported.map((item) => (
+                  <Grid item xs={12} sm={6} md={6} lg={3} key={item.id}>
+                    <FlaggedMessage {...item} />
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-        </Box>
-        <MessagesTable
-          Messages={messages}
-          search={search}
-          setSearch={setSearch}
-        />
+            </Box>
+            <MessagesTable
+              Messages={messages}
+              search={search}
+              setSearch={setSearch}
+            />
+          </>
+        }
       </Container>
     </Box>
   );
