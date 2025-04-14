@@ -14,6 +14,7 @@ import {
   Chip,
 } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
+// import { Ad } from "@/redux/slices/adsManagementSlice";
 
 interface Ad {
   id: string;
@@ -25,9 +26,7 @@ interface Ad {
   | "Active"
   | "Pending"
   | "Rejected"
-  | "Expired"
-  | "Flagged"
-  | "Reported";
+  | "Expired";
   dateCreated: string;
   expiryDate: string;
   imageUrl: string;
@@ -42,8 +41,6 @@ const statusConfig = {
   Pending: { color: "#FEFCE8", textColor: "#D97706", icon: "#EAB308" },
   Rejected: { color: "#FEF2F2", textColor: "#B91C1C", icon: "#EF4444" },
   Expired: { color: "#F9FAFB", textColor: "#9CA3AF", icon: "#6B7280" },
-  Reported: { color: "#FEF2F2", textColor: "#9CA3AF", icon: "#EF4444" },
-  Flagged: { color: "#FEFCE8", textColor: "#9CA3AF", icon: "#EAB308" },
 };
 
 const sellerConfig = {

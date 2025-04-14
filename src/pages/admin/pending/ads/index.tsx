@@ -4,6 +4,7 @@ import ErrorState from "@/components/common/Error";
 import Loading from "@/components/common/Loading/Loading";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchAds, fetchPendingAds } from "@/redux/slices/adsManagementSlice";
+import { fetchSearch } from "@/redux/thunk/fetchSearch";
 import { Close, FileCopyOutlined, Search } from "@mui/icons-material";
 import { Box, Button, Container, InputAdornment, Stack, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -14,14 +15,22 @@ const PendingAds: React.FC = () => {
   const [filteredAds, setFilteredAds] = useState<string>("");
   const { ads, pendingAds, loading, error } = useAppSelector((state) => state.ads);
 
-  const approvedAdsCount = ads.filter(ad => ad.status === "ACTIVE").length;
-  const expiredAdsCount = ads.filter(ad => ad.status === "EXPIRED").length;
-  const rejectedAdsCount = ads.filter(ad => ad.status === "REJECTED").length;
+  const approvedAdsCount = ads.filter(ad => ad.status === "Active").length;
+  const expiredAdsCount = ads.filter(ad => ad.status === "Expired").length;
+  const rejectedAdsCount = ads.filter(ad => ad.status === "Rejected").length;
 
   useEffect(() => {
     dispatch(fetchAds());
-    dispatch(fetchPendingAds());
-  }, [dispatch]);
+  }, [])
+
+  useEffect(() => {
+    if (filteredAds) {
+      dispatch(fetchSearch({ url: "ads", search: filteredAds, targetKey: "pendingAds", status: "PENDING" }))
+    }
+    else {
+      dispatch(fetchPendingAds());
+    }
+  }, [dispatch, filteredAds]);
 
 
 

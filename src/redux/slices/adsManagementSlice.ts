@@ -6,6 +6,7 @@ import {
   fetchPendingAdsApi,
   fetchRejectedAdsApi,
 } from "../api/adsManagement";
+import { fetchSearch } from "../thunk/fetchSearch";
 
 interface User {
   role: string;
@@ -18,7 +19,7 @@ interface User {
   status: string;
 }
 
-interface Ad {
+export interface Ad {
   id: string;
   itemName: string;
   price: number;
@@ -40,10 +41,11 @@ interface Ad {
 }
 
 interface AdsState {
-  ads: Ad[];
+  // change type here
+  ads: any[];
   loading: boolean;
   error: string | null;
-  activeAds: any[]; // change type here
+  activeAds: any[];
   expiredAds: any[];
   pendingAds: any[];
   rejectedAds: any[];
@@ -170,7 +172,7 @@ const adsSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
-      
+
       // active
       .addCase(fetchActiveAds.pending, (state, action) => {
         state.loading = true;
@@ -180,7 +182,7 @@ const adsSlice = createSlice({
         state.loading = false;
         const newAds = formattedAds(action.payload);
         state.activeAds = newAds || [];
-        state.error = newAds.length > 0 ? null : "No Active Users found";
+        state.error = newAds.length > 0 ? null : "No Active ads found";
       })
       .addCase(fetchActiveAds.rejected, (state, action) => {
         state.loading = false;
@@ -196,7 +198,7 @@ const adsSlice = createSlice({
         state.loading = false;
         const newAds = formattedAds(action.payload);
         state.expiredAds = newAds || [];
-        state.error = newAds.length > 0 ? null : "No Expired Users found";
+        state.error = newAds.length > 0 ? null : "No Expired ads found";
       })
       .addCase(fetchExpiredAds.rejected, (state, action) => {
         state.loading = false;
@@ -212,7 +214,7 @@ const adsSlice = createSlice({
         state.loading = false;
         const newAds = formattedAds(action.payload);
         state.pendingAds = newAds || [];
-        state.error = newAds.length > 0 ? null : "No Pending Users found";
+        state.error = newAds.length > 0 ? null : "No Pending ads found";
       })
       .addCase(fetchPendingAds.rejected, (state, action) => {
         state.loading = false;
@@ -228,9 +230,31 @@ const adsSlice = createSlice({
         state.loading = false;
         const newAds = formattedAds(action.payload);
         state.rejectedAds = newAds || [];
-        state.error = newAds.length > 0 ? null : "No Rejected Users found";
+        state.error = newAds.length > 0 ? null : "No Rejected ads found";
       })
       .addCase(fetchRejectedAds.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      // fetch ads search
+      .addCase(fetchSearch.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSearch.fulfilled, (state, action) => {
+        state.loading = false;
+
+        const { data, targetKey } = action.payload;
+
+        if (targetKey && state.hasOwnProperty(targetKey)) {
+          if (targetKey == "ads") {
+            (state as any)[targetKey] = data.data;
+          } else {
+            (state as any)[targetKey] = formattedAds(data.data);
+          }
+        }
+      })
+      .addCase(fetchSearch.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
