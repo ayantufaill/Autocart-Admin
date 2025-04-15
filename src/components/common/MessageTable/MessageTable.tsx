@@ -16,20 +16,19 @@ import {
   Typography,
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import { Message } from "@/redux/slices/messageManagementSlice";
 
-export interface Message {
-  status: "Flagged" | "Reported";
-  SenderId: string;
-  ReceiverId: string;
-  MessageContent: string;
-  Reason: string;
-  Date: string;
-}
+// export interface Message {
+//   status: "Flagged" | "Reported";
+//   SenderId: string;
+//   ReceiverId: string;
+//   MessageContent: string;
+//   Reason: string;
+//   Date: string;
+// }
 
 interface MessagesTableProps {
   Messages: Message[];
-  search: string;
-  setSearch: (search: string) => void;
 }
 
 const statusConfig = {
@@ -39,14 +38,10 @@ const statusConfig = {
 
 const MessagesTable: React.FC<MessagesTableProps> = ({
   Messages,
-  search,
-  setSearch,
 }) => {
   const router = useRouter();
 
-  const filteredMessages = Messages.filter((message) =>
-    message.SenderId.toLowerCase().includes(search.toLowerCase())
-  );
+  console.log(Messages)
 
   return (
     <div>
@@ -95,7 +90,7 @@ const MessagesTable: React.FC<MessagesTableProps> = ({
                 }}
               />
             </TableRow>
-            {filteredMessages.map((message, index, arr) => (
+            {Messages.map((message, index, arr) => (
               <TableRow
                 key={index}
                 sx={{
@@ -110,8 +105,8 @@ const MessagesTable: React.FC<MessagesTableProps> = ({
                   onClick={() => {
                     router.push(
                       "/admin/messagemanagement/" +
-                        message.status.toLowerCase() +
-                        "/opened"
+                      message.status.toLowerCase() +
+                      "/opened"
                     );
                   }}
                 >

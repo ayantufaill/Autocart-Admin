@@ -74,7 +74,8 @@ const ColorTabs: React.FC<ColorTabsProps> = ({ tabData, defaultTab = 0 }) => {
                       borderRadius: 1,
                     }}
                   >
-                    {tab.label} ({tab.count})
+                    {tab.label}
+                    {typeof tab.count === 'number' ? `(${tab.count})` : null}
                   </Typography>
                 </Box>
               }

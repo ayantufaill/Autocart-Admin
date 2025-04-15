@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { RootState, AppDispatch } from "@/redux/store";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import UserTable from "@/components/common/UserTable/UserTable";
@@ -9,19 +8,21 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import { fetchSearchUsers, fetchUsers } from "@/redux/slices/userSlice";
 import { Search } from "@mui/icons-material";
 import Loading from "@/components/common/Loading/Loading";
 import ErrorState from "@/components/common/Error";
+
+import { fetchSearchUsers, fetchUsers } from "@/redux/slices/userSlice";
 
 const User: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { users, loading, error } = useSelector(
     (state: RootState) => state.user
   );
+
   const [filteredName, setFilteredName] = useState<string>("");
 
-  const allUsers = users.length
+  const allUsers = users.length;
 
   const activeUsers = users.filter(
     (user: { status: string }) => user.status === "Active"
@@ -30,16 +31,6 @@ const User: React.FC = () => {
     (user) => user.status === "Suspended"
   ).length;
   const bannedUsers = users.filter((user) => user.status === "Banned").length;
-
-  useEffect(() => {
-    localStorage.setItem("usersCount", JSON.stringify({
-      allUsers: allUsers,
-      activeUsers: activeUsers,
-      suspendedUsers: suspendedUsers,
-      bannedUsers: bannedUsers,
-    }))
-
-  }, [allUsers, activeUsers, suspendedUsers, bannedUsers])
 
   useEffect(() => {
     if (filteredName) {

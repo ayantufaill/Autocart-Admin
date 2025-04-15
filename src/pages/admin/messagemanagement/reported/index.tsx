@@ -13,103 +13,18 @@ import TextField from "@mui/material/TextField";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import { Search } from "@mui/icons-material";
 import MessagesTable, {
-  Message,
 } from "@/components/common/MessageTable/MessageTable";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchReportedMessages } from "@/redux/slices/messageManagementSlice";
 import Loading from "@/components/common/Loading/Loading";
 import ErrorState from "@/components/common/Error";
-
-const reported = [
-  {
-    id: 1,
-    title: "Today",
-    value: 54,
-    percentage: "+9.2%",
-    description: "Compared to yesterday",
-  },
-  {
-    id: 2,
-    title: "This Week",
-    value: 25455,
-    percentage: "-9.2%",
-    description: "Compared to Last Week",
-  },
-  {
-    id: 3,
-    title: "This Month",
-    value: 347588,
-    percentage: "+9.2%",
-    description: "Compared to Last Month",
-  },
-  {
-    id: 4,
-    title: "This Year",
-    value: 875223,
-    percentage: "+9.2%",
-    description: "Compared to Last Year",
-  },
-];
-
-const messages: Message[] = [
-  {
-    status: "Reported",
-    SenderId: "USER200",
-    ReceiverId: "USER200",
-    MessageContent: "Lorem ipsum dolor sit amet consectetur.",
-    Reason: "Suspicious Activities",
-    Date: "20/01/2025",
-  },
-  {
-    status: "Reported",
-    SenderId: "USER200",
-    ReceiverId: "USER200",
-    MessageContent: "Lorem ipsum dolor sit amet consectetur.",
-    Reason: "Inappropriate Language",
-    Date: "20/01/2025",
-  },
-  {
-    status: "Reported",
-    SenderId: "USER200",
-    ReceiverId: "USER200",
-    MessageContent: "Lorem ipsum dolor sit amet consectetur.",
-    Reason: "Suspicious Activities",
-    Date: "20/01/2025",
-  },
-  {
-    status: "Reported",
-    SenderId: "USER200",
-    ReceiverId: "USER200",
-    MessageContent: "Lorem ipsum dolor sit amet consectetur.",
-    Reason: "Inappropriate Language",
-    Date: "20/01/2025",
-  },
-  {
-    status: "Reported",
-    SenderId: "USER200",
-    ReceiverId: "USER200",
-    MessageContent: "Lorem ipsum dolor sit amet consectetur.",
-    Reason: "Suspicious Activities",
-    Date: "20/01/2025",
-  },
-  {
-    status: "Reported",
-    SenderId: "USER200",
-    ReceiverId: "USER200",
-    MessageContent: "Lorem ipsum dolor sit amet consectetur.",
-    Reason: "Inappropriate Language",
-    Date: "20/01/2025",
-  },
-];
-
-
+import ReportedMessages from "@/components/common/Messagemanagement/ReportedMessages/ReportedMessages";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState<string>("Flagged Messages");
-  const [search, setSearch] = useState<string>("");
 
   const dispatch = useAppDispatch()
   const { reportedMessages, loading, error } = useAppSelector(state => state.messages)
+
   useEffect(() => {
     console.log("Messages called");
     dispatch(fetchReportedMessages());
@@ -130,7 +45,7 @@ const Index = () => {
         <TextField
           placeholder="Search User"
           variant="outlined"
-          onChange={(e) => setSearch(e.target.value)}
+          // onChange={(e) => setSearch(e.target.value)}
           sx={{
             marginBottom: 2,
             backgroundColor: "#F9F9F9",
@@ -149,32 +64,23 @@ const Index = () => {
             ),
           }}
         />
-        {loading ? <Loading /> : error ? <ErrorState error={error} /> :
+        {loading ? <Loading /> : error ? <ErrorState error={error} /> : reportedMessages &&
           <>
-            <Box
-              sx={{ display: "flex", flexDirection: "column", gap: "28px", mb: 3 }}
-            >
+            <Box sx={{ mt: "30px", mb: "50px" }}>
               <Typography
                 sx={{
                   color: "#1F2937",
                   fontSize: { xs: "18px", md: "20px", xl: "22px" },
                   fontWeight: 600,
+                  mb: "28px"
                 }}
               >
                 Reported Messages
               </Typography>
-              <Grid container spacing={2}>
-                {reported.map((item) => (
-                  <Grid item xs={12} sm={6} md={6} lg={3} key={item.id}>
-                    <FlaggedMessage {...item} />
-                  </Grid>
-                ))}
-              </Grid>
+              <ReportedMessages showTitle={false} />
             </Box>
             <MessagesTable
-              Messages={messages}
-              search={search}
-              setSearch={setSearch}
+              Messages={reportedMessages}
             />
           </>
         }

@@ -19,6 +19,9 @@ import { fetchAdsAnalytics } from "@/redux/thunk/adsAnalytics.thunk";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchUsersAnalytics } from "@/redux/thunk/userThunk";
+import { fetchStoryAnalytics } from "@/redux/slices/storyAnalyticsSlice";
+import ReportedMessagesAnalytics from "@/components/common/Messagemanagement/ReportedMessages/ReportedMessages";
+import StoryAnalytics from "@/components/common/Story/StoryAnalytics/StoryAnalytics";
 
 // check emailManagement
 
@@ -52,33 +55,6 @@ const flaggedMessage = [
   {
     title: "Yearly",
     amount: "8752285",
-    percentage: "+9.1%",
-    comparisonText: "Compared to yesterday",
-  },
-];
-
-const reportedMessage = [
-  {
-    title: "Daily",
-    amount: "54",
-    percentage: "+9.2%",
-    comparisonText: "Compared to yesterday",
-  },
-  {
-    title: "Weekly",
-    amount: "25455",
-    percentage: "+9.4%",
-    comparisonText: "Compared to yesterday",
-  },
-  {
-    title: "Monthly",
-    amount: "374588",
-    percentage: "-9.9%",
-    comparisonText: "Compared to yesterday",
-  },
-  {
-    title: "Yearly",
-    amount: "8752235",
     percentage: "+9.1%",
     comparisonText: "Compared to yesterday",
   },
@@ -138,39 +114,15 @@ const outboxMail = [
   },
 ];
 
-const stories = [
-  {
-    title: "Daily",
-    amount: "852",
-    percentage: "+9.2%",
-    comparisonText: "Compared to yesterday",
-  },
-  {
-    title: "Weekly",
-    amount: "54752",
-    percentage: "+9.4%",
-    comparisonText: "Compared to yesterday",
-  },
-  {
-    title: "Monthly",
-    amount: "255475",
-    percentage: "-9.9%",
-    comparisonText: "Compared to yesterday",
-  },
-  {
-    title: "Yearly",
-    amount: "22534285",
-    percentage: "+9.1%",
-    comparisonText: "Compared to yesterday",
-  },
-];
-
 const Index = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { totalAds, todayAdsCount, statusCounts } = useSelector(
+  const { totalAds, todayAdsCount, statusCounts, } = useSelector(
     (state: RootState) => state.adsAnalytics
   );
+
+  const { totalUsers, activeUsers, dailyRegistered, dailyLoggedIn, bannedUsers, suspendedUsers, } =
+    useSelector((state: RootState) => state.userAnalytics);
 
   useEffect(() => {
     dispatch(fetchAdsAnalytics());
@@ -185,8 +137,25 @@ const Index = () => {
       dailyLoggedIn,
     });
   }, [dispatch]);
-  const { totalUsers, activeUsers, dailyRegistered, dailyLoggedIn } =
-    useSelector((state: RootState) => state.userAnalytics);
+
+  useEffect(() => {
+    localStorage.setItem("usersCount", JSON.stringify({
+      allUsers: totalUsers,
+      activeUsers: activeUsers,
+      suspendedUsers: suspendedUsers,
+      bannedUsers: bannedUsers,
+    }))
+
+  }, [totalUsers, activeUsers, bannedUsers, suspendedUsers])
+
+  const getStatusCount = (status: string) => {
+    return (
+      statusCounts.find(
+        (s: { status: string }) =>
+          s.status.toUpperCase() === status.toUpperCase()
+      )?.count || 0
+    );
+  };
 
   const users = [
     {
@@ -219,15 +188,6 @@ const Index = () => {
     },
   ];
 
-  const getStatusCount = (status: string) => {
-    return (
-      statusCounts.find(
-        (s: { status: string }) =>
-          s.status.toUpperCase() === status.toUpperCase()
-      )?.count || 0
-    );
-  };
-
   const stats = [
     {
       title: "Total Ads",
@@ -258,7 +218,6 @@ const Index = () => {
       unit: "Ads",
     },
   ];
-
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <Box
@@ -461,7 +420,7 @@ const Index = () => {
             </Typography>
           </Box>
 
-          <Box>
+          {/* <Box>
             <Typography
               sx={{
                 fontSize: { xs: "14px", lg: "16px" },
@@ -478,25 +437,10 @@ const Index = () => {
                 </Grid>
               ))}
             </Grid>
-          </Box>
-
+          </Box> */}
+          {/* Shows counts for reported messages */}
           <Box>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", lg: "16px" },
-                color: "#9CA3AF",
-                mb: "16px",
-              }}
-            >
-              Reported Message
-            </Typography>
-            <Grid container spacing={2}>
-              {reportedMessage.map((data, index) => (
-                <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
-                  <FinanceStatCard {...data} />
-                </Grid>
-              ))}
-            </Grid>
+            <ReportedMessagesAnalytics />
           </Box>
         </Box>
 
@@ -604,13 +548,7 @@ const Index = () => {
           </Box>
 
           <Box>
-            <Grid container spacing={2}>
-              {stories.map((data, index) => (
-                <Grid item xs={12} md={6} lg={3} xl={3} key={index}>
-                  <FinanceStatCard {...data} />
-                </Grid>
-              ))}
-            </Grid>
+            <StoryAnalytics />
           </Box>
         </Box>
       </Box>
