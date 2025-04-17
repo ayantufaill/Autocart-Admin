@@ -20,6 +20,7 @@ interface User {
   imageUrl: string;
   regDate: string;
 }
+
 interface UsersTableProps {
   Users: User[];
 }

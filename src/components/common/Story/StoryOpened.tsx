@@ -34,6 +34,7 @@ const StoryOpened: React.FC = () => {
         >
           <Typography
             sx={{
+              color: "#1F2937",
               fontSize: { xs: "16px", lg: "20px" },
               fontWeight: 600,
               position: "relative",

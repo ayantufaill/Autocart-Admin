@@ -279,6 +279,8 @@ const adsSlice = createSlice({
             (state as any)[targetKey] = formattedAds(data.data);
           }
         }
+        if (formattedAds(data.data).length === 0) state.error = "Ads not found. ";
+        
       })
       .addCase(fetchSearchAds.rejected, (state, action) => {
         state.loading = false;

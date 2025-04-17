@@ -5,6 +5,9 @@ import adsAnalyticsReducer from "./slices/adsSlice";
 import userAnalyticsReducer from "./slices/userAnalyticsSlice";
 import adsReducer from "./slices/adsManagementSlice";
 import messagesReducer from "./slices/messageManagementSlice";
+import storyReducer from "./slices/storySlice";
+import messageAnalyticsReducer from "./slices/messageAnalyticsSlice";
+import storyAnalyticsReducer from "./slices/storyAnalyticsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +17,9 @@ export const store = configureStore({
     userAnalytics: userAnalyticsReducer,
     ads: adsReducer,
     messages: messagesReducer,
+    story: storyReducer,
+    messageAnalytics: messageAnalyticsReducer,
+    storyAnalytics: storyAnalyticsReducer,
   },
 });
 

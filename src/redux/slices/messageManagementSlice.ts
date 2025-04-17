@@ -1,11 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchReportedMessagesApi } from "../api/messageManagementApi";
 
+export interface Message {
+  status: "Reported" | "Flagged";
+  SenderId: string;
+  ReceiverId: string;
+  MessageContent: string;
+  Reason: string;
+  Date: string;
+}
+
 interface MessagesState {
-  messages: any[];
+  messages: Message[];
   loading: boolean;
   error: string | null;
-  reportedMessages: any[];
+  reportedMessages: Message[];
 }
 
 const initialState: MessagesState = {
@@ -13,6 +22,19 @@ const initialState: MessagesState = {
   loading: false,
   error: null,
   reportedMessages: [],
+};
+
+export const transformMessages = (data: any): Message[] => {
+  const rawReports = data || [];
+
+  return rawReports.map((report: any) => ({
+    status: "Reported",
+    SenderId: report.message.senderId,
+    ReceiverId: report.message.receiverId,
+    MessageContent: report.message.content,
+    Reason: report.reason,
+    Date: new Date(report.createdAt).toLocaleDateString(),
+  }));
 };
 
 export const fetchReportedMessages = createAsyncThunk(
@@ -42,7 +64,8 @@ const messagesSlice = createSlice({
       .addCase(fetchReportedMessages.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.reportedMessages = action.payload;
+        state.reportedMessages = transformMessages(action.payload);
+
         if (state.reportedMessages.length === 0) {
           state.error = "No reported message found. ";
         }

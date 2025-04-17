@@ -51,7 +51,7 @@ const StoryTable: React.FC<StoryTableProps> = ({ stories }) => {
       }}
     >
       <Table stickyHeader>
-        <TableHead>
+        <TableHead sx={{ visibility: stories.length === 0 ? "hidden" : "visible" }}>
           <TableRow>
             {[
               "Status",
@@ -112,12 +112,12 @@ const StoryTable: React.FC<StoryTableProps> = ({ stories }) => {
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "8px",
-                    backgroundColor: statusConfig[story.status].color,
+                    backgroundColor: statusConfig[story.status || "Active"].color,
                     padding: "6px 12px",
                     borderRadius: "6px",
                     fontSize: "14px",
                     fontWeight: 600,
-                    color: statusConfig[story.status].textColor,
+                    color: statusConfig[story.status || "Active"].textColor,
                     minWidth: "100px",
                     cursor: "pointer",
                     transition: "opacity 0.2s ease-in-out",
@@ -128,7 +128,7 @@ const StoryTable: React.FC<StoryTableProps> = ({ stories }) => {
                     sx={{
                       width: 10,
                       height: 10,
-                      backgroundColor: statusConfig[story.status].icon,
+                      backgroundColor: statusConfig[story.status || "Active"].icon,
                       borderRadius: "3px",
                     }}
                   />

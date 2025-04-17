@@ -300,6 +300,8 @@ const usersSlice = createSlice({
           );
           (state as any)[targetKey] = transformedUsers;
         }
+        
+        if(transformedUsers.length === 0) state.error = "User not found."
       })
       .addCase(fetchSearchUsers.rejected, (state, action) => {
         state.loading = false;

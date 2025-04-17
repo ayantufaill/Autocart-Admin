@@ -89,7 +89,7 @@ const StoryManagement: React.FC = () => {
         tabData={[
           { label: "Story Overview", path: "/admin/story/management" },
           { label: "Active Stories", path: "/admin/story/active" },
-          { label: "Flagged Stories", path: "/admin/story/flagged" },
+          // { label: "Flagged Stories", path: "/admin/story/flagged" },
           { label: "Reported Stories", path: "/admin/story/reported" },
           { label: "Expired Stories", path: "/admin/story/expired" },
         ]}
