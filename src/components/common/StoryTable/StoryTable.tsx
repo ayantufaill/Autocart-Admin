@@ -12,16 +12,17 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Story } from "@/redux/slices/storySlice";
 
-export interface Story {
-  status: "Active" | "Expired" | "Flagged" | "Reported";
-  userimgUrl: string;
-  userId: string;
-  storyContent: string;
-  storyId: string;
-  uploadDate: string;
-  storyImageUrl: string;
-}
+// export interface Story {
+//   status: "Active" | "Expired" | "Flagged" | "Reported";
+//   userimgUrl: string;
+//   userId: string;
+//   storyContent: string;
+//   storyId: string;
+//   uploadDate: string;
+//   storyImageUrl: string;
+// }
 
 interface StoryTableProps {
   stories: Story[];
@@ -154,7 +155,7 @@ const StoryTable: React.FC<StoryTableProps> = ({ stories }) => {
                   }}
                 >
                   <Avatar
-                    src="/Images/Ads/profile.png"
+                    src={story.userimgUrl}
                     sx={{ width: 24, height: 24 }}
                   />
                   <span>{story.userId}</span>
@@ -177,7 +178,7 @@ const StoryTable: React.FC<StoryTableProps> = ({ stories }) => {
                   }}
                 >
                   <img
-                    src="/Images/Ads/image.png"
+                    src={story.storyImageUrl}
                     alt={story.storyContent}
                     width="30"
                     height="30"

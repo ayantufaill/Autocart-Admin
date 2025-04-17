@@ -25,10 +25,10 @@ const initialState: MessagesState = {
 };
 
 export const transformMessages = (data: any): Message[] => {
-  const rawReports = data || [];
+  const newMessages = data || [];
 
-  return rawReports.map((report: any) => ({
-    status: "Reported",
+  return newMessages.map((report: any) => ({
+    status: "Reported", // have to change status here dynamically
     SenderId: report.message.senderId,
     ReceiverId: report.message.receiverId,
     MessageContent: report.message.content,

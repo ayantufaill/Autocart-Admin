@@ -22,6 +22,8 @@ import { fetchUsersAnalytics } from "@/redux/thunk/userThunk";
 import { fetchStoryAnalytics } from "@/redux/slices/storyAnalyticsSlice";
 import ReportedMessagesAnalytics from "@/components/common/Messagemanagement/ReportedMessages/ReportedMessages";
 import StoryAnalytics from "@/components/common/Story/StoryAnalytics/StoryAnalytics";
+import UsersAnalytics from "@/components/common/AdminAnalytics/UsersAnalytics";
+import AdsAnalytivs from "@/components/common/AdminAnalytics/AdsAnalytivs";
 
 // check emailManagement
 
@@ -124,19 +126,19 @@ const Index = () => {
   const { totalUsers, activeUsers, dailyRegistered, dailyLoggedIn, bannedUsers, suspendedUsers, } =
     useSelector((state: RootState) => state.userAnalytics);
 
-  useEffect(() => {
-    dispatch(fetchAdsAnalytics());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAdsAnalytics());
+  // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(fetchUsersAnalytics());
-    console.log("users analytics: ", {
-      totalUsers,
-      activeUsers,
-      dailyRegistered,
-      dailyLoggedIn,
-    });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchUsersAnalytics());
+  //   console.log("users analytics: ", {
+  //     totalUsers,
+  //     activeUsers,
+  //     dailyRegistered,
+  //     dailyLoggedIn,
+  //   });
+  // }, [dispatch]);
 
   useEffect(() => {
     localStorage.setItem("usersCount", JSON.stringify({
@@ -148,76 +150,76 @@ const Index = () => {
 
   }, [totalUsers, activeUsers, bannedUsers, suspendedUsers])
 
-  const getStatusCount = (status: string) => {
-    return (
-      statusCounts.find(
-        (s: { status: string }) =>
-          s.status.toUpperCase() === status.toUpperCase()
-      )?.count || 0
-    );
-  };
+  // const getStatusCount = (status: string) => {
+  //   return (
+  //     statusCounts.find(
+  //       (s: { status: string }) =>
+  //         s.status.toUpperCase() === status.toUpperCase()
+  //     )?.count || 0
+  //   );
+  // };
 
-  const users = [
-    {
-      title: "Total Users",
-      value: totalUsers?.toLocaleString?.() || "0",
-      color: "#1E40AF",
-      change: "+9.2%", // Placeholder
-      unit: "Users",
-    },
-    {
-      title: "Active Users",
-      value: activeUsers?.toLocaleString?.() || "0",
-      color: "#166534",
-      change: "+9.2%",
-      unit: "Users",
-    },
-    {
-      title: "Daily Register Users",
-      value: dailyRegistered?.toLocaleString?.() || "0",
-      color: "#854D0E",
-      change: "+9.2%",
-      unit: "Users",
-    },
-    {
-      title: "Daily Login",
-      value: dailyLoggedIn?.toLocaleString?.() || "0",
-      color: "#991B1B",
-      change: "-9.2%",
-      unit: "Users",
-    },
-  ];
+  // const users = [
+  //   {
+  //     title: "Total Users",
+  //     value: totalUsers?.toLocaleString?.() || "0",
+  //     color: "#1E40AF",
+  //     change: "+9.2%", // Placeholder
+  //     unit: "Users",
+  //   },
+  //   {
+  //     title: "Active Users",
+  //     value: activeUsers?.toLocaleString?.() || "0",
+  //     color: "#166534",
+  //     change: "+9.2%",
+  //     unit: "Users",
+  //   },
+  //   {
+  //     title: "Daily Register Users",
+  //     value: dailyRegistered?.toLocaleString?.() || "0",
+  //     color: "#854D0E",
+  //     change: "+9.2%",
+  //     unit: "Users",
+  //   },
+  //   {
+  //     title: "Daily Login",
+  //     value: dailyLoggedIn?.toLocaleString?.() || "0",
+  //     color: "#991B1B",
+  //     change: "-9.2%",
+  //     unit: "Users",
+  //   },
+  // ];
 
-  const stats = [
-    {
-      title: "Total Ads",
-      value: totalAds.toLocaleString(),
-      color: "#1E40AF",
-      change: "+9.2%",
-      unit: "Ads",
-    },
-    {
-      title: "Pending Ads",
-      value: getStatusCount("PENDING").toLocaleString(),
-      color: "#854D0E",
-      change: "+9.2%",
-      unit: "Ads",
-    },
-    {
-      title: "Active Ads",
-      value: getStatusCount("ACTIVE").toLocaleString(),
-      color: "#166534",
-      change: "+9.2%",
-      unit: "Ads",
-    },
-    {
-      title: "Daily Ads Created",
-      value: todayAdsCount.toLocaleString(),
-      color: "#991B1B",
-      change: "+9.2%",
-      unit: "Ads",
-    },
-  ];
+  // const stats = [
+  //   {
+  //     title: "Total Ads",
+  //     value: totalAds.toLocaleString(),
+  //     color: "#1E40AF",
+  //     change: "+9.2%",
+  //     unit: "Ads",
+  //   },
+  //   {
+  //     title: "Pending Ads",
+  //     value: getStatusCount("PENDING").toLocaleString(),
+  //     color: "#854D0E",
+  //     change: "+9.2%",
+  //     unit: "Ads",
+  //   },
+  //   {
+  //     title: "Active Ads",
+  //     value: getStatusCount("ACTIVE").toLocaleString(),
+  //     color: "#166534",
+  //     change: "+9.2%",
+  //     unit: "Ads",
+  //   },
+  //   {
+  //     title: "Daily Ads Created",
+  //     value: todayAdsCount.toLocaleString(),
+  //     color: "#991B1B",
+  //     change: "+9.2%",
+  //     unit: "Ads",
+  //   },
+  // ];
   return (
     <div style={{ backgroundColor: "#F9F9F9" }}>
       <Box
@@ -311,7 +313,7 @@ const Index = () => {
           </Box>
         </Box> */}
 
-        <Box sx={{ width: "100%" }}>
+        {/* <Box sx={{ width: "100%" }}>
           <Box
             sx={{
               display: "flex",
@@ -348,9 +350,9 @@ const Index = () => {
               ))}
             </Grid>
           </Box>
-        </Box>
-
-        <Box sx={{ mb: 1 }}>
+        </Box> */}
+        <AdsAnalytivs />
+        {/* <Box sx={{ mb: 1 }}>
           <Box
             sx={{
               display: "flex",
@@ -386,7 +388,8 @@ const Index = () => {
               ))}
             </Grid>
           </Box>
-        </Box>
+        </Box> */}
+        <UsersAnalytics />
 
         <Box
           sx={{
@@ -444,7 +447,7 @@ const Index = () => {
           </Box>
         </Box>
 
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -494,7 +497,6 @@ const Index = () => {
               ))}
             </Grid>
           </Box>
-          {/* Cards 2*/}
           <Box>
             <Typography
               sx={{
@@ -513,7 +515,7 @@ const Index = () => {
               ))}
             </Grid>
           </Box>
-        </Box>
+        </Box> */}
 
         <Box
           sx={{

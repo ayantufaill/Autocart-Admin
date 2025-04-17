@@ -8,6 +8,7 @@ import messagesReducer from "./slices/messageManagementSlice";
 import storyReducer from "./slices/storySlice";
 import messageAnalyticsReducer from "./slices/messageAnalyticsSlice";
 import storyAnalyticsReducer from "./slices/storyAnalyticsSlice";
+import reportedReducer from "./slices/ReportsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     story: storyReducer,
     messageAnalytics: messageAnalyticsReducer,
     storyAnalytics: storyAnalyticsReducer,
+    reports: reportedReducer,
   },
 });
 

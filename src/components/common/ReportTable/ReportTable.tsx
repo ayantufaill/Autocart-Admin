@@ -13,17 +13,11 @@ import {
   InputAdornment,
   Box,
 } from "@mui/material";
-import { Search } from "@mui/icons-material";
-import SearchBar from "../SearchBar/SearchBar";
-
-interface Report {
-  status: "Unread" | "Read";
-  reportId: string;
-  title: string;
-  category: string;
-  imageUrl: string;
-  issueDate: string;
-}
+// import { Report, Search } from "@mui/icons-material";
+// import SearchBar from "../SearchBar/SearchBar";
+import { Report } from "@/redux/slices/ReportsSlice";
+import { markReportAsRead } from "@/redux/thunk/reports.thunk";
+import { useAppDispatch } from "@/redux/hooks";
 
 interface ReportsTableProps {
   Reports: Report[];
@@ -35,20 +29,23 @@ const statusConfig = {
 };
 
 const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
-  const [search, setSearch] = useState("");
+
+  const dispatch = useAppDispatch();
+
+  // const [search, setSearch] = useState("");
   const router = useRouter();
 
-  const filteredReports = Reports.filter((Report) =>
-    Report.reportId.toLowerCase().includes(search.toLowerCase())
-  );
+  // const filteredReports = Reports.filter((Report) =>
+  //   Report.reportId.toLowerCase().includes(search.toLowerCase())
+  // );
 
   return (
     <div>
-      <SearchBar
+      {/* <SearchBar
         placeholder="Search Reports"
         search={search}
         setSearch={setSearch}
-      />
+      /> */}
 
       <TableContainer
         sx={{
@@ -59,7 +56,7 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
         }}
       >
         <Table stickyHeader>
-          <TableHead>
+          <TableHead sx={{ visibility: Reports.length === 0 ? "hidden" : "visible" }}>
             <TableRow sx={{ border: "none" }}>
               {[
                 "Status",
@@ -88,7 +85,7 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
             <TableRow sx={{ border: "none" }}>
               <TableCell sx={{ border: "none" }} />
             </TableRow>
-            {filteredReports.map((report, index, arr) => (
+            {Reports.map((report, index, arr) => (
               <TableRow
                 key={report.category}
                 sx={{
@@ -104,11 +101,13 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                   }}
                 >
                   <Box
-                    onClick={() =>
-                      router.push(
-                        `/admin/report/${report.status.toLowerCase()}`
-                      )
-                    }
+                    onClick={() => {
+                      if (report.status == "Unread") {
+                        console.log("dispatch action")
+                        console.log(report.id)
+                        dispatch(markReportAsRead(report.id));
+                      }
+                    }}
                     sx={{
                       display: "flex",
                       alignItems: "center",
@@ -143,7 +142,7 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                     flexDirection: { xs: "column", lg: "row" },
                     justifyContent: "center",
                     alignItems: "center",
-                    gap: {xs: "16px", md: "8px"},
+                    gap: { xs: "16px", md: "8px" },
                     borderLeft: "0.5px solid #CACACA",
                     fontWeight: "bold",
                     borderBottom:
@@ -154,7 +153,7 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                     src={report.imageUrl}
                     sx={{ width: 24, height: 24 }}
                   />
-                  {report.reportId}
+                  {report.reporterId}
                 </TableCell>
                 <TableCell
                   sx={{

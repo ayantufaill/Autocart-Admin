@@ -17,13 +17,25 @@ const ActiveUsers: React.FC = () => {
   const [filteredName, setFilteredName] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
   const ActiveUsers = useSelector((state: RootState) => state.user.activeUsers);
-  const users = useSelector((state: RootState) => state.user.users);
+  // const users = useSelector((state: RootState) => state.user.users);
+  
   const loading = useSelector((state: RootState) => state.user.loading);
   const error = useSelector((state: RootState) => state.user.error);
 
+  const [users, setUsers] = useState({
+    allUsers: 0,
+    activeUsers: 0,
+    bannedUsers: 0,
+    suspendedUsers: 0,
+  })
+
   useEffect(() => {
-    dispatch(fetchUsers());
-    console.log(localStorage.getItem("usersCount"))
+    // dispatch(fetchUsers());
+    const usersCount = localStorage.getItem("usersCount");
+    if (usersCount) {
+      // console.log(JSON.parse(usersCount));
+      setUsers(JSON.parse(usersCount))
+    }
   }, [])
 
   useEffect(() => {
@@ -41,21 +53,26 @@ const ActiveUsers: React.FC = () => {
     }
   }, [dispatch, filteredName]);
 
-  const activeUsers = ActiveUsers.filter(
-    (user: any) => user.status === "Active"
-  ).length;
-  const suspendedUsers = users.filter(
-    (user: any) => user.status === "Suspended"
-  ).length;
-  const bannedUsers = users.filter(
-    (user: any) => user.status === "Banned"
-  ).length;
+  // const activeUsers = ActiveUsers.filter(
+  //   (user: any) => user.status === "Active"
+  // ).length;
+  // const suspendedUsers = users.filter(
+  //   (user: any) => user.status === "Suspended"
+  // ).length;
+  // const bannedUsers = users.filter(
+  //   (user: any) => user.status === "Banned"
+  // ).length;
+
+  const totalUsers = users.allUsers;
+  const activeUsers = users.activeUsers;
+  const suspendedUsers = users.suspendedUsers;
+  const bannedUsers = users.bannedUsers;
 
   return (
     <div style={{ backgroundColor: "#F9F9F9", minHeight: "100%" }}>
       <ColorTabs
         tabData={[
-          { label: "All Users", count: users.length, path: "/admin/user" },
+          { label: "All Users", count: totalUsers, path: "/admin/user" },
           {
             label: "Active Users",
             count: activeUsers,
