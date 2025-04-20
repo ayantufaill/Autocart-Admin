@@ -12,6 +12,8 @@ import {
   Avatar,
   InputAdornment,
   Box,
+  Typography,
+  Tooltip,
 } from "@mui/material";
 // import { Report, Search } from "@mui/icons-material";
 // import SearchBar from "../SearchBar/SearchBar";
@@ -31,6 +33,7 @@ const statusConfig = {
 const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
 
   const dispatch = useAppDispatch();
+  const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
 
   // const [search, setSearch] = useState("");
   const router = useRouter();
@@ -85,19 +88,18 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
             <TableRow sx={{ border: "none" }}>
               <TableCell sx={{ border: "none" }} />
             </TableRow>
-            {Reports.map((report, index, arr) => (
+            {Reports.map((report, index) => (
               <TableRow
                 key={report.category}
                 sx={{
                   backgroundColor: index % 2 === 0 ? "#F9F9F9" : "#F3F4F6",
+                  '&:last-child td': { borderBottom: 0 }
                 }}
               >
                 <TableCell
                   sx={{
                     textAlign: "center",
                     padding: "12px",
-                    borderBottom:
-                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Box
@@ -140,28 +142,29 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                     textAlign: "center",
                     display: "flex",
                     flexDirection: { xs: "column", lg: "row" },
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: { xs: "16px", md: "8px" },
+                    justifyContent: { xs: "center", lg: "flex-start" },
+                    // alignItems: "center",
+                    gap: { xs: "16px", md: "10px" },
                     borderLeft: "0.5px solid #CACACA",
-                    fontWeight: "bold",
-                    borderBottom:
-                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   <Avatar
                     src={report.imageUrl}
                     sx={{ width: 24, height: 24 }}
                   />
-                  {report.reporterId}
+                  <Typography sx={{
+                    textAlign: "start",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                  }}>
+                    {report.reporterId}
+                  </Typography>
                 </TableCell>
                 <TableCell
                   sx={{
                     textAlign: "center",
                     borderLeft: "0.5px solid #CACACA",
                     fontWeight: "bold",
-                    borderBottom:
-                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {report.title}
@@ -172,8 +175,6 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                     textAlign: "center",
                     borderLeft: "0.5px solid #CACACA",
                     fontWeight: "bold",
-                    borderBottom:
-                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {report.category}
@@ -183,8 +184,6 @@ const ReportTable: React.FC<ReportsTableProps> = ({ Reports }) => {
                     textAlign: "center",
                     borderLeft: "0.5px solid #CACACA",
                     fontWeight: "bold",
-                    borderBottom:
-                      arr.length - 1 === index ? "none" : "0.5px solid #CACACA",
                   }}
                 >
                   {report.issueDate}

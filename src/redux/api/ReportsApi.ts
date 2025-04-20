@@ -11,7 +11,7 @@ export const fetchReportedUsersApi = async () => {
 };
 
 export const markReportAsReadApi = async (id: string) => {
-  const response = await api.get(
+  const response = await api.patch(
     `/dashboard-analytics/reported-ads/${id}/read`
   );
   return response.data;
