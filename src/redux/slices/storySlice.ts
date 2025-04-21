@@ -4,6 +4,7 @@ import {
   fetchExpiredStories,
   fetchReportedStories,
 } from "../thunk/story.thunk";
+import { fetchSearchReportedStories } from "../thunk/reports.thunk";
 
 export interface Story {
   status: "Active" | "Expired" | "Flagged" | "Reported";
@@ -114,6 +115,22 @@ const storySlice = createSlice({
           state.error = "Expired stories not found";
       })
       .addCase(fetchExpiredStories.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      // search reported stories
+      .addCase(fetchSearchReportedStories.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSearchReportedStories.fulfilled, (state, action) => {
+        state.loading = false;
+        state.reportedStories = transformStories(action.payload);
+        if (state.reportedStories.length === 0) {
+          state.error = "No Reported Stories found. ";
+        }
+      })
+      .addCase(fetchSearchReportedStories.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

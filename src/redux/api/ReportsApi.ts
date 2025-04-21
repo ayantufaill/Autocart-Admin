@@ -16,3 +16,31 @@ export const markReportAsReadApi = async (id: string) => {
   );
   return response.data;
 };
+
+export const fetchSearchReportedAdsApi = async (id: string) => {
+  const response = await api.get(
+    `/dashboard-analytics/reported-ads?reportedAdId=${id}`
+  );
+  return response.data;
+};
+
+export const fetchSearchReportedUsersApi = async (id: string) => {
+  const response = await api.get(
+    `/dashboard-analytics/reported-users?reportedUserId=${id}`
+  );
+  return response.data;
+};
+
+export const fetchSearchReportedStoriesApi = async (id: string) => {
+  const response = await api.get(
+    `/dashboard-analytics/reported-stories?reportedStoryId=${id}`
+  );
+  return response.data;
+};
+
+export const fetchFilterReportedUsersApi = async (status: boolean) => {
+  const response = await api.get(
+    `/dashboard-analytics/reported-users?isRead=${status}`
+  );
+  return response.data;
+};

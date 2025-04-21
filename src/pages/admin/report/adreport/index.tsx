@@ -4,10 +4,10 @@ import Loading from "@/components/common/Loading/Loading";
 import ReportTable from "@/components/common/ReportTable/ReportTable";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import { fetchReportedAds, fetchReportedUsers } from "@/redux/thunk/reports.thunk";
+import { fetchReportedAds, fetchReportedUsers, fetchSearchReportedAds } from "@/redux/thunk/reports.thunk";
 import { Search } from "@mui/icons-material";
 import { Container, InputAdornment, TextField } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // const reports: {
 //   status: "Unread" | "Read";
@@ -79,11 +79,22 @@ import React, { useEffect } from "react";
 const ReportedAds: React.FC = () => {
   const dispatch = useAppDispatch();
   const { reportedAds, loading, error, reportedUsers } = useAppSelector((state: RootState) => state.reports);
+  const [search, setSearch] = useState("") // based on user id
 
   useEffect(() => {
-    dispatch(fetchReportedAds());
+    if (search) {
+      console.log(search)
+      dispatch(fetchSearchReportedAds(search))
+    }
+    else {
+      console.log("fetchReportedAds")
+      dispatch(fetchReportedAds());
+    }
+  }, [dispatch, search]);
+
+  useEffect(() => {
     dispatch(fetchReportedUsers());
-  }, [dispatch]);
+  }, [])
 
   return (
     <div style={{ minHeight: "100%", backgroundColor: "#F9F9F9" }}>
@@ -105,7 +116,7 @@ const ReportedAds: React.FC = () => {
         <TextField
           placeholder={"Search Reports"}
           variant="outlined"
-          // onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           sx={{
             fontSize: "12px",
             color: "#BFC3CB",
@@ -129,7 +140,7 @@ const ReportedAds: React.FC = () => {
             ),
           }}
         />
-        {loading ? <Loading /> : error ? <ErrorState error={error} /> : <ReportTable Reports={reportedAds} />}
+        {loading ? <Loading /> : error ? <ErrorState error={error} /> : <ReportTable entityType="Ads" Reports={reportedAds} />}
       </Container>
     </div>
   );

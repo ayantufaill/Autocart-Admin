@@ -1,10 +1,9 @@
 "use client";
 import ColorTabs from "@/components/common/ColorTabs/ColorTabs";
 import FinanceStatCard from "@/components/common/AdminCards/FinanceCard";
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import SearchBar from "@/components/common/SearchBar/SearchBar";
-import StoryTable, { Story } from "@/components/common/StoryTable/StoryTable";
+import StoryTable from "@/components/common/StoryTable/StoryTable";
 
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -12,8 +11,11 @@ import { useAppSelector } from "@/redux/hooks";
 import { fetchReportedStories } from "@/redux/thunk/story.thunk";
 import Loading from "@/components/common/Loading/Loading";
 import ErrorState from "@/components/common/Error";
+import { Search } from "@mui/icons-material";
+import { fetchSearchReportedStories } from "@/redux/thunk/reports.thunk";
 
 const StoryReported: React.FC = () => {
+  const [searchId, setSearchId] = useState("")
   const dispatch = useDispatch<AppDispatch>()
   const { counts } = useAppSelector((state: RootState) => state.storyAnalytics)
   const [todayCount, setTodayCount] = useState(0);
@@ -22,8 +24,13 @@ const StoryReported: React.FC = () => {
 
 
   useEffect(() => {
-    dispatch(fetchReportedStories())
-  }, [dispatch])
+    if (searchId) {
+      dispatch(fetchSearchReportedStories(searchId));
+    }
+    else {
+      dispatch(fetchReportedStories());
+    }
+  }, [dispatch, searchId])
 
   useEffect(() => {
     const storyCounts = localStorage.getItem("storyCounts");
@@ -48,10 +55,32 @@ const StoryReported: React.FC = () => {
         defaultTab={2}
       />
       <Container sx={{ pb: 5 }}>
-        <SearchBar
-          placeholder="Search User"
-          search={search}
-          setSearch={setSearch}
+        <TextField
+          placeholder={"Search Report"}
+          variant="outlined"
+          onChange={(e) => setSearchId(e.target.value)}
+          sx={{
+            fontSize: "12px",
+            color: "#BFC3CB",
+            marginBottom: 2,
+            backgroundColor: "#F9F9F9",
+            width: { xs: "100%", md: "70%" },
+            maxWidth: "600px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              maxHeight: "43px",
+            },
+            "& ::placeholder": {
+              color: "#CBCED4",
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search sx={{ color: "#BFC3CB" }} />
+              </InputAdornment>
+            ),
+          }}
         />
 
         {loading ? <Loading /> : error ? <ErrorState error={error} /> : reportedStories && <>

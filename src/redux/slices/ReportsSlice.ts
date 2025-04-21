@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  fetchFilterReportedUsers,
   fetchReportedAds,
   fetchReportedUsers,
+  fetchSearchReportedAds,
+  fetchSearchReportedUsers,
   markReportAsRead,
 } from "../thunk/reports.thunk";
 
@@ -13,19 +16,21 @@ export interface Report {
   category: string;
   imageUrl: string;
   issueDate: string;
+  // entityId: string;
 }
 
 const transformReport = (data: any): Report[] => {
   const reports = data || [];
 
   return reports.map((report: any) => ({
-    id: report.id,
+    id: report?.adId || report?.reportedUserId,
     status: report.isRead ? "Read" : "Unread",
     reporterId: report.reportedById,
     title: report.ad?.itemName || "Untitled",
     category: report.ReportCategory || "Uncategorized",
     imageUrl: report.reportedBy.profileImage || "",
     issueDate: new Date(report.createdAt).toLocaleDateString(),
+    // entityId: report?.adId || report?.reportedUserId
   }));
 };
 
@@ -56,7 +61,6 @@ const ReportsSlice = createSlice({
       .addCase(fetchReportedAds.fulfilled, (state, action) => {
         state.loading = false;
         state.reportedAds = transformReport(action.payload);
-        console.log(transformReport(action.payload));
         if (action.payload?.length === 0)
           state.error = "No Reported Ads found. ";
       })
@@ -72,6 +76,7 @@ const ReportsSlice = createSlice({
       .addCase(fetchReportedUsers.fulfilled, (state, action) => {
         state.loading = false;
         state.reportedUsers = transformReport(action.payload);
+        // console.log("reported users", (action.payload));
         if (action.payload?.length === 0)
           state.error = "No Reported Users found. ";
       })
@@ -89,6 +94,50 @@ const ReportsSlice = createSlice({
         console.log(action.payload);
       })
       .addCase(markReportAsRead.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      // search reported ads
+      .addCase(fetchSearchReportedAds.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSearchReportedAds.fulfilled, (state, action) => {
+        state.loading = false;
+        state.reportedAds = transformReport(action.payload);
+        if (state.reportedAds.length === 0)
+          state.error = "No Reported Ads found. ";
+      })
+      .addCase(fetchSearchReportedAds.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      // search reported users
+      .addCase(fetchSearchReportedUsers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSearchReportedUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.reportedUsers = transformReport(action.payload);
+        if (state.reportedUsers.length === 0)
+          state.error = "No Reported Users found. ";
+      })
+      .addCase(fetchSearchReportedUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(fetchFilterReportedUsers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchFilterReportedUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.reportedUsers = transformReport(action.payload);
+        if (state.reportedUsers.length === 0)
+          state.error = "No Reported Users found. ";
+      })
+      .addCase(fetchFilterReportedUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

@@ -4,87 +4,38 @@ import Loading from "@/components/common/Loading/Loading";
 import ReportTable from "@/components/common/ReportTable/ReportTable";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import { fetchReportedAds, fetchReportedUsers } from "@/redux/thunk/reports.thunk";
+import { fetchFilterReportedUsers, fetchReportedAds, fetchReportedUsers, fetchSearchReportedUsers } from "@/redux/thunk/reports.thunk";
 import { Search } from "@mui/icons-material";
-import { Container, InputAdornment, TextField } from "@mui/material";
-import React, { useEffect } from "react";
-
-// const reports: {
-//   status: "Unread" | "Read";
-//   reportId: string;
-//   title: string;
-//   category: string;
-//   imageUrl: string;
-//   issueDate: string;
-// }[] = [
-//   {
-//     status: "Unread",
-//     reportId: "USER200",
-//     title: "Report on AD245",
-//     category: "Misleading information",
-//     imageUrl: "/Images/Report/image.png",
-//     issueDate: "20/02/2025",
-//   },
-//   {
-//     status: "Read",
-//     reportId: "USER200",
-//     title: "Report on AD245",
-//     category: "Fraud",
-//     imageUrl: "/Images/Report/boy.png",
-//     issueDate: "20/02/2025",
-//   },
-//   {
-//     status: "Read",
-//     reportId: "USER200",
-//     title: "Report on AD245",
-//     category: "Misleading information",
-//     imageUrl: "/Images/Report/image.png",
-//     issueDate: "20/02/2025",
-//   },
-//   {
-//     status: "Unread",
-//     reportId: "USER200",
-//     title: "Report on AD245",
-//     category: "Fraud",
-//     imageUrl: "/Images/Report/Unread/girl.png",
-//     issueDate: "20/02/2025",
-//   },
-//   {
-//     status: "Unread",
-//     reportId: "USER200",
-//     title: "Report on AD245",
-//     category: "Misleading information",
-//     imageUrl: "/Images/Report/boy.png",
-//     issueDate: "20/02/2025",
-//   },
-//   {
-//     status: "Read",
-//     reportId: "USER200",
-//     title: "Report on AD245",
-//     category: "Fraud",
-//     imageUrl: "/Images/Report/image.png",
-//     issueDate: "20/02/2025",
-//   },
-//   {
-//     status: "Unread",
-//     reportId: "USER200",
-//     title: "Report on AD245",
-
-//     category: "Misleading information",
-//     imageUrl: "/Images/Report/Unread/girl.png",
-//     issueDate: "20/02/2025",
-//   },
-// ];
+import { Container, InputAdornment, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 const User: React.FC = () => {
+  const [search, setSearch] = useState("") // based on user id
+  const [selectOption, setSelectOption] = useState("All")
   const dispatch = useAppDispatch();
   const { reportedAds, loading, error, reportedUsers } = useAppSelector((state: RootState) => state.reports);
 
+  const handleSelectChange = (e: SelectChangeEvent<string>) => {
+    setSelectOption(e.target.value);
+  };
+
+  useEffect(() => {
+    if (search) {
+      dispatch(fetchSearchReportedUsers(search));
+    } else {
+      if (selectOption === "All") {
+        dispatch(fetchReportedUsers());
+      } else if (selectOption === "true") {
+        dispatch(fetchFilterReportedUsers(true));
+      } else if (selectOption === "false") {
+        dispatch(fetchFilterReportedUsers(false));
+      }
+    }
+  }, [search, selectOption, dispatch]);
 
   useEffect(() => {
     dispatch(fetchReportedAds());
-    dispatch(fetchReportedUsers());
-  }, [dispatch]);
+  }, [])
 
   return (
     <div style={{ minHeight: "100%", backgroundColor: "#F9F9F9" }}>
@@ -106,7 +57,7 @@ const User: React.FC = () => {
         <TextField
           placeholder={"Search Reports"}
           variant="outlined"
-          // onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           sx={{
             fontSize: "12px",
             color: "#BFC3CB",
@@ -130,7 +81,18 @@ const User: React.FC = () => {
             ),
           }}
         />
-        {loading ? <Loading /> : error ? <ErrorState error={error} /> : <ReportTable Reports={reportedUsers} />}
+        <div>
+          <Select sx={{ height: 30, "& .MuiSelect-select": {} }} value={selectOption} onChange={(e) => { handleSelectChange(e) }}>
+            <MenuItem value="All">All</MenuItem>
+            <MenuItem value="true">True</MenuItem>
+            <MenuItem value="false">False</MenuItem>
+          </Select>
+        </div>
+        {
+          loading ? <Loading /> : error ? <ErrorState error={error} /> : <>
+            <ReportTable entityType="Users" Reports={reportedUsers} />
+          </>
+        }
       </Container>
     </div>
   );
